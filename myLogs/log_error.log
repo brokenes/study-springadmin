@@ -1,0 +1,15 @@
+2023-03-31 08:58:15.761 [main] ERROR com.github.admin.AdminServiceApplication -[main] Line:23 - ************AdminServiceApplication项目启动成功************
+2023-03-31 09:27:18.016 [main] ERROR com.github.admin.AdminServiceApplication -[main] Line:23 - ************AdminServiceApplication项目启动成功************
+2023-03-31 10:07:31.990 [main] ERROR com.github.admin.AdminServiceApplication -[main] Line:23 - ************AdminServiceApplication项目启动成功************
+2023-03-31 10:44:39.862 [main] ERROR com.github.admin.AdminServiceApplication -[main] Line:23 - ************AdminServiceApplication项目启动成功************
+2023-03-31 10:45:48.441 [main] ERROR com.github.admin.AdminServiceApplication -[main] Line:23 - ************AdminServiceApplication项目启动成功************
+2023-03-31 14:08:43.082 [main] ERROR com.github.admin.AdminServiceApplication -[main] Line:23 - ************AdminServiceApplication项目启动成功************
+2023-03-31 14:10:22.907 [http-nio-8088-exec-4] ERROR c.g.admin.serveice.server.impl.UserServiceImpl -[findByUserName] Line:24 - 当前用户名称userName:xxx查询用户信息不存在
+2023-03-31 14:19:12.393 [main] ERROR com.github.admin.AdminServiceApplication -[main] Line:23 - ************AdminServiceApplication项目启动成功************
+2023-03-31 14:19:32.724 [main] ERROR com.github.admin.AdminServiceApplication -[main] Line:23 - ************AdminServiceApplication项目启动成功************
+2023-03-31 14:22:02.048 [main] ERROR com.github.admin.AdminServiceApplication -[main] Line:23 - ************AdminServiceApplication项目启动成功************
+2023-03-31 15:56:19.366 [main] ERROR com.github.admin.AdminServiceApplication -[main] Line:23 - ************AdminServiceApplication项目启动成功************
+2023-03-31 16:13:06.946 [main] ERROR com.github.admin.AdminServiceApplication -[main] Line:23 - ************AdminServiceApplication项目启动成功************
+2023-03-31 16:28:49.584 [main] ERROR com.github.admin.AdminServiceApplication -[main] Line:23 - ************AdminServiceApplication项目启动成功************
+2023-03-31 16:33:21.547 [main] ERROR com.github.admin.AdminServiceApplication -[main] Line:23 - ************AdminServiceApplication项目启动成功************
+2023-03-31 16:38:13.155 [main] ERROR com.github.admin.AdminServiceApplication -[main] Line:23 - ************AdminServiceApplication项目启动成功************

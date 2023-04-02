@@ -1,0 +1,5 @@
+# Project exclude paths
+/admin-api/target/
+/admin-client/target/
+/admin-common/target/
+/admin-service/target/

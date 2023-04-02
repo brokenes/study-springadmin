@@ -1,0 +1,153 @@
+2023-03-31 09:28:03.055 [main] INFO  org.reflections.Reflections -[scan] Line:232- Reflections took 51 ms to scan 1 urls, producing 3 keys and 6 values 
+2023-03-31 09:28:03.114 [main] INFO  org.reflections.Reflections -[scan] Line:232- Reflections took 29 ms to scan 1 urls, producing 4 keys and 9 values 
+2023-03-31 09:28:03.132 [main] INFO  org.reflections.Reflections -[scan] Line:232- Reflections took 15 ms to scan 1 urls, producing 3 keys and 10 values 
+2023-03-31 09:28:03.256 [main] INFO  org.reflections.Reflections -[scan] Line:232- Reflections took 102 ms to scan 136 urls, producing 0 keys and 0 values 
+2023-03-31 09:28:03.266 [main] INFO  org.reflections.Reflections -[scan] Line:232- Reflections took 8 ms to scan 1 urls, producing 1 keys and 5 values 
+2023-03-31 09:28:03.277 [main] INFO  org.reflections.Reflections -[scan] Line:232- Reflections took 8 ms to scan 1 urls, producing 1 keys and 7 values 
+2023-03-31 09:28:03.293 [main] INFO  org.reflections.Reflections -[scan] Line:232- Reflections took 13 ms to scan 1 urls, producing 2 keys and 8 values 
+2023-03-31 09:28:03.403 [main] INFO  org.reflections.Reflections -[scan] Line:232- Reflections took 108 ms to scan 136 urls, producing 0 keys and 0 values 
+2023-03-31 09:28:04.422 [main] INFO  com.github.admin.SrpingbootApplicationTest -[logStartupProfileInfo] Line:637- The following 1 profile is active: "local"
+2023-03-31 09:28:10.536 [main] INFO  com.github.admin.SrpingbootApplicationTest -[logStarted] Line:61 - Started SrpingbootApplicationTest in 9.225 seconds (JVM running for 10.812)
+2023-03-31 09:28:11.156 [main] INFO  com.github.admin.SrpingbootApplicationTest -[_测试用户根据名称查询接口] Line:23 - 当前查询用户对象数据:User{id=1, userName='admin', deptId=1, picture='null', sex=1, email='10086@163.com', phone='10086', remark='', createDate=Fri Aug 10 12:00:03 CST 2018, updateDate=Thu Nov 07 10:09:17 CST 2019, status=1}
+2023-03-31 10:13:44.957 [main] INFO  com.alibaba.nacos.common.remote.client -[lambda$createClient$0] Line:80 - [RpcClientFactory] create a new rpc client of ff096a83-7e5e-4052-b4ce-aaa7861a4c35_config-0
+2023-03-31 10:13:45.045 [main] INFO  org.reflections.Reflections -[scan] Line:232- Reflections took 50 ms to scan 1 urls, producing 3 keys and 6 values 
+2023-03-31 10:13:45.094 [main] INFO  org.reflections.Reflections -[scan] Line:232- Reflections took 32 ms to scan 1 urls, producing 4 keys and 9 values 
+2023-03-31 10:13:45.172 [main] INFO  org.reflections.Reflections -[scan] Line:232- Reflections took 74 ms to scan 1 urls, producing 3 keys and 10 values 
+2023-03-31 10:13:45.364 [main] INFO  org.reflections.Reflections -[scan] Line:232- Reflections took 186 ms to scan 136 urls, producing 0 keys and 0 values 
+2023-03-31 10:13:45.376 [main] INFO  org.reflections.Reflections -[scan] Line:232- Reflections took 10 ms to scan 1 urls, producing 1 keys and 5 values 
+2023-03-31 10:13:45.387 [main] INFO  org.reflections.Reflections -[scan] Line:232- Reflections took 8 ms to scan 1 urls, producing 1 keys and 7 values 
+2023-03-31 10:13:45.407 [main] INFO  org.reflections.Reflections -[scan] Line:232- Reflections took 18 ms to scan 1 urls, producing 2 keys and 8 values 
+2023-03-31 10:13:45.516 [main] INFO  org.reflections.Reflections -[scan] Line:232- Reflections took 104 ms to scan 136 urls, producing 0 keys and 0 values 
+2023-03-31 10:13:45.517 [main] INFO  com.alibaba.nacos.common.remote.client -[printIfInfoEnabled] Line:60 - [ff096a83-7e5e-4052-b4ce-aaa7861a4c35_config-0] RpcClient init label, labels = {module=config, Vipserver-Tag=null, source=sdk, Amory-Tag=null, Location-Tag=null, taskId=0, AppName=unknown}
+2023-03-31 10:13:45.523 [main] INFO  com.alibaba.nacos.common.remote.client -[printIfInfoEnabled] Line:60 - [ff096a83-7e5e-4052-b4ce-aaa7861a4c35_config-0] Register server push request handler:com.alibaba.nacos.client.config.impl.ClientWorker$ConfigRpcTransportClient$$Lambda$626/491152599
+2023-03-31 10:13:45.524 [main] INFO  com.alibaba.nacos.common.remote.client -[printIfInfoEnabled] Line:60 - [ff096a83-7e5e-4052-b4ce-aaa7861a4c35_config-0] Register server push request handler:com.alibaba.nacos.client.config.impl.ClientWorker$ConfigRpcTransportClient$$Lambda$627/1186989416
+2023-03-31 10:13:45.525 [main] INFO  com.alibaba.nacos.common.remote.client -[printIfInfoEnabled] Line:60 - [ff096a83-7e5e-4052-b4ce-aaa7861a4c35_config-0] Registry connection listener to current client:com.alibaba.nacos.client.config.impl.ClientWorker$ConfigRpcTransportClient$1
+2023-03-31 10:13:45.526 [main] INFO  com.alibaba.nacos.common.remote.client -[printIfInfoEnabled] Line:60 - [ff096a83-7e5e-4052-b4ce-aaa7861a4c35_config-0] RpcClient init, ServerListFactory = com.alibaba.nacos.client.config.impl.ClientWorker$ConfigRpcTransportClient$2
+2023-03-31 10:13:45.533 [main] INFO  com.alibaba.nacos.common.remote.client -[printIfInfoEnabled] Line:60 - [ff096a83-7e5e-4052-b4ce-aaa7861a4c35_config-0] Try to connect to server on start up, server: {serverIp = 'localhost', server main port = 8848}
+2023-03-31 10:13:46.531 [main] INFO  com.alibaba.nacos.common.remote.client -[printIfInfoEnabled] Line:60 - [ff096a83-7e5e-4052-b4ce-aaa7861a4c35_config-0] Success to connect to server [localhost:8848] on start up, connectionId = 1680228826333_127.0.0.1_49985
+2023-03-31 10:13:46.533 [com.alibaba.nacos.client.remote.worker] INFO  com.alibaba.nacos.common.remote.client -[printIfInfoEnabled] Line:60 - [ff096a83-7e5e-4052-b4ce-aaa7861a4c35_config-0] Notify connected event to listeners.
+2023-03-31 10:13:46.533 [main] INFO  com.alibaba.nacos.common.remote.client -[printIfInfoEnabled] Line:60 - [ff096a83-7e5e-4052-b4ce-aaa7861a4c35_config-0] Register server push request handler:com.alibaba.nacos.common.remote.client.RpcClient$ConnectResetRequestHandler
+2023-03-31 10:13:46.549 [main] INFO  com.alibaba.nacos.common.remote.client -[printIfInfoEnabled] Line:60 - [ff096a83-7e5e-4052-b4ce-aaa7861a4c35_config-0] Register server push request handler:com.alibaba.nacos.common.remote.client.RpcClient$$Lambda$635/498023236
+2023-03-31 10:13:46.882 [main] INFO  com.github.admin.SrpingbootApplicationTest -[logStartupProfileInfo] Line:637- The following 1 profile is active: "local"
+2023-03-31 10:13:49.596 [main] INFO  c.a.d.s.b.a.DruidDataSourceAutoConfigure -[dataSource] Line:55 - Init DruidDataSource
+2023-03-31 10:13:50.324 [main] INFO  com.alibaba.druid.pool.DruidDataSource -[init] Line:996- {dataSource-1} inited
+2023-03-31 10:13:53.018 [main] INFO  com.alibaba.nacos.common.remote.client -[lambda$createClient$0] Line:80 - [RpcClientFactory] create a new rpc client of d44cd309-5de2-4335-90a8-61e018ace4e6
+2023-03-31 10:13:53.021 [main] INFO  com.alibaba.nacos.common.remote.client -[printIfInfoEnabled] Line:60 - [d44cd309-5de2-4335-90a8-61e018ace4e6] RpcClient init label, labels = {module=naming, source=sdk}
+2023-03-31 10:13:53.025 [main] INFO  com.alibaba.nacos.common.remote.client -[printIfInfoEnabled] Line:60 - [d44cd309-5de2-4335-90a8-61e018ace4e6] RpcClient init, ServerListFactory = com.alibaba.nacos.client.naming.core.ServerListManager
+2023-03-31 10:13:53.027 [main] INFO  com.alibaba.nacos.common.remote.client -[printIfInfoEnabled] Line:60 - [d44cd309-5de2-4335-90a8-61e018ace4e6] Registry connection listener to current client:com.alibaba.nacos.client.naming.remote.gprc.redo.NamingGrpcRedoService
+2023-03-31 10:13:53.028 [main] INFO  com.alibaba.nacos.common.remote.client -[printIfInfoEnabled] Line:60 - [d44cd309-5de2-4335-90a8-61e018ace4e6] Register server push request handler:com.alibaba.nacos.client.naming.remote.gprc.NamingPushRequestHandler
+2023-03-31 10:13:53.030 [main] INFO  com.alibaba.nacos.common.remote.client -[printIfInfoEnabled] Line:60 - [d44cd309-5de2-4335-90a8-61e018ace4e6] Try to connect to server on start up, server: {serverIp = 'localhost', server main port = 8848}
+2023-03-31 10:13:53.177 [main] INFO  com.alibaba.nacos.common.remote.client -[printIfInfoEnabled] Line:60 - [d44cd309-5de2-4335-90a8-61e018ace4e6] Success to connect to server [localhost:8848] on start up, connectionId = 1680228833058_127.0.0.1_50002
+2023-03-31 10:13:53.179 [com.alibaba.nacos.client.remote.worker] INFO  com.alibaba.nacos.common.remote.client -[printIfInfoEnabled] Line:60 - [d44cd309-5de2-4335-90a8-61e018ace4e6] Notify connected event to listeners.
+2023-03-31 10:13:53.179 [main] INFO  com.alibaba.nacos.common.remote.client -[printIfInfoEnabled] Line:60 - [d44cd309-5de2-4335-90a8-61e018ace4e6] Register server push request handler:com.alibaba.nacos.common.remote.client.RpcClient$ConnectResetRequestHandler
+2023-03-31 10:13:53.185 [main] INFO  com.alibaba.nacos.common.remote.client -[printIfInfoEnabled] Line:60 - [d44cd309-5de2-4335-90a8-61e018ace4e6] Register server push request handler:com.alibaba.nacos.common.remote.client.RpcClient$$Lambda$635/498023236
+2023-03-31 10:13:53.347 [main] INFO  com.github.admin.SrpingbootApplicationTest -[logStarted] Line:61 - Started SrpingbootApplicationTest in 10.417 seconds (JVM running for 12.111)
+2023-03-31 10:13:53.368 [main] INFO  c.a.cloud.nacos.refresh.NacosContextRefresher -[registerNacosListener] Line:129- [Nacos Config] Listening config: dataId=springboot-admin-service, group=DEFAULT_GROUP
+2023-03-31 10:13:53.370 [main] INFO  c.a.cloud.nacos.refresh.NacosContextRefresher -[registerNacosListener] Line:129- [Nacos Config] Listening config: dataId=springboot-admin-service.yml, group=DEFAULT_GROUP
+2023-03-31 10:13:53.373 [main] INFO  c.a.cloud.nacos.refresh.NacosContextRefresher -[registerNacosListener] Line:129- [Nacos Config] Listening config: dataId=springboot-admin-service-local.yml, group=DEFAULT_GROUP
+2023-03-31 10:13:53.847 [nacos-grpc-client-executor-9] INFO  com.alibaba.nacos.common.remote.client -[printIfInfoEnabled] Line:60 - [d44cd309-5de2-4335-90a8-61e018ace4e6] Receive server push request, request = NotifySubscriberRequest, requestId = 36
+2023-03-31 10:13:53.853 [nacos-grpc-client-executor-9] INFO  com.alibaba.nacos.common.remote.client -[printIfInfoEnabled] Line:60 - [d44cd309-5de2-4335-90a8-61e018ace4e6] Ack server push request, request = NotifySubscriberRequest, requestId = 36
+2023-03-31 10:13:53.991 [main] INFO  com.github.admin.SrpingbootApplicationTest -[_测试用户根据名称查询接口] Line:23 - 当前查询用户对象数据:User{id=1, userName='admin', deptId=1, picture='null', sex=1, email='10086@163.com', phone='10086', remark='', createDate=Fri Aug 10 12:00:03 CST 2018, updateDate=Thu Nov 07 10:09:17 CST 2019, status=1}
+2023-03-31 10:13:54.408 [SpringApplicationShutdownHook] INFO  com.alibaba.nacos.common.remote.client -[shutdown] Line:454- Shutdown rpc client, set status to shutdown
+2023-03-31 10:13:54.413 [SpringApplicationShutdownHook] INFO  com.alibaba.nacos.common.remote.client -[shutdown] Line:456- Shutdown client event executor java.util.concurrent.ScheduledThreadPoolExecutor@1c569712[Running, pool size = 2, active threads = 2, queued tasks = 0, completed tasks = 0]
+2023-03-31 10:13:54.413 [SpringApplicationShutdownHook] INFO  com.alibaba.nacos.common.remote.client -[closeConnection] Line:591- Close current connection 1680228833058_127.0.0.1_50002
+2023-03-31 10:13:54.425 [SpringApplicationShutdownHook] INFO  c.a.nacos.common.remote.client.grpc.GrpcClient -[shutdown] Line:85 - Shutdown grpc executor java.util.concurrent.ThreadPoolExecutor@7632749b[Running, pool size = 13, active threads = 0, queued tasks = 0, completed tasks = 13]
+2023-03-31 10:13:54.442 [SpringApplicationShutdownHook] INFO  com.alibaba.druid.pool.DruidDataSource -[close] Line:2138- {dataSource-1} closing ...
+2023-03-31 10:13:54.470 [SpringApplicationShutdownHook] INFO  com.alibaba.druid.pool.DruidDataSource -[close] Line:2211- {dataSource-1} closed
+2023-03-31 11:02:52.837 [main] INFO  org.reflections.Reflections -[scan] Line:232- Reflections took 57 ms to scan 1 urls, producing 3 keys and 6 values 
+2023-03-31 11:02:52.895 [main] INFO  org.reflections.Reflections -[scan] Line:232- Reflections took 35 ms to scan 1 urls, producing 4 keys and 9 values 
+2023-03-31 11:02:52.915 [main] INFO  org.reflections.Reflections -[scan] Line:232- Reflections took 16 ms to scan 1 urls, producing 3 keys and 10 values 
+2023-03-31 11:02:53.043 [main] INFO  org.reflections.Reflections -[scan] Line:232- Reflections took 121 ms to scan 139 urls, producing 0 keys and 0 values 
+2023-03-31 11:02:53.053 [main] INFO  org.reflections.Reflections -[scan] Line:232- Reflections took 8 ms to scan 1 urls, producing 1 keys and 5 values 
+2023-03-31 11:02:53.066 [main] INFO  org.reflections.Reflections -[scan] Line:232- Reflections took 10 ms to scan 1 urls, producing 1 keys and 7 values 
+2023-03-31 11:02:53.081 [main] INFO  org.reflections.Reflections -[scan] Line:232- Reflections took 12 ms to scan 1 urls, producing 2 keys and 8 values 
+2023-03-31 11:02:53.194 [main] INFO  org.reflections.Reflections -[scan] Line:232- Reflections took 109 ms to scan 139 urls, producing 0 keys and 0 values 
+2023-03-31 11:02:54.261 [main] INFO  com.github.admin.UserServiceTest -[logStartupProfileInfo] Line:637- The following 1 profile is active: "local"
+2023-03-31 11:03:00.858 [main] INFO  com.github.admin.UserServiceTest -[logStarted] Line:61 - Started UserServiceTest in 10.03 seconds (JVM running for 11.571)
+2023-03-31 11:03:01.330 [main] INFO  c.g.admin.serveice.server.impl.UserServiceImpl -[findByUserName] Line:21 - 查询用户信息userName:aaaaa
+2023-03-31 11:03:01.672 [main] INFO  com.github.admin.UserServiceTest -[_测试用户查询接口] Line:25 - 查询结果:{"success":false}
+2023-03-31 11:06:32.427 [main] INFO  org.reflections.Reflections -[scan] Line:232- Reflections took 72 ms to scan 1 urls, producing 3 keys and 6 values 
+2023-03-31 11:06:32.521 [main] INFO  org.reflections.Reflections -[scan] Line:232- Reflections took 61 ms to scan 1 urls, producing 4 keys and 9 values 
+2023-03-31 11:06:32.546 [main] INFO  org.reflections.Reflections -[scan] Line:232- Reflections took 16 ms to scan 1 urls, producing 3 keys and 10 values 
+2023-03-31 11:06:32.703 [main] INFO  org.reflections.Reflections -[scan] Line:232- Reflections took 149 ms to scan 140 urls, producing 0 keys and 0 values 
+2023-03-31 11:06:32.715 [main] INFO  org.reflections.Reflections -[scan] Line:232- Reflections took 11 ms to scan 1 urls, producing 1 keys and 5 values 
+2023-03-31 11:06:32.748 [main] INFO  org.reflections.Reflections -[scan] Line:232- Reflections took 25 ms to scan 1 urls, producing 1 keys and 7 values 
+2023-03-31 11:06:32.800 [main] INFO  org.reflections.Reflections -[scan] Line:232- Reflections took 45 ms to scan 1 urls, producing 2 keys and 8 values 
+2023-03-31 11:06:32.959 [main] INFO  org.reflections.Reflections -[scan] Line:232- Reflections took 154 ms to scan 140 urls, producing 0 keys and 0 values 
+2023-03-31 11:06:34.194 [main] INFO  com.github.admin.UserServiceTest -[logStartupProfileInfo] Line:637- The following 1 profile is active: "local"
+2023-03-31 11:06:40.916 [main] INFO  com.github.admin.UserServiceTest -[logStarted] Line:61 - Started UserServiceTest in 10.66 seconds (JVM running for 12.675)
+2023-03-31 11:07:31.264 [main] INFO  c.g.admin.serveice.server.impl.UserServiceImpl -[findByUserName] Line:21 - 查询用户信息userName:aaaaa
+2023-03-31 11:08:20.630 [main] INFO  com.github.admin.UserServiceTest -[_测试用户查询接口] Line:25 - 查询结果:{"success":false}
+2023-03-31 11:08:33.392 [main] INFO  org.reflections.Reflections -[scan] Line:232- Reflections took 52 ms to scan 1 urls, producing 3 keys and 6 values 
+2023-03-31 11:08:33.462 [main] INFO  org.reflections.Reflections -[scan] Line:232- Reflections took 49 ms to scan 1 urls, producing 4 keys and 9 values 
+2023-03-31 11:08:33.484 [main] INFO  org.reflections.Reflections -[scan] Line:232- Reflections took 17 ms to scan 1 urls, producing 3 keys and 10 values 
+2023-03-31 11:08:33.606 [main] INFO  org.reflections.Reflections -[scan] Line:232- Reflections took 115 ms to scan 140 urls, producing 0 keys and 0 values 
+2023-03-31 11:08:33.618 [main] INFO  org.reflections.Reflections -[scan] Line:232- Reflections took 9 ms to scan 1 urls, producing 1 keys and 5 values 
+2023-03-31 11:08:33.631 [main] INFO  org.reflections.Reflections -[scan] Line:232- Reflections took 11 ms to scan 1 urls, producing 1 keys and 7 values 
+2023-03-31 11:08:33.647 [main] INFO  org.reflections.Reflections -[scan] Line:232- Reflections took 13 ms to scan 1 urls, producing 2 keys and 8 values 
+2023-03-31 11:08:33.775 [main] INFO  org.reflections.Reflections -[scan] Line:232- Reflections took 124 ms to scan 140 urls, producing 0 keys and 0 values 
+2023-03-31 11:08:34.956 [main] INFO  com.github.admin.UserServiceTest -[logStartupProfileInfo] Line:637- The following 1 profile is active: "local"
+2023-03-31 11:08:41.772 [main] INFO  com.github.admin.UserServiceTest -[logStarted] Line:61 - Started UserServiceTest in 10.417 seconds (JVM running for 12.162)
+2023-03-31 12:45:43.439 [main] INFO  org.reflections.Reflections -[scan] Line:232- Reflections took 47 ms to scan 1 urls, producing 3 keys and 6 values 
+2023-03-31 12:45:43.513 [main] INFO  org.reflections.Reflections -[scan] Line:232- Reflections took 46 ms to scan 1 urls, producing 4 keys and 9 values 
+2023-03-31 12:45:43.535 [main] INFO  org.reflections.Reflections -[scan] Line:232- Reflections took 16 ms to scan 1 urls, producing 3 keys and 10 values 
+2023-03-31 12:45:43.680 [main] INFO  org.reflections.Reflections -[scan] Line:232- Reflections took 139 ms to scan 140 urls, producing 0 keys and 0 values 
+2023-03-31 12:45:43.690 [main] INFO  org.reflections.Reflections -[scan] Line:232- Reflections took 8 ms to scan 1 urls, producing 1 keys and 5 values 
+2023-03-31 12:45:43.701 [main] INFO  org.reflections.Reflections -[scan] Line:232- Reflections took 9 ms to scan 1 urls, producing 1 keys and 7 values 
+2023-03-31 12:45:43.718 [main] INFO  org.reflections.Reflections -[scan] Line:232- Reflections took 13 ms to scan 1 urls, producing 2 keys and 8 values 
+2023-03-31 12:45:43.843 [main] INFO  org.reflections.Reflections -[scan] Line:232- Reflections took 121 ms to scan 140 urls, producing 0 keys and 0 values 
+2023-03-31 12:45:45.033 [main] INFO  com.github.admin.UserServiceTest -[logStartupProfileInfo] Line:637- The following 1 profile is active: "local"
+2023-03-31 12:45:51.865 [main] INFO  com.github.admin.UserServiceTest -[logStarted] Line:61 - Started UserServiceTest in 10.506 seconds (JVM running for 12.352)
+2023-03-31 12:45:58.782 [main] INFO  c.g.admin.serveice.server.impl.UserServiceImpl -[findByUserName] Line:21 - 查询用户信息userName:aaaaa
+2023-03-31 12:46:01.053 [main] INFO  com.github.admin.UserServiceTest -[_测试用户查询接口] Line:25 - 查询结果:{"success":false}
+2023-03-31 12:46:01.775 [main] INFO  com.github.admin.SrpingbootApplicationTest -[_测试用户根据名称查询接口] Line:23 - 当前查询用户对象数据:User{id=1, userName='admin', deptId=1, picture='null', sex=1, email='10086@163.com', phone='10086', remark='', createDate=Fri Aug 10 12:00:03 CST 2018, updateDate=Thu Nov 07 10:09:17 CST 2019, status=1}
+2023-03-31 12:46:31.944 [main] INFO  org.reflections.Reflections -[scan] Line:232- Reflections took 59 ms to scan 1 urls, producing 3 keys and 6 values 
+2023-03-31 12:46:31.998 [main] INFO  org.reflections.Reflections -[scan] Line:232- Reflections took 31 ms to scan 1 urls, producing 4 keys and 9 values 
+2023-03-31 12:46:32.020 [main] INFO  org.reflections.Reflections -[scan] Line:232- Reflections took 19 ms to scan 1 urls, producing 3 keys and 10 values 
+2023-03-31 12:46:32.148 [main] INFO  org.reflections.Reflections -[scan] Line:232- Reflections took 120 ms to scan 139 urls, producing 0 keys and 0 values 
+2023-03-31 12:46:32.158 [main] INFO  org.reflections.Reflections -[scan] Line:232- Reflections took 8 ms to scan 1 urls, producing 1 keys and 5 values 
+2023-03-31 12:46:32.174 [main] INFO  org.reflections.Reflections -[scan] Line:232- Reflections took 13 ms to scan 1 urls, producing 1 keys and 7 values 
+2023-03-31 12:46:32.189 [main] INFO  org.reflections.Reflections -[scan] Line:232- Reflections took 11 ms to scan 1 urls, producing 2 keys and 8 values 
+2023-03-31 12:46:32.304 [main] INFO  org.reflections.Reflections -[scan] Line:232- Reflections took 111 ms to scan 139 urls, producing 0 keys and 0 values 
+2023-03-31 12:46:33.433 [main] INFO  com.github.admin.UserServiceTest -[logStartupProfileInfo] Line:637- The following 1 profile is active: "local"
+2023-03-31 12:46:39.659 [main] INFO  com.github.admin.UserServiceTest -[logStarted] Line:61 - Started UserServiceTest in 9.828 seconds (JVM running for 11.414)
+2023-03-31 12:46:40.036 [main] INFO  c.g.admin.serveice.server.impl.UserServiceImpl -[findByUserName] Line:21 - 查询用户信息userName:admin
+2023-03-31 12:46:40.347 [main] INFO  com.github.admin.UserServiceTest -[_测试用户查询接口] Line:25 - 查询结果:{"data":{"createDate":"2018-08-10 12:00:03","deptId":1,"email":"10086@163.com","id":1,"nickName":"超级管理员","password":"5fa04c0758ae596e2a93cd2802640693a5b08bdfacd4307abce323c85e481154","phone":"10086","remark":"","salt":"7rl2t9","sex":1,"status":1,"updateDate":"2019-11-07 10:09:17","userName":"admin"},"success":true}
+2023-03-31 12:49:30.336 [main] INFO  org.reflections.Reflections -[scan] Line:232- Reflections took 55 ms to scan 1 urls, producing 3 keys and 6 values 
+2023-03-31 12:49:30.389 [main] INFO  org.reflections.Reflections -[scan] Line:232- Reflections took 33 ms to scan 1 urls, producing 4 keys and 9 values 
+2023-03-31 12:49:30.407 [main] INFO  org.reflections.Reflections -[scan] Line:232- Reflections took 16 ms to scan 1 urls, producing 3 keys and 10 values 
+2023-03-31 12:49:30.539 [main] INFO  org.reflections.Reflections -[scan] Line:232- Reflections took 126 ms to scan 139 urls, producing 0 keys and 0 values 
+2023-03-31 12:49:30.550 [main] INFO  org.reflections.Reflections -[scan] Line:232- Reflections took 9 ms to scan 1 urls, producing 1 keys and 5 values 
+2023-03-31 12:49:30.562 [main] INFO  org.reflections.Reflections -[scan] Line:232- Reflections took 10 ms to scan 1 urls, producing 1 keys and 7 values 
+2023-03-31 12:49:30.579 [main] INFO  org.reflections.Reflections -[scan] Line:232- Reflections took 14 ms to scan 1 urls, producing 2 keys and 8 values 
+2023-03-31 12:49:30.683 [main] INFO  org.reflections.Reflections -[scan] Line:232- Reflections took 101 ms to scan 139 urls, producing 0 keys and 0 values 
+2023-03-31 12:49:31.718 [main] INFO  com.github.admin.UserServiceTest -[logStartupProfileInfo] Line:637- The following 1 profile is active: "local"
+2023-03-31 12:49:37.482 [main] INFO  com.github.admin.UserServiceTest -[logStarted] Line:61 - Started UserServiceTest in 9.137 seconds (JVM running for 10.713)
+2023-03-31 12:49:37.972 [main] INFO  c.g.admin.serveice.server.impl.UserServiceImpl -[findByUserName] Line:21 - 查询用户信息userName:admin
+2023-03-31 12:49:38.358 [main] INFO  com.github.admin.UserServiceTest -[_测试用户查询接口] Line:25 - 查询结果:{"code":"0000","data":{"createDate":"2018-08-10 12:00:03","deptId":1,"email":"10086@163.com","id":1,"nickName":"超级管理员","password":"5fa04c0758ae596e2a93cd2802640693a5b08bdfacd4307abce323c85e481154","phone":"10086","remark":"","salt":"7rl2t9","sex":1,"status":1,"updateDate":"2019-11-07 10:09:17","userName":"admin"},"message":"success","success":true}
+2023-03-31 12:50:44.262 [main] INFO  org.reflections.Reflections -[scan] Line:232- Reflections took 50 ms to scan 1 urls, producing 3 keys and 6 values 
+2023-03-31 12:50:44.331 [main] INFO  org.reflections.Reflections -[scan] Line:232- Reflections took 51 ms to scan 1 urls, producing 4 keys and 9 values 
+2023-03-31 12:50:44.350 [main] INFO  org.reflections.Reflections -[scan] Line:232- Reflections took 16 ms to scan 1 urls, producing 3 keys and 10 values 
+2023-03-31 12:50:44.478 [main] INFO  org.reflections.Reflections -[scan] Line:232- Reflections took 122 ms to scan 139 urls, producing 0 keys and 0 values 
+2023-03-31 12:50:44.488 [main] INFO  org.reflections.Reflections -[scan] Line:232- Reflections took 8 ms to scan 1 urls, producing 1 keys and 5 values 
+2023-03-31 12:50:44.499 [main] INFO  org.reflections.Reflections -[scan] Line:232- Reflections took 9 ms to scan 1 urls, producing 1 keys and 7 values 
+2023-03-31 12:50:44.514 [main] INFO  org.reflections.Reflections -[scan] Line:232- Reflections took 13 ms to scan 1 urls, producing 2 keys and 8 values 
+2023-03-31 12:50:44.625 [main] INFO  org.reflections.Reflections -[scan] Line:232- Reflections took 108 ms to scan 139 urls, producing 0 keys and 0 values 
+2023-03-31 12:50:45.648 [main] INFO  com.github.admin.UserServiceTest -[logStartupProfileInfo] Line:637- The following 1 profile is active: "local"
+2023-03-31 12:50:51.871 [main] INFO  com.github.admin.UserServiceTest -[logStarted] Line:61 - Started UserServiceTest in 9.516 seconds (JVM running for 11.025)
+2023-03-31 12:50:52.289 [main] INFO  c.g.admin.serveice.server.impl.UserServiceImpl -[findByUserName] Line:21 - 查询用户信息userName:admin
+2023-03-31 12:50:52.553 [main] INFO  com.github.admin.UserServiceTest -[_测试用户查询接口] Line:25 - 查询结果:{"code":"0000","data":{"createDate":"2018-08-10 12:00:03","deptId":1,"email":"10086@163.com","id":1,"nickName":"超级管理员","password":"5fa04c0758ae596e2a93cd2802640693a5b08bdfacd4307abce323c85e481154","phone":"10086","remark":"","salt":"7rl2t9","sex":1,"status":1,"updateDate":"2019-11-07 10:09:17","userName":"admin"},"message":"操作成功","success":true}
+2023-03-31 15:15:54.585 [main] INFO  org.reflections.Reflections -[scan] Line:232- Reflections took 59 ms to scan 1 urls, producing 3 keys and 6 values 
+2023-03-31 15:15:54.657 [main] INFO  org.reflections.Reflections -[scan] Line:232- Reflections took 48 ms to scan 1 urls, producing 4 keys and 9 values 
+2023-03-31 15:15:54.679 [main] INFO  org.reflections.Reflections -[scan] Line:232- Reflections took 15 ms to scan 1 urls, producing 3 keys and 10 values 
+2023-03-31 15:15:54.874 [main] INFO  org.reflections.Reflections -[scan] Line:232- Reflections took 188 ms to scan 140 urls, producing 0 keys and 0 values 
+2023-03-31 15:15:54.886 [main] INFO  org.reflections.Reflections -[scan] Line:232- Reflections took 9 ms to scan 1 urls, producing 1 keys and 5 values 
+2023-03-31 15:15:54.902 [main] INFO  org.reflections.Reflections -[scan] Line:232- Reflections took 13 ms to scan 1 urls, producing 1 keys and 7 values 
+2023-03-31 15:15:54.926 [main] INFO  org.reflections.Reflections -[scan] Line:232- Reflections took 20 ms to scan 1 urls, producing 2 keys and 8 values 
+2023-03-31 15:15:55.074 [main] INFO  org.reflections.Reflections -[scan] Line:232- Reflections took 143 ms to scan 140 urls, producing 0 keys and 0 values 
+2023-03-31 15:15:56.673 [main] INFO  com.github.admin.UserServiceTest -[logStartupProfileInfo] Line:637- The following 1 profile is active: "local"
+2023-03-31 15:16:04.502 [main] INFO  com.github.admin.UserServiceTest -[logStarted] Line:61 - Started UserServiceTest in 12.104 seconds (JVM running for 14.229)
+2023-03-31 15:21:04.769 [main] INFO  c.g.admin.serveice.server.impl.UserServiceImpl -[findByUserName] Line:21 - 查询用户信息userName:aaaaa
+2023-03-31 15:21:05.533 [main] INFO  com.github.admin.UserServiceTest -[_测试用户查询接口] Line:25 - 查询结果:{"success":false}
+2023-03-31 15:21:05.661 [main] INFO  com.github.admin.SrpingbootApplicationTest -[_测试用户根据名称查询接口] Line:23 - 当前查询用户对象数据:User{id=1, userName='admin', deptId=1, picture='null', sex=1, email='10086@163.com', phone='10086', remark='', createDate=Fri Aug 10 12:00:03 CST 2018, updateDate=Thu Nov 07 10:09:17 CST 2019, status=1}
+2023-03-31 15:21:13.274 [main] INFO  c.g.admin.serveice.server.impl.UserServiceImpl -[findByUserName] Line:21 - 查询用户信息userName:admin

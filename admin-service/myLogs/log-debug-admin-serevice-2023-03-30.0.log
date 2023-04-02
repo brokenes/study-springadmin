@@ -1,0 +1,51 @@
+2023-03-30 22:00:04.084 [main] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -[scanCandidateComponents] Line:435- Identified candidate component class: file [/Users/cavlinlee/study-springadmin/admin-service/target/classes/com/github/admin/serveice/dao/UserDao.class]
+2023-03-30 22:00:04.088 [main] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -[debug] Line:49 - Creating MapperFactoryBean with name 'userDao' and 'com.github.admin.serveice.dao.UserDao' mapperInterface
+2023-03-30 22:00:04.091 [main] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -[debug] Line:49 - Enabling autowire by type for MapperFactoryBean with name 'userDao'.
+2023-03-30 22:00:08.929 [main] DEBUG c.github.admin.serveice.dao.UserDao.findByUserName -[debug] Line:137- ==>  Preparing: select * from sys_user where username = ?
+2023-03-30 22:00:09.013 [main] DEBUG c.github.admin.serveice.dao.UserDao.findByUserName -[debug] Line:137- ==> Parameters: hello(String)
+2023-03-30 22:00:09.032 [main] DEBUG c.github.admin.serveice.dao.UserDao.findByUserName -[debug] Line:137- <==      Total: 0
+2023-03-30 22:00:38.392 [main] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -[scanCandidateComponents] Line:435- Identified candidate component class: file [/Users/cavlinlee/study-springadmin/admin-service/target/classes/com/github/admin/serveice/dao/UserDao.class]
+2023-03-30 22:00:38.400 [main] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -[debug] Line:49 - Creating MapperFactoryBean with name 'userDao' and 'com.github.admin.serveice.dao.UserDao' mapperInterface
+2023-03-30 22:00:38.402 [main] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -[debug] Line:49 - Enabling autowire by type for MapperFactoryBean with name 'userDao'.
+2023-03-30 22:00:43.653 [main] DEBUG c.github.admin.serveice.dao.UserDao.findByUserName -[debug] Line:137- ==>  Preparing: select * from sys_user where username = ?
+2023-03-30 22:00:43.742 [main] DEBUG c.github.admin.serveice.dao.UserDao.findByUserName -[debug] Line:137- ==> Parameters: admin(String)
+2023-03-30 22:02:02.098 [main] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -[scanCandidateComponents] Line:435- Identified candidate component class: file [/Users/cavlinlee/study-springadmin/admin-service/target/classes/com/github/admin/serveice/dao/UserDao.class]
+2023-03-30 22:02:02.108 [main] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -[debug] Line:49 - Creating MapperFactoryBean with name 'userDao' and 'com.github.admin.serveice.dao.UserDao' mapperInterface
+2023-03-30 22:02:02.113 [main] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -[debug] Line:49 - Enabling autowire by type for MapperFactoryBean with name 'userDao'.
+2023-03-30 22:02:07.079 [main] DEBUG c.github.admin.serveice.dao.UserDao.findByUserName -[debug] Line:137- ==>  Preparing: select * from sys_user where username = ?
+2023-03-30 22:02:07.155 [main] DEBUG c.github.admin.serveice.dao.UserDao.findByUserName -[debug] Line:137- ==> Parameters: hello(String)
+2023-03-30 22:02:07.170 [main] DEBUG c.github.admin.serveice.dao.UserDao.findByUserName -[debug] Line:137- <==      Total: 0
+2023-03-30 22:05:23.482 [main] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -[scanCandidateComponents] Line:435- Identified candidate component class: file [/Users/cavlinlee/study-springadmin/admin-service/target/classes/com/github/admin/serveice/dao/UserDao.class]
+2023-03-30 22:05:23.491 [main] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -[debug] Line:49 - Creating MapperFactoryBean with name 'userDao' and 'com.github.admin.serveice.dao.UserDao' mapperInterface
+2023-03-30 22:05:23.495 [main] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -[debug] Line:49 - Enabling autowire by type for MapperFactoryBean with name 'userDao'.
+2023-03-30 22:05:28.545 [main] DEBUG c.github.admin.serveice.dao.UserDao.findByUserName -[debug] Line:137- ==>  Preparing: select * from sys_user where username = ?
+2023-03-30 22:05:28.623 [main] DEBUG c.github.admin.serveice.dao.UserDao.findByUserName -[debug] Line:137- ==> Parameters: admin(String)
+2023-03-30 22:06:15.506 [main] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -[scanCandidateComponents] Line:435- Identified candidate component class: file [/Users/cavlinlee/study-springadmin/admin-service/target/classes/com/github/admin/serveice/dao/UserDao.class]
+2023-03-30 22:06:15.513 [main] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -[debug] Line:49 - Creating MapperFactoryBean with name 'userDao' and 'com.github.admin.serveice.dao.UserDao' mapperInterface
+2023-03-30 22:06:15.516 [main] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -[debug] Line:49 - Enabling autowire by type for MapperFactoryBean with name 'userDao'.
+2023-03-30 22:06:20.529 [main] DEBUG c.github.admin.serveice.dao.UserDao.findByUserName -[debug] Line:137- ==>  Preparing: select * from sys_user where username = ?
+2023-03-30 22:06:20.611 [main] DEBUG c.github.admin.serveice.dao.UserDao.findByUserName -[debug] Line:137- ==> Parameters: admin(String)
+2023-03-30 22:07:51.979 [main] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -[scanCandidateComponents] Line:435- Identified candidate component class: file [/Users/cavlinlee/study-springadmin/admin-service/target/classes/com/github/admin/serveice/dao/UserDao.class]
+2023-03-30 22:07:51.989 [main] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -[debug] Line:49 - Creating MapperFactoryBean with name 'userDao' and 'com.github.admin.serveice.dao.UserDao' mapperInterface
+2023-03-30 22:07:51.992 [main] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -[debug] Line:49 - Enabling autowire by type for MapperFactoryBean with name 'userDao'.
+2023-03-30 22:07:56.876 [main] DEBUG c.github.admin.serveice.dao.UserDao.findByUserName -[debug] Line:137- ==>  Preparing: select * from sys_user where username = ?
+2023-03-30 22:07:56.946 [main] DEBUG c.github.admin.serveice.dao.UserDao.findByUserName -[debug] Line:137- ==> Parameters: admin(String)
+2023-03-30 22:07:56.970 [main] DEBUG c.github.admin.serveice.dao.UserDao.findByUserName -[debug] Line:137- <==      Total: 1
+2023-03-30 22:09:11.984 [main] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -[scanCandidateComponents] Line:435- Identified candidate component class: file [/Users/cavlinlee/study-springadmin/admin-service/target/classes/com/github/admin/serveice/dao/UserDao.class]
+2023-03-30 22:09:11.991 [main] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -[debug] Line:49 - Creating MapperFactoryBean with name 'userDao' and 'com.github.admin.serveice.dao.UserDao' mapperInterface
+2023-03-30 22:09:11.994 [main] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -[debug] Line:49 - Enabling autowire by type for MapperFactoryBean with name 'userDao'.
+2023-03-30 22:09:16.874 [main] DEBUG c.github.admin.serveice.dao.UserDao.findByUserName -[debug] Line:137- ==>  Preparing: select * from sys_user where username = ?
+2023-03-30 22:09:16.947 [main] DEBUG c.github.admin.serveice.dao.UserDao.findByUserName -[debug] Line:137- ==> Parameters: admin(String)
+2023-03-30 22:09:16.968 [main] DEBUG c.github.admin.serveice.dao.UserDao.findByUserName -[debug] Line:137- <==      Total: 1
+2023-03-30 22:11:36.511 [main] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -[scanCandidateComponents] Line:435- Identified candidate component class: file [/Users/cavlinlee/study-springadmin/admin-service/target/classes/com/github/admin/serveice/dao/UserDao.class]
+2023-03-30 22:11:36.517 [main] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -[debug] Line:49 - Creating MapperFactoryBean with name 'userDao' and 'com.github.admin.serveice.dao.UserDao' mapperInterface
+2023-03-30 22:11:36.519 [main] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -[debug] Line:49 - Enabling autowire by type for MapperFactoryBean with name 'userDao'.
+2023-03-30 22:11:41.655 [main] DEBUG c.github.admin.serveice.dao.UserDao.findByUserName -[debug] Line:137- ==>  Preparing: select * from sys_user where username = ?
+2023-03-30 22:11:41.721 [main] DEBUG c.github.admin.serveice.dao.UserDao.findByUserName -[debug] Line:137- ==> Parameters: admin(String)
+2023-03-30 22:11:41.745 [main] DEBUG c.github.admin.serveice.dao.UserDao.findByUserName -[debug] Line:137- <==      Total: 1
+2023-03-30 22:15:10.456 [main] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -[scanCandidateComponents] Line:435- Identified candidate component class: file [/Users/cavlinlee/study-springadmin/admin-service/target/classes/com/github/admin/serveice/dao/UserDao.class]
+2023-03-30 22:15:10.463 [main] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -[debug] Line:49 - Creating MapperFactoryBean with name 'userDao' and 'com.github.admin.serveice.dao.UserDao' mapperInterface
+2023-03-30 22:15:10.465 [main] DEBUG org.mybatis.spring.mapper.ClassPathMapperScanner -[debug] Line:49 - Enabling autowire by type for MapperFactoryBean with name 'userDao'.
+2023-03-30 22:15:15.503 [main] DEBUG c.github.admin.serveice.dao.UserDao.findByUserName -[debug] Line:137- ==>  Preparing: select * from sys_user where username = ?
+2023-03-30 22:15:15.572 [main] DEBUG c.github.admin.serveice.dao.UserDao.findByUserName -[debug] Line:137- ==> Parameters: admin(String)
+2023-03-30 22:15:15.592 [main] DEBUG c.github.admin.serveice.dao.UserDao.findByUserName -[debug] Line:137- <==      Total: 1
