@@ -1,4 +1,4 @@
-package com.github.admin.resolver;
+package com.github.admin.api.resolver;
 
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;

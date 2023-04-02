@@ -30,10 +30,11 @@
         <div class="layui-form-item">
             <input type="checkbox" name="rememberMe" title="记住我" th:title="#{login.remember.me}" lay-skin="primary">
 <!--            <a class="layui-layout-right forget-password" href="javascript:alert('请联系超级管理员！')">忘记密码?</a>-->
-            <a class="layui-layout-right forget-password" th:href="@{/login(lan='zh_CN')}">中文</a>
+
         </div>
         <div class="layui-form-item">
-            <a class="layui-layout-right forget-password" th:href="@{/login(lan='en_US')}">英文</a>
+            <a class="layui-layout-left forget-password" th:href="@{/login(lan='zh_CN')}">中文</a>
+            <a class="layui-layout-right forget-password" th:href="@{/login(lan='en_US')}">English</a>
         </div>
         <button type="submit" class="layui-btn layui-btn-fluid ajax-login"><i class="fa fa-sign-in fa-lg fa-fw"></i> [[#{login.sign.in}]]</button>
     </form>
