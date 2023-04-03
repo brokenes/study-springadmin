@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>后台管理系统</title>
+    <title>[[#{login.title}]]</title>
     <link rel="stylesheet" type="text/css" th:href="@{/css/login.css}">
     <link rel="stylesheet" th:href="@{/css/plugins/font-awesome-4.7.0/css/font-awesome.min.css}"  media="all">
     <link rel="stylesheet" th:href="@{/lib/layui-v2.3.0/css/layui.css}"  media="all">
@@ -32,6 +32,7 @@
 <!--            <a class="layui-layout-right forget-password" href="javascript:alert('请联系超级管理员！')">忘记密码?</a>-->
 
         </div>
+
         <div class="layui-form-item">
             <a class="layui-layout-left forget-password" th:href="@{/login(lan='zh_CN')}">中文</a>
             <a class="layui-layout-right forget-password" th:href="@{/login(lan='en_US')}">English</a>
