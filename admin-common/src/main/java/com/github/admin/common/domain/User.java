@@ -2,6 +2,8 @@ package com.github.admin.common.domain;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 public class User implements Serializable {
 
@@ -33,6 +35,10 @@ public class User implements Serializable {
     private Date updateDate;
     /**状态**/
     private int status;
+
+    private Dept dept;
+
+    private Set<Role> roles = new HashSet<>(0);
 
     public Long getId() {
         return id;
@@ -144,6 +150,22 @@ public class User implements Serializable {
 
     public void setStatus(int status) {
         this.status = status;
+    }
+
+    public Dept getDept() {
+        return dept;
+    }
+
+    public void setDept(Dept dept) {
+        this.dept = dept;
+    }
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
     }
 
     @Override
