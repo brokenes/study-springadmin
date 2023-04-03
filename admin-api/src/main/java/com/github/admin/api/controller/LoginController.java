@@ -1,12 +1,21 @@
 package com.github.admin.api.controller;
 
 import com.github.admin.common.config.ProjectProperties;
+import com.github.admin.common.domain.User;
 import com.github.admin.common.enums.ResultEnum;
 import com.github.admin.common.exception.ResultException;
 import com.github.admin.common.util.CaptchaUtil;
+import com.github.admin.common.util.ResultVoUtil;
 import com.github.admin.common.util.SpringContextUtil;
 import com.github.admin.common.vo.ResultVo;
+import com.github.admin.util.URL;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.AuthenticationException;
+import org.apache.shiro.authc.LockedAccountException;
+import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.session.Session;
+import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -18,6 +27,7 @@ import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+
 
 @Controller
 public class LoginController {
@@ -63,13 +73,43 @@ public class LoginController {
         boolean isCaptcha = properties.isCaptchaOpen();
         LOGGER.info("当前系统配置是否需要验证码登录,isCaptche:{},用户输入验证码为,captcha:{}",isCaptcha,captcha);
         if(isCaptcha){
-            if(StringUtils.isBlank(captcha)){
-                LOGGER.error("当前用户没有输入验证码");
+            Session session = SecurityUtils.getSubject().getSession();
+            String sessionCaptcha = (String) session.getAttribute("captcha");
+            if (StringUtils.isBlank(captcha) || StringUtils.isBlank(sessionCaptcha)
+                    || !captcha.toUpperCase().equals(sessionCaptcha.toUpperCase())) {
                 throw new ResultException(ResultEnum.USER_CAPTCHA_ERROR);
             }
+            session.removeAttribute("captcha");
         }
+        // 1.获取Subject主体对象
+        Subject subject = SecurityUtils.getSubject();
+        // 2.封装用户数据
+        UsernamePasswordToken token = new UsernamePasswordToken(userName, password);
+        // 3.执行登录，进入自定义Realm类中
+        try {
+            // 判断是否自动登录
+            if (rememberMe != null) {
+                token.setRememberMe(true);
+            } else {
+                token.setRememberMe(false);
+            }
+            subject.login(token);
 
-        return null;
-
+            // 判断是否拥有后台角色
+            User user = (User) SecurityUtils.getSubject().getPrincipal();
+//           if (roleService.existsUserOk(user.getId())) {
+            if(false){
+                return ResultVoUtil.success("登录成功", new URL("/main"));
+            } else {
+                SecurityUtils.getSubject().logout();
+                return ResultVoUtil.error("您不是后台管理员！");
+            }
+        }catch(LockedAccountException e) {
+            return ResultVoUtil.error("该账号已被冻结");
+        }catch(AuthenticationException e) {
+            return ResultVoUtil.error("用户名或密码错误");
+        }catch(Exception e){
+            return ResultVoUtil.error("系统异常,请稍后再试!");
+        }
     }
 }
