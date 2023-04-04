@@ -1,4 +1,4 @@
-package com.github.admin;
+package com.github.admin.service;
 
 import com.alibaba.fastjson2.JSON;
 import com.github.admin.common.domain.User;

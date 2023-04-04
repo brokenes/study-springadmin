@@ -10,6 +10,7 @@ layui.use(['element'], function () {
         var form = $(this).parents("form");
         var url = form.attr("action");
         var serializeArray = form.serializeArray();
+
         $.post(url, serializeArray, function (result) {
             if(result.code !== 200){
                 $('.captcha-img').click();

@@ -1,4 +1,4 @@
-package com.github.admin;
+package com.github.admin.dao;
 
 import com.github.admin.common.domain.User;
 import com.github.admin.serveice.dao.UserDao;
@@ -10,9 +10,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import javax.annotation.Resource;
 
 @SpringBootTest
-public class SrpingbootApplicationTest {
+public class UserDaoTest {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(SrpingbootApplicationTest.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(UserDaoTest.class);
 
     @Resource
     UserDao userDao;

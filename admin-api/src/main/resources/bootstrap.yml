@@ -20,6 +20,8 @@ spring:
     active: local
   messages:
     basename: i18n/admin
+  main:
+    allow-bean-definition-overriding: true
 management:
   endpoint:
     health:

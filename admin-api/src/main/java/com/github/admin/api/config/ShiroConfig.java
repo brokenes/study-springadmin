@@ -5,6 +5,7 @@ import com.github.admin.api.filter.UserAuthFilter;
 import com.github.admin.api.manage.RememberMeManager;
 import com.github.admin.api.properties.ShiroProjectProperties;
 import com.github.admin.api.real.AuthRealm;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.codec.Base64;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
@@ -14,16 +15,12 @@ import org.apache.shiro.web.servlet.SimpleCookie;
 import org.apache.shiro.web.session.mgt.DefaultWebSessionManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.util.StringUtils;
 
 import javax.servlet.Filter;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 
-/**
- * @author 小懒虫
- * @date 2018/8/14
- */
+
 @Configuration
 public class ShiroConfig {
 
@@ -60,7 +57,7 @@ public class ShiroConfig {
         // 通过yml配置文件方式配置的[anon]忽略规则
         String[] excludes = properties.getExcludes().split(",");
         for (String exclude : excludes) {
-            if (!StringUtils.isEmpty(exclude.trim())) {
+            if (StringUtils.isNotBlank(exclude.trim())) {
                 filterMap.put(exclude, "anon");
             }
         }

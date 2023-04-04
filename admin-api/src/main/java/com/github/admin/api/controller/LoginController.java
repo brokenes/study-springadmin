@@ -1,10 +1,12 @@
 package com.github.admin.api.controller;
 
+import com.github.admin.client.RoleServiceClient;
 import com.github.admin.common.config.ProjectProperties;
 import com.github.admin.common.domain.User;
 import com.github.admin.common.enums.ResultEnum;
 import com.github.admin.common.exception.ResultException;
 import com.github.admin.common.util.CaptchaUtil;
+import com.github.admin.common.util.Result;
 import com.github.admin.common.util.ResultVoUtil;
 import com.github.admin.common.util.SpringContextUtil;
 import com.github.admin.common.vo.ResultVo;
@@ -22,7 +24,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.annotation.Resource;
 import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -33,6 +37,10 @@ import java.io.IOException;
 public class LoginController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(LoginController.class);
+
+
+    @Resource
+    private RoleServiceClient roleServiceClient;
 
     @GetMapping(value = {"/login","/"})
     public String login(Model model){
@@ -64,6 +72,7 @@ public class LoginController {
 
 
     @PostMapping("/login")
+    @ResponseBody
     public ResultVo login(String userName,String password,String captcha, String rememberMe){
         ProjectProperties properties = SpringContextUtil.getBean(ProjectProperties.class);
         if(StringUtils.isBlank(userName) || StringUtils.isBlank(password)){
@@ -97,18 +106,20 @@ public class LoginController {
 
             // 判断是否拥有后台角色
             User user = (User) SecurityUtils.getSubject().getPrincipal();
-//           if (roleService.existsUserOk(user.getId())) {
-            if(false){
-                return ResultVoUtil.success("登录成功", new URL("/main"));
+            Result<Boolean> result = roleServiceClient.existsUserOk(user.getId());
+           if (result.isSuccess() && result.getData()) {
+//            if(false){
+                return ResultVoUtil.success("登录成功!", new URL("/main"));
             } else {
                 SecurityUtils.getSubject().logout();
                 return ResultVoUtil.error("您不是后台管理员！");
             }
         }catch(LockedAccountException e) {
-            return ResultVoUtil.error("该账号已被冻结");
+            return ResultVoUtil.error("该账号已被冻结!");
         }catch(AuthenticationException e) {
-            return ResultVoUtil.error("用户名或密码错误");
+            return ResultVoUtil.error("用户名或密码错误!");
         }catch(Exception e){
+            LOGGER.error("系统异常:",e);
             return ResultVoUtil.error("系统异常,请稍后再试!");
         }
     }
