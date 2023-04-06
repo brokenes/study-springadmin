@@ -1,4 +1,4 @@
-package com.github.admin.common.config;
+package com.github.admin.api.properties;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;

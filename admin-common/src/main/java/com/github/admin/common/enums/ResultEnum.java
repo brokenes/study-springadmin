@@ -43,6 +43,8 @@ public enum ResultEnum implements ResultInterface {
     NO_ADMINROLE_AUTH(500, "admin.user.not.exit","不允许操作管理员角色"),
     NO_ADMINROLE_STATUS(501, "admin.user.not.exit","不能修改管理员角色状态"),
 
+    SYS_ERROR(500,"sys.error","系统异常,请稍后再试");
+
     ;
 
     private Integer code;

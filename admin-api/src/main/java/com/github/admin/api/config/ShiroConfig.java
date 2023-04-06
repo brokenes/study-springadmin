@@ -2,9 +2,9 @@ package com.github.admin.api.config;
 
 
 import com.github.admin.api.filter.UserAuthFilter;
-import com.github.admin.api.manage.RememberMeManager;
+import com.github.admin.api.shiro.manage.RememberMeManager;
 import com.github.admin.api.properties.ShiroProjectProperties;
-import com.github.admin.api.real.AuthRealm;
+import com.github.admin.api.shiro.real.AuthRealm;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.codec.Base64;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;

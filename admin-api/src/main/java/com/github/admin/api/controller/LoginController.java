@@ -1,7 +1,8 @@
 package com.github.admin.api.controller;
 
+import com.github.admin.api.properties.ProjectProperties;
+import com.github.admin.api.util.URL;
 import com.github.admin.client.RoleServiceClient;
-import com.github.admin.common.config.ProjectProperties;
 import com.github.admin.common.domain.User;
 import com.github.admin.common.enums.ResultEnum;
 import com.github.admin.common.exception.ResultException;
@@ -10,7 +11,6 @@ import com.github.admin.common.util.Result;
 import com.github.admin.common.util.ResultVoUtil;
 import com.github.admin.common.util.SpringContextUtil;
 import com.github.admin.common.vo.ResultVo;
-import com.github.admin.util.URL;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
@@ -41,13 +41,15 @@ public class LoginController {
 
     @Resource
     private RoleServiceClient roleServiceClient;
+    @Resource
+    private ProjectProperties projectProperties;
 
     @GetMapping(value = {"/login","/"})
     public String login(Model model){
-        ProjectProperties properties = SpringContextUtil.getBean(ProjectProperties.class);
-        boolean isCaptcha = properties.isCaptchaOpen();
+//        ProjectProperties properties = SpringContextUtil.getBean(ProjectProperties.class);
+        boolean isCaptcha = projectProperties.isCaptchaOpen();
         LOGGER.info("当前验证码是否开启isCaptcha:{}",isCaptcha);
-        model.addAttribute("isCaptcha", properties.isCaptchaOpen());
+        model.addAttribute("isCaptcha", projectProperties.isCaptchaOpen());
         return "/login";
     }
 

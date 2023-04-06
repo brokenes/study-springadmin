@@ -1,6 +1,6 @@
-package com.github.admin.common.exception;
+package com.github.admin.api.handler;
 
-import com.github.admin.common.exception.advice.ResultExceptionAdvice;
+import com.github.admin.common.exception.ResultException;
 import com.github.admin.common.util.ResultVoUtil;
 import com.github.admin.common.util.SpringContextUtil;
 import com.github.admin.common.vo.ResultVo;

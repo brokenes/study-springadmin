@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.github.admin.serveice.dao.MenuDao">
+    <resultMap id="BaseResultMap" type="Menu">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="title" property="title" jdbcType="VARCHAR"/>
+        <result column="pid" property="pid" jdbcType="INTEGER" />
+        <result column="pids" property="pids" jdbcType="VARCHAR" />
+        <result column="url" property="url" jdbcType="VARCHAR" />
+        <result column="perms" property="perms" jdbcType="VARCHAR" />
+        <result column="icon" property="icon" jdbcType="VARCHAR" />
+        <result column="type" property="type" jdbcType="TINYINT" />
+        <result column="sort" property="sort" jdbcType="TINYINT" />
+        <result column="remark" property="remark" jdbcType="VARCHAR" />
+        <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+        <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+        <result column="create_by" property="createBy" jdbcType="INTEGER"/>
+        <result column="update_by" property="updateBy" jdbcType="INTEGER"/>
+        <result column="status" property="status" jdbcType="TINYINT" />
+    </resultMap>
+
+    <select id="findAll" resultMap="BaseResultMap">
+        select * from sys_menu where status != 3 order by
+            type ASC,
+            sort ASC
+    </select>
+
+</mapper>

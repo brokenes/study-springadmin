@@ -4,11 +4,7 @@ import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
-/**
- * 项目-shiro会话配置项
- * @author 小懒虫
- * @date 2018/11/6
- */
+
 @Data
 @Component
 @ConfigurationProperties(prefix = "project.shiro")

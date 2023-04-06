@@ -1,5 +1,6 @@
-package com.github.admin.common.exception.advice;
+package com.github.admin.api.handler;
 
+import com.github.admin.common.exception.advice.ExceptionAdvice;
 import com.github.admin.common.util.SpringContextUtil;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 

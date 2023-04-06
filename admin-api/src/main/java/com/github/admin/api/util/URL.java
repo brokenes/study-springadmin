@@ -1,4 +1,4 @@
-package com.github.admin.util;
+package com.github.admin.api.util;
 
 
 import lombok.Data;

@@ -34,7 +34,7 @@
                 </a>
             </li>
             <li class="layui-nav-item timo-nav-user">
-                <a class="timo-header-nickname" th:text="${user.nickname}">TIMO</a>
+                <a class="timo-header-nickname" th:text="${user.nickName}">TIMO</a>
                 <div class="layui-nav-child">
                     <div class="timo-nav-child-box">
                         <div><a class="open-popup" data-title="个人信息" th:attr="data-url=@{/userInfo}"
@@ -52,14 +52,14 @@
     <!-- 侧边栏 -->
     <div class="layui-side layui-bg-black">
         <div class="layui-side-scroll">
-            <div class="layui-side-user">
-                <img class="layui-side-user-avatar open-popup" th:attr="data-url=@{/userInfo}" data-size="680,464"
-                     th:src="@{'/system/user/picture?p='+${user.picture}}" alt="头像">
-                <div>
-                    <p class="layui-side-user-name" th:text="${user.nickname}">TIMO</p>
-                    <p class="layui-side-user-designation">在线</p>
-                </div>
-            </div>
+<!--            <div class="layui-side-user">-->
+<!--                <img class="layui-side-user-avatar open-popup" th:attr="data-url=@{/userInfo}" data-size="680,464"/>-->
+<!--&lt;!&ndash;                     th:src="@{'/system/user/picture?p='+${user.picture}}" alt="头像">&ndash;&gt;-->
+<!--                <div>-->
+<!--                    <p class="layui-side-user-name" th:text="${user.nickName}">TIMO</p>-->
+<!--                    <p class="layui-side-user-designation">在线</p>-->
+<!--                </div>-->
+<!--            </div>-->
             <!-- 导航区域 -->
             <ul class="layui-nav layui-nav-tree" lay-filter="layui-nav-side">
                 <li class="layui-nav-item" th:each="item:${treeMenu}">
@@ -88,6 +88,7 @@
 </div>
 <!--<script th:replace="/common/template :: script"></script>-->
 <script th:src="@{/lib/layui-v2.3.0/layui.js}" charset="utf-8"></script>
+<script th:src="@{/js/main.js}" charset="utf-8"></script>
 <script>
     window.main = 111;
 </script>

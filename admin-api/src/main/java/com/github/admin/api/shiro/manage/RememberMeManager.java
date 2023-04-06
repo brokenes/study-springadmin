@@ -1,6 +1,6 @@
-package com.github.admin.api.manage;
+package com.github.admin.api.shiro.manage;
 
-import com.github.admin.api.real.AuthRealm;
+import com.github.admin.api.shiro.real.AuthRealm;
 import com.github.admin.common.domain.User;
 import com.github.admin.common.util.EntityBeanUtil;
 import com.github.admin.common.util.ShiroUtil;
