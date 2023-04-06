@@ -125,4 +125,10 @@ public class LoginController {
             return ResultVoUtil.error("系统异常,请稍后再试!");
         }
     }
+
+    @GetMapping("/logout")
+    public String logout() {
+        SecurityUtils.getSubject().logout();
+        return "redirect:/login";
+    }
 }

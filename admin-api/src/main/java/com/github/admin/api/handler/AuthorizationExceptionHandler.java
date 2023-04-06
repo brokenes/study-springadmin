@@ -41,7 +41,7 @@ public class AuthorizationExceptionHandler {
                 // 重定向到无权限页面
                 String contextPath = request.getContextPath();
                 ShiroFilterFactoryBean shiroFilter = SpringContextUtil.getBean(ShiroFilterFactoryBean.class);
-                response.sendRedirect(contextPath+shiroFilter.getUnauthorizedUrl());
+                response.sendRedirect(contextPath + shiroFilter.getUnauthorizedUrl());
             } catch (IOException e1) {
                 return ResultVoUtil.error(code, msg);
             }
