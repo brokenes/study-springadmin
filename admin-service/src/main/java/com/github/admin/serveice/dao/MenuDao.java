@@ -7,4 +7,6 @@ import java.util.List;
 public interface MenuDao {
 
      List<Menu> findAll();
+
+     Menu findById(Long menuId);
 }

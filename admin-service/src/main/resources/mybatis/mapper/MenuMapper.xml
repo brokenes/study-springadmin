@@ -27,4 +27,10 @@
             sort ASC
     </select>
 
+    <select id = "findById" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select * from sys_menu where id = #{menuId} and
+            status != 3 order by
+            type ASC,
+            sort ASC
+    </select>
 </mapper>

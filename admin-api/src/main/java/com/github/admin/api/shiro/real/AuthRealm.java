@@ -1,13 +1,16 @@
 package com.github.admin.api.shiro.real;
 
+import com.github.admin.client.RoleServiceClient;
 import com.github.admin.client.UserServiceCient;
 import com.github.admin.common.constants.AdminConst;
+import com.github.admin.common.domain.Role;
 import com.github.admin.common.domain.User;
 import com.github.admin.common.enums.ResultEnum;
 import com.github.admin.common.enums.StatusEnum;
 import com.github.admin.common.exception.ResultException;
 import com.github.admin.common.util.Result;
 import com.github.admin.common.util.ShiroUtil;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authc.credential.SimpleCredentialsMatcher;
 import org.apache.shiro.authz.AuthorizationInfo;
@@ -21,6 +24,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.annotation.PostConstruct;
+import java.util.Set;
 
 
 public class AuthRealm extends AuthorizingRealm {
@@ -28,6 +32,9 @@ public class AuthRealm extends AuthorizingRealm {
     private static final Logger LOGGER = LoggerFactory.getLogger(AuthRealm.class);
     @Autowired
     private UserServiceCient userServiceCient;
+
+    @Autowired
+    private RoleServiceClient roleServiceClient;
 
     /**
      * 授权逻辑
@@ -43,26 +50,32 @@ public class AuthRealm extends AuthorizingRealm {
         }else if(user.getStatus() == StatusEnum.FREEZED.getCode()) {
             throw new LockedAccountException();
         }
-
+        Long userId = user.getId();
         // 管理员拥有所有权限
-        if (user.getId().equals(AdminConst.ADMIN_ID)) {
+        if (userId.equals(AdminConst.ADMIN_ID)) {
             info.addRole(AdminConst.ADMIN_ROLE_NAME);
             info.addStringPermission("*:*:*");
             return info;
         }
 
         // 赋予角色和资源授权
-       /* Set<Role> roles = ShiroUtil.getSubjectRoles();
-        roles.forEach(role -> {
-            info.addRole(role.getName());
-            role.getMenus().forEach(menu -> {
-                String perms = menu.getPerms();
-                if (menu.getStatus().equals(StatusEnum.OK.getCode())
-                        && !StringUtils.isEmpty(perms) && !perms.contains("*")) {
-                    info.addStringPermission(perms);
-                }
-            });
-        });*/
+//       Set<Role> roles = ShiroUtil.getSubjectRoles();
+        Result<Set<Role>> result = roleServiceClient.getUserOkRoleList(userId);
+        if(result.isSuccess()){
+            Set<Role> roles = result.getData();
+                    roles.forEach(role -> {
+                        info.addRole(role.getName());
+                        role.getMenus().forEach(menu -> {
+                            String perms = menu.getPerms();
+                            if (menu.getStatus() == StatusEnum.OK.getCode()
+                                    && StringUtils.isNotEmpty(perms) && !perms.contains("*")) {
+                                info.addStringPermission(perms);
+                            }
+                        });
+                    });
+        } else {
+            throw new UnknownAccountException();
+        }
 
         return info;
     }

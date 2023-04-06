@@ -1,9 +1,13 @@
 package com.github.admin.serveice.server.impl;
 
+import com.github.admin.common.domain.Menu;
 import com.github.admin.common.domain.Role;
+import com.github.admin.common.domain.RoleMenu;
 import com.github.admin.common.domain.UserRole;
 import com.github.admin.common.util.Result;
+import com.github.admin.serveice.dao.MenuDao;
 import com.github.admin.serveice.dao.RoleDao;
+import com.github.admin.serveice.dao.RoleMenuDao;
 import com.github.admin.serveice.dao.UserRoleDao;
 import com.github.admin.serveice.server.RoleService;
 import org.apache.commons.collections4.CollectionUtils;
@@ -12,7 +16,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class RoleServiceImpl implements RoleService {
@@ -23,6 +31,13 @@ public class RoleServiceImpl implements RoleService {
 
     @Resource
     private UserRoleDao userRoleDao;
+
+    @Resource
+    private RoleMenuDao roleMenuDao;
+
+    @Resource
+    private MenuDao menuDao;
+
 
     /***
      * SELECT
@@ -59,4 +74,59 @@ public class RoleServiceImpl implements RoleService {
         }
         return Result.fail("401","当前用户对应的角色不存在");
     }
+
+    @Override
+    public Result<Set<Role>> getUserOkRoleList(Long userId) {
+        if(userId == null){
+            LOGGER.error("当前传递的userId为空!");
+            return Result.fail("404","用户id为空!");
+        }
+        List<UserRole> userRoleList = userRoleDao.findByUserId(userId);
+        if(CollectionUtils.isEmpty(userRoleList)){
+            LOGGER.error("当前userId:{}查询用户角色不存在",userId);
+            return Result.fail("404","当前用户对应的角色不存在");
+        }
+        List<Role> roleList = new ArrayList<Role>();
+        for(UserRole userRole:userRoleList){
+            Long roleId = userRole.getRoleId();
+            Role role = roleDao.findByRoleId(roleId);
+            if(role != null){
+                roleList.add(role);
+            }
+        }
+        if(CollectionUtils.isEmpty(roleList)){
+            LOGGER.error("当前userId:{}查询角色不存在",userId);
+            return Result.fail("404","当前角色不存在");
+        }
+        Set<Role> set = roleList.stream().collect(Collectors.toSet());
+        LOGGER.info("当前用户userId:{},查询对应的角色集合大小:{}",userId,set.size());
+
+        for(Role role:set){
+            Long roleId = role.getId();
+            Set<Menu> menuSet = new HashSet<Menu>();
+            List<RoleMenu> list = roleMenuDao.findByRoleId(roleId);
+            if(CollectionUtils.isNotEmpty(list)){
+                menuSet = parseListToSet(list);
+            }
+            role.setMenus(menuSet);
+        }
+        return Result.ok(set);
+    }
+
+    private Set<Menu> parseListToSet(List<RoleMenu> list){
+        Set<Menu> set = new HashSet<Menu>();
+        List<Menu> menuList = new ArrayList<>();
+        for(RoleMenu roleMenu:list){
+            Long menuId = roleMenu.getMenuId();
+            Menu menu = menuDao.findById(menuId);
+            if(menu != null){
+                menuList.add(menu);
+            }
+        }
+        if(CollectionUtils.isNotEmpty(menuList)){
+            set = menuList.stream().collect(Collectors.toSet());
+        }
+        return  set;
+    }
+
 }

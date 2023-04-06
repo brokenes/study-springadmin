@@ -4,6 +4,8 @@ import lombok.Data;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Data
 public class Role implements Serializable {
@@ -18,6 +20,6 @@ public class Role implements Serializable {
     private Long updateBy;
     private int status;
 
-
+    private Set<Menu> menus = new HashSet<Menu>();
 
 }
