@@ -1,6 +1,0 @@
-2023-03-31 10:13:46.624 [main] WARN  c.a.cloud.nacos.client.NacosPropertySourceBuilder -[loadNacosData] Line:87 - Ignore the empty nacos configuration and get it based on dataId[springboot-admin-service] & group[DEFAULT_GROUP]
-2023-03-31 10:13:46.656 [main] WARN  c.a.cloud.nacos.client.NacosPropertySourceBuilder -[loadNacosData] Line:87 - Ignore the empty nacos configuration and get it based on dataId[springboot-admin-service.yml] & group[DEFAULT_GROUP]
-2023-03-31 10:13:54.044 [Thread-6] WARN  com.alibaba.nacos.common.notify.NotifyCenter -[shutdown] Line:136- [NotifyCenter] Start destroying Publisher
-2023-03-31 10:13:54.045 [Thread-2] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder -[shutdown] Line:108- [HttpClientBeanHolder] Start destroying common HttpClient
-2023-03-31 10:13:54.049 [Thread-6] WARN  com.alibaba.nacos.common.notify.NotifyCenter -[shutdown] Line:153- [NotifyCenter] Destruction of the end
-2023-03-31 10:13:54.056 [Thread-2] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder -[shutdown] Line:114- [HttpClientBeanHolder] Destruction of the end

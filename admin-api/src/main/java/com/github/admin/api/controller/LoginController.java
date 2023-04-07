@@ -1,6 +1,7 @@
 package com.github.admin.api.controller;
 
 import com.github.admin.api.properties.ProjectProperties;
+import com.github.admin.api.request.LoginRequest;
 import com.github.admin.api.util.URL;
 import com.github.admin.client.RoleServiceClient;
 import com.github.admin.common.domain.User;
@@ -9,8 +10,9 @@ import com.github.admin.common.exception.ResultException;
 import com.github.admin.common.util.CaptchaUtil;
 import com.github.admin.common.util.Result;
 import com.github.admin.common.util.ResultVoUtil;
-import com.github.admin.common.util.SpringContextUtil;
 import com.github.admin.common.vo.ResultVo;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
@@ -22,6 +24,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -34,6 +37,7 @@ import java.io.IOException;
 
 
 @Controller
+@Api(tags = "用户登录接口")
 public class LoginController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(LoginController.class);
@@ -44,6 +48,7 @@ public class LoginController {
     @Resource
     private ProjectProperties projectProperties;
 
+    @ApiOperation(value = "跳转到登录页面")
     @GetMapping(value = {"/login","/"})
     public String login(Model model){
 //        ProjectProperties properties = SpringContextUtil.getBean(ProjectProperties.class);
@@ -56,6 +61,7 @@ public class LoginController {
     /**
      * 验证码图片
      */
+    @ApiOperation(value = "获取登录验证码")
     @GetMapping("/captcha")
     public void captcha(HttpServletRequest request, HttpServletResponse response) throws IOException {
         //设置响应头信息，通知浏览器不要缓存
@@ -73,15 +79,20 @@ public class LoginController {
     }
 
 
+    @ApiOperation(value = "用户登录")
     @PostMapping("/login")
     @ResponseBody
-    public ResultVo login(String userName,String password,String captcha, String rememberMe){
-        ProjectProperties properties = SpringContextUtil.getBean(ProjectProperties.class);
-        if(StringUtils.isBlank(userName) || StringUtils.isBlank(password)){
-            LOGGER.error("当前用户或密码为空,用户名称-userName:{},密码-password:{}",password);
-            throw new ResultException(ResultEnum.USER_NAME_PWD_NULL);
-        }
-        boolean isCaptcha = properties.isCaptchaOpen();
+    public ResultVo login(@Validated LoginRequest loginRequest){
+//        ProjectProperties properties = SpringContextUtil.getBean(ProjectProperties.class);
+//        if(StringUtils.isBlank(userName) || StringUtils.isBlank(password)){
+//            LOGGER.error("当前用户或密码为空,用户名称-userName:{},密码-password:{}",password);
+//            throw new ResultException(ResultEnum.USER_NAME_PWD_NULL);
+//        }
+        String userName = loginRequest.getUserName();
+        String password = loginRequest.getPassword();
+        String captcha = loginRequest.getCaptcha();
+        String rememberMe = loginRequest.getRememberMe();
+        boolean isCaptcha = projectProperties.isCaptchaOpen();
         LOGGER.info("当前系统配置是否需要验证码登录,isCaptche:{},用户输入验证码为,captcha:{}",isCaptcha,captcha);
         if(isCaptcha){
             Session session = SecurityUtils.getSubject().getSession();
