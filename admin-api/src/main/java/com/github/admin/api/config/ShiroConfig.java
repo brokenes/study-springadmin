@@ -55,10 +55,10 @@ public class ShiroConfig {
         filterMap.put("/lib/**", "anon");
         filterMap.put("/favicon.ico", "anon");
 
-        filterMap.put("/swagger-ui/**", "anon");
-        filterMap.put("/webjars/**", "anon");
-        filterMap.put("/v2/**", "anon");
-        filterMap.put("/swagger-resources/**", "anon");
+//        filterMap.put("/swagger-ui/**", "anon");
+//        filterMap.put("/webjars/**", "anon");
+//        filterMap.put("/v2/**", "anon");
+//        filterMap.put("/swagger-resources/**", "anon");
 
 
 

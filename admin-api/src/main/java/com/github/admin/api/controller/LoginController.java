@@ -1,18 +1,16 @@
 package com.github.admin.api.controller;
 
 import com.github.admin.api.properties.ProjectProperties;
-import com.github.admin.api.request.LoginRequest;
 import com.github.admin.api.util.URL;
 import com.github.admin.client.RoleServiceClient;
 import com.github.admin.common.domain.User;
 import com.github.admin.common.enums.ResultEnum;
 import com.github.admin.common.exception.ResultException;
+import com.github.admin.common.request.LoginRequest;
 import com.github.admin.common.util.CaptchaUtil;
 import com.github.admin.common.util.Result;
 import com.github.admin.common.util.ResultVoUtil;
 import com.github.admin.common.vo.ResultVo;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
@@ -37,7 +35,7 @@ import java.io.IOException;
 
 
 @Controller
-@Api(tags = "用户登录接口")
+//@Api(tags = "用户登录接口")
 public class LoginController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(LoginController.class);
@@ -48,7 +46,7 @@ public class LoginController {
     @Resource
     private ProjectProperties projectProperties;
 
-    @ApiOperation(value = "跳转到登录页面")
+//    @ApiOperation(value = "跳转到登录页面")
     @GetMapping(value = {"/login","/"})
     public String login(Model model){
 //        ProjectProperties properties = SpringContextUtil.getBean(ProjectProperties.class);
@@ -61,7 +59,7 @@ public class LoginController {
     /**
      * 验证码图片
      */
-    @ApiOperation(value = "获取登录验证码")
+//    @ApiOperation(value = "获取登录验证码")
     @GetMapping("/captcha")
     public void captcha(HttpServletRequest request, HttpServletResponse response) throws IOException {
         //设置响应头信息，通知浏览器不要缓存
@@ -79,7 +77,7 @@ public class LoginController {
     }
 
 
-    @ApiOperation(value = "用户登录")
+//    @ApiOperation(value = "用户登录")
     @PostMapping("/login")
     @ResponseBody
     public ResultVo login(@Validated LoginRequest loginRequest){

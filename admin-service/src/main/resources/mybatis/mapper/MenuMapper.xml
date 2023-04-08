@@ -29,8 +29,27 @@
 
     <select id = "findById" resultMap="BaseResultMap" parameterType="java.lang.Long">
         select * from sys_menu where id = #{menuId} and
-            status != 3 order by
+            status = 1 order by
             type ASC,
             sort ASC
     </select>
+
+    <select id = "findByCondition" resultMap="BaseResultMap" parameterType="map">
+        select * from sys_menu
+        <where>
+            <if test="status != null">
+               and status = #{status}
+            </if>
+            <if test="url != null">
+               and url = #{url}
+            </if>
+            <if test="title != null">
+                and title like concat(concat('%',#{title}),'%')
+            </if>
+        </where>
+            order by
+            type ASC,
+            sort ASC
+    </select>
+
 </mapper>

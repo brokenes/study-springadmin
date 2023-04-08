@@ -145,9 +145,11 @@
 
             listData.forEach(function (item) {
                 if(newList[item.pid] != undefined){
+                    console.log(newList[item.pid].children == undefined + "************");
                     if(newList[item.pid].children == undefined){
                         newList[item.pid].children = [];
                     }
+                    console.log(item.pid);
                     newList[item.pid].children.push(item);
                 }else{
                     treeList.push(item);

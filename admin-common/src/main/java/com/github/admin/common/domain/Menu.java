@@ -1,5 +1,6 @@
 package com.github.admin.common.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -26,6 +27,8 @@ public class Menu implements Serializable {
     private Long updateBy;
     private int status;
 
+//    @JSONField(serialize = false)
+    @JsonIgnore
     private Map<Long, Menu> children = new HashMap<>();
 
 
