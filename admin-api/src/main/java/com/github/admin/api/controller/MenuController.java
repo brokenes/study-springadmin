@@ -48,11 +48,20 @@ public class MenuController {
             list = result.getData();
             LOGGER.info("查询菜单集合数据:{}", JSON.toJSONString(list));
             list.forEach(editMenu -> {
-                String type = String.valueOf(editMenu.getType());
-//                editMenu.setRemark(DictUtil.keyValue("MENU_TYPE", type));
-                editMenu.setRemark(type);
+                int menuType = editMenu.getType();
+                String remark = "-";
+                if(menuType == 1){
+                    remark = "目录";
+                }else if(menuType == 2){
+                    remark = "菜单";
+                }else if(menuType == 3){
+                    remark = "按钮";
+                }
+                editMenu.setRemark(remark);
             });
         }
         return ResultVoUtil.success(list);
     }
+
+
 }
