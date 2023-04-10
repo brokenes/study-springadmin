@@ -5,6 +5,7 @@ import com.github.admin.common.request.MenuRequest;
 import com.github.admin.common.util.Result;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -19,5 +20,9 @@ public interface MenuServiceClient {
 
     @PostMapping("/findAllMenus")
     public Result<List<Menu>> findAllMenus(@RequestBody MenuRequest menuRequest);
+
+
+    @PostMapping("/findListByPidAndId/{pid}/{id}")
+    public Result<List<Menu>> findListByPidAndId(@PathVariable("pid")Long pid,@PathVariable("id")Long id);
 
 }

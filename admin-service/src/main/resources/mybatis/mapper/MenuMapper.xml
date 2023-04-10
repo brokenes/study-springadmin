@@ -52,4 +52,8 @@
             sort ASC
     </select>
 
+    <select id = "findListByPidAndId" resultMap="BaseResultMap" parameterType="map">
+        select * from sys_menu where pid = #{pid} and id != #{id} order by sort ASC
+    </select>
+
 </mapper>

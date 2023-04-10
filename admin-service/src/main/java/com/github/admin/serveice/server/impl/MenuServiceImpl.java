@@ -53,4 +53,16 @@ public class MenuServiceImpl implements MenuService {
 
     }
 
+    @Override
+    public Result<List<Menu>> findListByPidAndId(Long pid, Long id) {
+        LOGGER.info("查询菜单集合排序pid:{},id:{}",pid,id);
+        List<Menu>  list = menuDao.findListByPidAndId(pid,id);
+        if(CollectionUtils.isEmpty(list)){
+            LOGGER.error("pid:{},id:{}查询对应的排序数据集合为空",pid,id);
+            return Result.fail("404","查询数据为空");
+        }
+        LOGGER.info("根据pid:{},id:{}查询集合大小为:{}",pid,id,list.size());
+        return Result.ok(list);
+    }
+
 }

@@ -22,4 +22,10 @@ public class MenuDaoTest {
         List<Menu> list = menuDao.findAll();
         LOGGER.info("查询菜单返回数据结果:{}",list);
     }
+
+    @Test
+    public void _测试菜单排序查询(){
+        List<Menu> list = menuDao.findListByPidAndId(0L,2L);
+        LOGGER.info("_测试菜单排序查询:{}",list);
+    }
 }

@@ -11,4 +11,6 @@ public interface MenuService {
     Result<List<Menu>> findAll();
 
     Result<List<Menu>> findAll(MenuRequest menuRequest);
+
+    Result<List<Menu>> findListByPidAndId(Long pid, Long id);
 }
