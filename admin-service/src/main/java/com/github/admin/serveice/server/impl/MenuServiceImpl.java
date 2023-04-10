@@ -37,9 +37,9 @@ public class MenuServiceImpl implements MenuService {
     public Result<List<Menu>> findAll(MenuRequest menuRequest){
         try {
             Map<String,String> map = BeanUtils.describe(menuRequest);
-            if(menuRequest.getStatus() == null){
-                map.put("status","1");
-            }
+//            if(menuRequest.getStatus() == null){
+//                map.put("status","1");
+//            }
             List<Menu> list = menuDao.findByCondition(map);
             if(CollectionUtils.isEmpty(list)){
                 LOGGER.error("查询菜单集合数据为空,查询参数为map:{}",map);

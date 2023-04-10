@@ -37,13 +37,13 @@
     <select id = "findByCondition" resultMap="BaseResultMap" parameterType="map">
         select * from sys_menu
         <where>
-            <if test="status != null">
+            <if test="status != null and status != ''">
                and status = #{status}
             </if>
-            <if test="url != null">
+            <if test="url != null and url != ''">
                and url = #{url}
             </if>
-            <if test="title != null">
+            <if test="title != null and title != ''">
                 and title like concat(concat('%',#{title}),'%')
             </if>
         </where>
