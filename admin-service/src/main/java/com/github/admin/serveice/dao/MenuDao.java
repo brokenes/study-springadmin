@@ -15,4 +15,10 @@ public interface MenuDao {
      List<Menu> findByCondition(Map<String,String> map);
 
      List<Menu> findListByPidAndId(@Param("pid")Long pid,@Param("id")Long id);
+
+     Integer getSortMax(Long pid);
+
+     Menu findMenuByPid(Long pid);
+
+     Integer save(Menu menu);
 }

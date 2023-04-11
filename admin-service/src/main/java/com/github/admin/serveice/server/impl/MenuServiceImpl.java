@@ -56,13 +56,50 @@ public class MenuServiceImpl implements MenuService {
     @Override
     public Result<List<Menu>> findListByPidAndId(Long pid, Long id) {
         LOGGER.info("查询菜单集合排序pid:{},id:{}",pid,id);
+        if(pid == null || id == null){
+            return Result.fail("405","参数pid或id为空!");
+        }
         List<Menu>  list = menuDao.findListByPidAndId(pid,id);
         if(CollectionUtils.isEmpty(list)){
             LOGGER.error("pid:{},id:{}查询对应的排序数据集合为空",pid,id);
             return Result.fail("404","查询数据为空");
         }
-        LOGGER.info("根据pid:{},id:{}查询集合大小为:{}",pid,id,list.size());
+        LOGGER.info("根据参数pid:{},id:{} 查询集合大小为:{}",pid,id,list.size());
         return Result.ok(list);
     }
 
+    @Override
+    public Result<Integer> getSortMax(Long pid) {
+        LOGGER.info("查询菜单排序参数pid:{}",pid);
+        if(pid == null){
+            return Result.fail("405","参数pid为空!");
+        }
+        Integer maxSort = menuDao.getSortMax(pid);
+        LOGGER.info("查询菜单排序结果,参数pid:{},排序结果maxSort:{}",pid,maxSort);
+        return Result.ok(maxSort);
+    }
+
+    @Override
+    public Result<Menu> findMenuByPid(Long pid) {
+        LOGGER.info("查询菜单参数pid:{}",pid);
+        if(pid == null){
+            return Result.fail("405","参数pid为空!");
+        }
+        Menu menu = menuDao.findMenuByPid(pid);
+        if(menu == null){
+            return Result.fail("404","查询菜单数据为空!");
+        }
+        LOGGER.info("查询菜单结果,参数pid:{},结果menu:{}",pid,menu);
+        return Result.ok(menu);
+    }
+
+    @Override
+    public Result<Integer> saveMenu(Menu menu) {
+        Integer status = menuDao.save(menu);
+        LOGGER.info("添加菜单返回状态结果:{}",status);
+        if(status != 1){
+            return Result.fail("500","添加菜单失败!");
+        }
+        return Result.ok(status);
+    }
 }

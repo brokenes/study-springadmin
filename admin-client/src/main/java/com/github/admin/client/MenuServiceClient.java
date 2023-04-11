@@ -25,4 +25,13 @@ public interface MenuServiceClient {
     @PostMapping("/findListByPidAndId/{pid}/{id}")
     public Result<List<Menu>> findListByPidAndId(@PathVariable("pid")Long pid,@PathVariable("id")Long id);
 
+
+    @PostMapping("/getSortMax/{pid}")
+    public Result<Integer> getSortMax(@PathVariable("pid")Long pid);
+
+    @PostMapping("/findMenuByPid/{pid}")
+    public Result<Menu> findMenuByPid(@PathVariable("pid")Long pid);
+
+    @PostMapping("/saveMenu")
+    public Result<Integer> saveMenu(@RequestBody Menu menu);
 }

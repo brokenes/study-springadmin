@@ -32,4 +32,5 @@ public class MenuRequest implements Serializable {
 //    @NotNull(message = "排序不能为空")
     private Integer sort;
 
+    private String remark;
 }

@@ -13,4 +13,10 @@ public interface MenuService {
     Result<List<Menu>> findAll(MenuRequest menuRequest);
 
     Result<List<Menu>> findListByPidAndId(Long pid, Long id);
+
+    Result<Integer> getSortMax(Long pid);
+
+    Result<Menu> findMenuByPid(Long pid);
+
+    Result<Integer> saveMenu(Menu menu);
 }

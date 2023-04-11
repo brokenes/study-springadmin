@@ -29,4 +29,19 @@ public class MenuController {
     public Result<List<Menu>> findListByPidAndId(@PathVariable("pid")Long pid, @PathVariable("id")Long id){
         return menuServiceImpl.findListByPidAndId(pid,id);
     }
+
+    @PostMapping("/getSortMax/{pid}")
+    public Result<Integer> getSortMax(@PathVariable("pid")Long pid){
+        return menuServiceImpl.getSortMax(pid);
+    }
+
+    @PostMapping("/findMenuByPid/{pid}")
+    public Result<Menu> findMenuByPid(@PathVariable("pid")Long pid){
+        return menuServiceImpl.findMenuByPid(pid);
+    }
+
+    @PostMapping("/saveMenu")
+    public Result<Integer> saveMenu(@RequestBody Menu menu){
+        return menuServiceImpl.saveMenu(menu);
+    }
 }
