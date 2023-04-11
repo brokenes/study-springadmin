@@ -57,7 +57,7 @@ public class ResultVoUtil {
      * @param code 错误码
      * @param msg  提示信息
      */
-    public static ResultVo error(Integer code, String msg) {
+    public static ResultVo error(String code, String msg) {
         ResultVo resultVo = new ResultVo();
         resultVo.setMsg(msg);
         resultVo.setCode(code);
@@ -70,7 +70,7 @@ public class ResultVoUtil {
      * @param msg 提示信息
      */
     public static ResultVo error(String msg) {
-        Integer code = ResultEnum.ERROR.getCode();
+        String code = ResultEnum.ERROR.getCode();
         return error(code, msg);
     }
 

@@ -8,7 +8,7 @@ import lombok.Getter;
 @Getter
 public class ResultException extends RuntimeException {
 
-    private Integer code;
+    private String code;
 
     /**
      * 统一异常处理
@@ -33,7 +33,7 @@ public class ResultException extends RuntimeException {
      * @param code 状态码
      * @param message 提示信息
      */
-    public ResultException(Integer code, String message) {
+    public ResultException(String code, String message) {
         super(message);
         this.code = code;
     }

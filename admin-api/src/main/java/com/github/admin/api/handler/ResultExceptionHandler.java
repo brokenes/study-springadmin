@@ -33,7 +33,7 @@ public class ResultExceptionHandler {
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public ResultVo exception(Exception e) {
         log.error("全局异常信息,exception:",e);
-        return ResultVoUtil.error(500, "系统异常,请稍后再试!");
+        return ResultVoUtil.error("500", "系统异常,请稍后再试!");
     }
 
     @ExceptionHandler({MethodArgumentNotValidException.class})
@@ -45,13 +45,13 @@ public class ResultExceptionHandler {
             sb.append(fieldError.getField()).append("：").append(fieldError.getDefaultMessage()).append(", ");
         }
         String msg = sb.toString();
-        return ResultVoUtil.error(400, msg);
+        return ResultVoUtil.error("400", msg);
     }
 
     @ExceptionHandler({ConstraintViolationException.class})
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ResultVo handleConstraintViolationException(ConstraintViolationException ex) {
-        return ResultVoUtil.error(400,ex.getMessage());
+        return ResultVoUtil.error("400",ex.getMessage());
     }
 
 
@@ -77,6 +77,6 @@ public class ResultExceptionHandler {
         ResultExceptionAdvice resultExceptionAdvice = SpringContextUtil.getBean(ResultExceptionAdvice.class);
         resultExceptionAdvice.runtimeException(e);
         log.error("【系统异常】", e);
-        return ResultVoUtil.error(500, "未知错误：EX4399");
+        return ResultVoUtil.error("500", "未知错误：EX4399");
     }
 }

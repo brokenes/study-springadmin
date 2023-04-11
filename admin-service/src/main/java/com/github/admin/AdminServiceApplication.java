@@ -6,6 +6,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 /***
  * @MapperScan 注释会自动扫码指定包路径下的对象，让spring容器管理
@@ -14,6 +15,7 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 @SpringBootApplication
 @MapperScan("com.github.admin.serveice.dao")
 @EnableDiscoveryClient
+@EnableTransactionManagement
 public class AdminServiceApplication {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(AdminServiceApplication.class);

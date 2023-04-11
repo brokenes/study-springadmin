@@ -106,68 +106,24 @@ public class MenuController {
     @ResponseBody
     public ResultVo save(@Validated MenuRequest menuRequest){
         LOGGER.info("菜单添加请求参数:{}",menuRequest);
-        if(menuRequest.getSort() == null){
-            Result<Integer> result = menuServiceClient.getSortMax(menuRequest.getPid());
-            if(result.isSuccess()){
-                Integer sortMax = result.getData();
-                menuRequest.setSort(sortMax != null ? sortMax - 1 : 0);
-            }
-        }
-        Result<Menu> result = menuServiceClient.findMenuByPid(menuRequest.getPid());
         if(SecurityUtils.getSubject() == null || SecurityUtils.getSubject().getPrincipal() == null){
               throw new UnknownAccountException();
         }
         User user = (User) SecurityUtils.getSubject().getPrincipal();
         Long userId = user.getId();
         Menu menu = new Menu();
-        Date date = new Date();
         BeanUtils.copyProperties(menuRequest,menu);
         menu.setCreateBy(userId);
-        menu.setCreateDate(date);
         menu.setUpdateBy(userId);
-        menu.setUpdateDate(date);
-        menu.setStatus(1);
+        LOGGER.info("保存菜单对象属性复制后数据:{}",JSON.toJSONString(menu));
+        Result<Integer> result = menuServiceClient.saveMenu(menu);
         if(result.isSuccess()){
-            Menu pMenu = result.getData();
-            int type = pMenu.getType();
-            if(type == 3){
-                return  ResultVoUtil.error("请选择正确的父级菜单!");
-            }
-            menu.setPids(pMenu.getPids() + ",[" + menu.getPid() + "]");
+            return ResultVoUtil.SAVE_SUCCESS;
         }else{
-            return  ResultVoUtil.error("添加菜单失败!");
+            String errMsg = result.getMessage();
+            String code = result.getCode();
+            return  ResultVoUtil.error(code,errMsg);
         }
-        LOGGER.info("当前菜单对象赋值后数据为:{}",menu);
-//        if (menuRequest.getId() == null) {
-//            // 排序为空时，添加到最后
-//            if(menu.getSort() == null){
-//                Integer sortMax = menuService.getSortMax(menu.getPid());
-//                menu.setSort(sortMax !=null ? sortMax - 1 : 0);
-//            }
-//        }
-//
-//        // 添加/更新全部上级序号
-//        Menu pMenu = menuService.getById(menu.getPid());
-//        menu.setPids(pMenu.getPids() + ",[" + menu.getPid() + "]");
-//
-//        // 复制保留无需修改的数据
-//        if (menu.getId() != null) {
-//            Menu beMenu = menuService.getById(menu.getId());
-//            EntityBeanUtil.copyProperties(beMenu, menu);
-//        }
-//
-//        // 排序功能
-//        Integer sort = menu.getSort();
-//        Long notId = menu.getId() != null ? menu.getId() : 0;
-//        List<Menu> levelMenu = menuService.getListByPid(menu.getPid(), notId);
-//        levelMenu.add(sort, menu);
-//        for (int i = 1; i <= levelMenu.size(); i++) {
-//            levelMenu.get(i - 1).setSort(i);
-//        }
-//
-//        // 保存数据
-//        menuService.save(levelMenu);
-        return ResultVoUtil.SAVE_SUCCESS;
     }
 
 

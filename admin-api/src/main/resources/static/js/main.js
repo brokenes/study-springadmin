@@ -98,7 +98,7 @@ layui.use(['element', 'form', 'layer', 'upload'], function () {
         },
         complete: function (xhr) {
             layer.closeAll('loading');
-            if (xhr.status === 401) {
+            if (401 == xhr.status) {
                 layer.confirm('session连接超时，是否重新登录？', {
                     btn: ['是', '否']
                 }, function () {
@@ -112,7 +112,7 @@ layui.use(['element', 'form', 'layer', 'upload'], function () {
 
     /*  漂浮消息 */
     $.fn.Messager = function (result) {
-        if (result.code === 200) {
+        if (result.code == 200) {
             layer.msg(result.msg, {offset: '15px', time: 3000, icon: 1});
             setTimeout(function () {
                 if (result.data === 'submit[refresh]') {

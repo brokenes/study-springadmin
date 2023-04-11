@@ -34,7 +34,6 @@
         select *
         from sys_menu
         where id = #{menuId}
-          and status = 1
         order by type ASC,
                  sort ASC
     </select>
@@ -75,7 +74,7 @@
     <select id="findMenuByPid" resultMap="BaseResultMap" parameterType="java.lang.Long">
         select *
         from sys_menu
-        where id = #{pid}
+        where pid = #{pid}
     </select>
 
     <insert id="save" parameterType="Menu">
@@ -85,4 +84,13 @@
                 #{updateDate}, #{createBy}, #{updateBy}, #{status})
     </insert>
 
+    <update id="update" parameterType="Menu">
+        update  sys_menu
+        <set>
+            <if test="sort != null">
+                sort = #{sort}
+            </if>
+        </set>
+        where id = #{id}
+    </update>
 </mapper>

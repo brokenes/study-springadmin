@@ -19,7 +19,7 @@ public class Menu implements Serializable {
     private String perms;
     private String icon;
     private int type;
-    private int sort;
+    private Integer sort;
     private String remark;
     private Date createDate;
     private Date updateDate;

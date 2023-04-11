@@ -12,7 +12,7 @@ public class ResultVo<T> {
 
     /** 状态码 */
 //    @ApiModelProperty(notes = "状态码（200成功、400错误）")
-    private Integer code;
+    private String code;
 
     /** 提示信息 */
 //    @ApiModelProperty(notes = "提示信息")

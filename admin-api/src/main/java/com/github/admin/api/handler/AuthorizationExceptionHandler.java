@@ -27,7 +27,7 @@ public class AuthorizationExceptionHandler {
     @ResponseBody
     public ResultVo authorizationException(AuthorizationException e, HttpServletRequest request,
                                            HttpServletResponse response){
-        Integer code = ResultEnum.NO_PERMISSIONS.getCode();
+        String code = ResultEnum.NO_PERMISSIONS.getCode();
         String msg = ResultEnum.NO_PERMISSIONS.getMessage();
 
         // 获取异常信息

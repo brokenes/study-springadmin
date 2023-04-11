@@ -18,7 +18,9 @@ public interface MenuDao {
 
      Integer getSortMax(Long pid);
 
-     Menu findMenuByPid(Long pid);
+     List<Menu> findMenuByPid(Long pid);
 
      Integer save(Menu menu);
+
+     Integer update(Menu menu);
 }

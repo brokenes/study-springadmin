@@ -11,7 +11,7 @@ public interface ResultInterface {
      * 获取状态编码
      * @return 编码
      */
-    Integer getCode();
+    String getCode();
 
     /**
      * 获取提示信息
