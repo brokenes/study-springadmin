@@ -2,11 +2,13 @@ package com.github.admin.serveice.server.impl;
 
 import com.alibaba.fastjson.JSON;
 import com.github.admin.common.domain.Menu;
+import com.github.admin.common.domain.User;
 import com.github.admin.common.enums.ResultEnum;
 import com.github.admin.common.exception.ResultException;
 import com.github.admin.common.request.MenuRequest;
 import com.github.admin.common.util.Result;
 import com.github.admin.serveice.dao.MenuDao;
+import com.github.admin.serveice.dao.UserDao;
 import com.github.admin.serveice.server.MenuService;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.collections4.CollectionUtils;
@@ -26,6 +28,9 @@ public class MenuServiceImpl implements MenuService {
     private static final Logger LOGGER = LoggerFactory.getLogger(MenuServiceImpl.class);
     @Resource
     private MenuDao menuDao;
+
+    @Resource
+    private UserDao userDao;
 
     @Override
     public Result<List<Menu>> findAll() {
@@ -152,5 +157,28 @@ public class MenuServiceImpl implements MenuService {
             throw new ResultException(ResultEnum.SAVE_MENU_ERROR);
         }
         return Result.ok(status);
+    }
+
+    @Override
+    public Result<Menu> findMenuById(Long id) {
+        if(id == null){
+            LOGGER.error("根据Id查询对应菜单参数id为空!");
+            return Result.fail("405","参数为空");
+        }
+        Menu menu = menuDao.findById(id);
+        if(menu == null){
+            LOGGER.error("根据Id:{}查询对应菜单为空!",id);
+            return Result.fail("404","查询菜单为空");
+        }
+        Long createBy = menu.getCreateBy();
+        Long updateBy = menu.getUpdateBy();
+        Long pid = menu.getPid();
+        User createUser = userDao.findUserById(createBy);
+        User updateUser = userDao.findUserById(updateBy);
+        Menu pMenu = menuDao.findById(pid);
+        menu.setPMenu(pMenu);
+        menu.setCreateUser(createUser);
+        menu.setUpdateUser(updateUser);
+        return Result.ok(menu);
     }
 }

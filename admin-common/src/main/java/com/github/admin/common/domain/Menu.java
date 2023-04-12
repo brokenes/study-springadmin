@@ -26,10 +26,13 @@ public class Menu implements Serializable {
     private Long createBy;
     private Long updateBy;
     private int status;
+    private User createUser;
+    private User updateUser;
 
 //    @JSONField(serialize = false)
     @JsonIgnore
     private Map<Long, Menu> children = new HashMap<>();
 
+    private Menu pMenu;
 
 }

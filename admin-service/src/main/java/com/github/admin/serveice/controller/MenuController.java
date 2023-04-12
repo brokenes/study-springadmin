@@ -44,4 +44,9 @@ public class MenuController {
     public Result<Integer> saveMenu(@RequestBody Menu menu){
         return menuServiceImpl.saveMenu(menu);
     }
+
+    @PostMapping("/findMenuById/{id}")
+    public Result<Menu> findMenuById(@PathVariable("id")Long id){
+        return menuServiceImpl.findMenuById(id);
+    }
 }

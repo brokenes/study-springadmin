@@ -34,4 +34,8 @@ public interface MenuServiceClient {
 
     @PostMapping("/saveMenu")
     public Result<Integer> saveMenu(@RequestBody Menu menu);
+
+
+    @PostMapping("/findMenuById/{id}")
+    public Result<Menu> findMenuById(@PathVariable("id")Long id);
 }

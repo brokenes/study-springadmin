@@ -127,5 +127,31 @@ public class MenuController {
     }
 
 
+    @GetMapping({"/system/menu/detail/{id}"})
+    @RequiresPermissions("system:menu:detail")
+    public String toDetail(@PathVariable("id")Long id,Model model) {
+        Result<Menu> result = menuServiceClient.findMenuById(id);
+        if(result.isSuccess()){
+            Menu menu = result.getData();
+            model.addAttribute("menu",menu);
+        }
+        return "/manager/menu/detail";
+    }
+
+
+    @GetMapping({"/system/menu/edit/{id}"})
+    @RequiresPermissions("system:menu:add")
+    public String toEdit(@PathVariable("id")Long id,Model model) {
+        Result<Menu> result = menuServiceClient.findMenuById(id);
+        if(result.isSuccess()){
+            Menu menu = result.getData();
+            model.addAttribute("menu",menu);
+            model.addAttribute("pMenu",menu.getPMenu());
+        }
+        return "/manager/menu/edit";
+    }
+
+
+
 
 }

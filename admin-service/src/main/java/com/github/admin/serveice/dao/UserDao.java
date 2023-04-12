@@ -13,4 +13,7 @@ public interface UserDao {
      * @return
      */
     User findByUserName(@Param("userName") String userName);
+
+
+    User findUserById(Long id);
 }

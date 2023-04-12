@@ -19,4 +19,6 @@ public interface MenuService {
     Result<Menu> findMenuByPid(Long pid);
 
     Result<Integer> saveMenu(Menu menu);
+
+    Result<Menu> findMenuById(Long id);
 }
