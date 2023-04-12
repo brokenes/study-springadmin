@@ -93,9 +93,15 @@ public class MenuController {
     }
 
 
-    @GetMapping({"/system/menu/add"})
+    @GetMapping({"/system/menu/add","/system/menu/add/{pid}"})
     @RequiresPermissions("system:menu:add")
-    public String toAdd() {
+    public String toAdd(@PathVariable(value = "pid",required = false)Long pid,Model model) {
+        if(pid != null){
+            Result<Menu> result = menuServiceClient.findMenuById(pid);
+            if(result.isSuccess()){
+                model.addAttribute("pMenu",result.getData());
+            }
+        }
         return "/manager/menu/add";
     }
 

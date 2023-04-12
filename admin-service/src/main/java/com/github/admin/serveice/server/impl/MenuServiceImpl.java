@@ -113,18 +113,28 @@ public class MenuServiceImpl implements MenuService {
             LOGGER.error("菜单pid参数为空!");
             return Result.fail("405","参数pid为空!");
         }
-        Menu parentMenu = menuDao.findById(pid);
-        if(parentMenu == null){
-            LOGGER.error("查询父菜单为空,pid:{}",pid);
-            return Result.fail("404","查询菜单数据为空!");
+        if(pid == 0){
+            int parentMenuType = 0;
+            int menuType = menu.getType();
+            if(menuType - parentMenuType > 1){
+                LOGGER.error("操作用户没有选择正确的菜单类型,父菜单类型parentMenuType:{},当前添加菜单类型menuType:{}", parentMenuType,menuType);
+                return  Result.fail("404","请选择正确的菜单类型!");
+            }
+            menu.setPids("[" + pid + "]");
+        }else{
+            Menu parentMenu = menuDao.findById(pid);
+            if(parentMenu == null){
+                LOGGER.error("查询父菜单为空,pid:{}",pid);
+                return Result.fail("404","查询菜单数据为空!");
+            }
+            int parentMenuType = parentMenu.getType();
+            int menuType = menu.getType() - 1;
+            if(parentMenuType >= 3 || parentMenuType != menuType){
+                LOGGER.error("操作用户没有选择正确的菜单类型,父菜单类型parentMenuType:{},当前添加菜单类型menuType:{}", parentMenuType,menuType);
+                return  Result.fail("404","请选择正确的菜单类型!");
+            }
+            menu.setPids(parentMenu.getPids() + ",[" + pid + "]");
         }
-        int parentMenuType = parentMenu.getType();
-        int menuType = menu.getType() - 1;
-        if(parentMenuType >= 3 || parentMenuType != menuType){
-            LOGGER.error("操作用户没有选择正确的菜单类型,父菜单类型parentMenuType:{},当前添加菜单类型menuType:{}", parentMenuType,menuType);
-            return  Result.fail("404","请选择正确的菜单类型!");
-        }
-        menu.setPids(parentMenu.getPids() + ",[" + pid + "]");
         if(menu.getSort() == null){
             Integer maxSort = menuDao.getSortMax(pid);
             menu.setSort(maxSort != null ? maxSort - 1 : 0);
@@ -176,6 +186,11 @@ public class MenuServiceImpl implements MenuService {
         User createUser = userDao.findUserById(createBy);
         User updateUser = userDao.findUserById(updateBy);
         Menu pMenu = menuDao.findById(pid);
+        if(pMenu == null && pid == 0){
+            pMenu = new Menu();
+            pMenu.setId(0L);
+            pMenu.setTitle("顶级菜单");
+        }
         menu.setPMenu(pMenu);
         menu.setCreateUser(createUser);
         menu.setUpdateUser(updateUser);

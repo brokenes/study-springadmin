@@ -39,7 +39,9 @@
         <div class="layui-form-item">
             <label class="layui-form-label required">父级菜单</label>
             <div class="layui-input-inline">
-                <input class="layui-input select-tree" th:attr="data-url=@{/system/menu/list}" type="text" name="pid"  placeholder="请输入父级菜单">
+                <input class="layui-input select-tree" th:attr="data-url=@{/system/menu/list},
+                data-value=${pMenu?.id}" type="text" name="pid"  placeholder="请输入父级菜单" th:value="${pMenu?.title}">
+<!--                <input class="layui-input select-tree" th:attr="data-url=@{/system/menu/list}" type="text" name="pid"  placeholder="请输入父级菜单">-->
             </div>
         </div>
         <div class="layui-form-item">
