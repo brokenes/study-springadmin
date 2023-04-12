@@ -145,7 +145,6 @@
 
             listData.forEach(function (item) {
                 if(newList[item.pid] != undefined){
-                    console.log(newList[item.pid].children == undefined + "************");
                     if(newList[item.pid].children == undefined){
                         newList[item.pid].children = [];
                     }
@@ -178,6 +177,13 @@
                                 fill += self.options.treeFill;
                             }
                         return fill + icon + item[point];
+                    }else if(point == "status"){
+                        var  status = item[point];
+                        if(status == 1){
+                            return "启用";
+                        }else {
+                            return "停用";
+                        }
                     }else if(point == '$hide'){
                         var isHide = (rank >= self.options.hideRank);
                         return isHide ? "tree-hidd" : "";

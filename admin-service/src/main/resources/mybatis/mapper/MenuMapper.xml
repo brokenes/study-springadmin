@@ -90,7 +90,14 @@
             <if test="sort != null">
                 sort = #{sort}
             </if>
+            <if test="status != null">
+                status = #{status}
+            </if>
         </set>
         where id = #{id}
     </update>
+
+    <delete id="deleteById" parameterType="java.lang.Long">
+        delete from sys_menu where id = #{id}
+    </delete>
 </mapper>

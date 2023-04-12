@@ -23,4 +23,6 @@ public interface MenuDao {
      Integer save(Menu menu);
 
      Integer update(Menu menu);
+
+     Integer deleteById(Long id);
 }

@@ -21,4 +21,8 @@ public interface MenuService {
     Result<Integer> saveMenu(Menu menu);
 
     Result<Menu> findMenuById(Long id);
+
+    Result<Integer> deleteMenuById(Long id);
+
+    Result<Integer> updateMenuStatus(List<Menu> list);
 }

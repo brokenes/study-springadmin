@@ -38,4 +38,12 @@ public interface MenuServiceClient {
 
     @PostMapping("/findMenuById/{id}")
     public Result<Menu> findMenuById(@PathVariable("id")Long id);
+
+
+    @PostMapping("/deleteMenuById/{id}")
+    public Result<Integer> deleteMenuById(@PathVariable("id")Long id);
+
+
+    @PostMapping("/updateMenuStatus")
+    public Result<Integer> updateMenuStatus(@RequestBody List<Menu> list);
 }

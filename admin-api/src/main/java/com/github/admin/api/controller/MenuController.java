@@ -18,10 +18,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.*;
@@ -159,5 +156,59 @@ public class MenuController {
 
 
 
+    @GetMapping("/system/menu/delete/{id}")
+    @RequiresPermissions("system:menu:status")
+    @ResponseBody
+    public ResultVo delete(@PathVariable("id")Long id){
+        Result<Integer> result = menuServiceClient.deleteMenuById(id);
+        if(result.isSuccess()){
+            return ResultVoUtil.success("删除成功");
+        }else{
+            String errMsg = result.getMessage();
+            String code = result.getCode();
+            return  ResultVoUtil.error(code,errMsg);
+        }
+    }
 
+    @PostMapping("/system/menu/status/start")
+    @RequiresPermissions("system:menu:status")
+    @ResponseBody
+    public ResultVo startStatus(@RequestParam("ids")List<Long> ids){
+        List<Menu> list = new ArrayList<Menu>();
+        for(Long id:ids){
+            Menu menu = new Menu();
+            menu.setId(id);
+            menu.setStatus(1);
+            list.add(menu);
+        }
+        Result<Integer> result = menuServiceClient.updateMenuStatus(list);
+        if(result.isSuccess()){
+            return ResultVoUtil.success("启用成功");
+        }else{
+            String errMsg = result.getMessage();
+            String code = result.getCode();
+            return  ResultVoUtil.error(code,errMsg);
+        }
+    }
+
+    @PostMapping("/system/menu/status/stop")
+    @RequiresPermissions("system:menu:status")
+    @ResponseBody
+    public ResultVo stopStatus(@RequestParam("ids")List<Long> ids){
+        List<Menu> list = new ArrayList<Menu>();
+        for(Long id:ids){
+            Menu menu = new Menu();
+            menu.setId(id);
+            menu.setStatus(2);
+            list.add(menu);
+        }
+        Result<Integer> result = menuServiceClient.updateMenuStatus(list);
+        if(result.isSuccess()){
+            return ResultVoUtil.success("停用成功");
+        }else{
+            String errMsg = result.getMessage();
+            String code = result.getCode();
+            return  ResultVoUtil.error(code,errMsg);
+        }
+    }
 }

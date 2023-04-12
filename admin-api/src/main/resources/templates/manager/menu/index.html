@@ -76,14 +76,14 @@
                         </button>
                         <dl class="layui-nav-child layui-anim layui-anim-upbit">
                             <dd>
-                                <a class="ajax-status" th:href="@{/system/menu/status/ok}">启用</a>
+                                <a class="ajax-status" th:href="@{/system/menu/status/start}">启用</a>
                             </dd>
                             <dd>
-                                <a class="ajax-status" th:href="@{/system/menu/status/freezed}">冻结</a>
+                                <a class="ajax-status" th:href="@{/system/menu/status/stop}">冻结</a>
                             </dd>
-                            <dd>
-                                <a class="ajax-status" th:href="@{/system/menu/status/delete}">删除</a>
-                            </dd>
+<!--                            <dd>-->
+<!--                                <a class="ajax-status" th:href="@{/system/menu/status/delete}">删除</a>-->
+<!--                            </dd>-->
                         </dl>
                     </div>
                 </div>
@@ -118,7 +118,7 @@
                         <td>{{url}}</td>
                         <td>{{perms}}</td>
                         <td>{{remark}}</td>
-                        <td>正常</td>
+                        <td>{{status}}</td>
                         <td>
                             <a class="open-popup popup-edit" data-title="编辑菜单"
                                th:attr="data-url=@{'/system/menu/edit/{{id}}'}"
@@ -129,7 +129,7 @@
                                shiro:hasPermission="system:menu:detail" data-size="800,600" href="#">详细
                             </a>
                             <a class="ajax-get popup-delete" th:attr="data-msg='您是否确定删除'"
-                               th:href="@{'/system/menu/status/delete?ids={{id}}'}"
+                               th:href="@{'/system/menu/delete/{{id}}'}"
                                shiro:hasPermission="system:menu:status">删除
                             </a>
                         </td>

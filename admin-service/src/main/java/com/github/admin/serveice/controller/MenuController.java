@@ -49,4 +49,14 @@ public class MenuController {
     public Result<Menu> findMenuById(@PathVariable("id")Long id){
         return menuServiceImpl.findMenuById(id);
     }
+
+    @PostMapping("/deleteMenuById/{id}")
+    public Result<Integer> deleteMenuById(@PathVariable("id")Long id){
+        return menuServiceImpl.deleteMenuById(id);
+    }
+
+    @PostMapping("/updateMenuStatus")
+    public Result<Integer> updateMenuStatus(@RequestBody List<Menu> list){
+        return menuServiceImpl.updateMenuStatus(list);
+    }
 }

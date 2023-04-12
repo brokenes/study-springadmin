@@ -196,4 +196,45 @@ public class MenuServiceImpl implements MenuService {
         menu.setUpdateUser(updateUser);
         return Result.ok(menu);
     }
+
+    @Override
+    public Result<Integer> deleteMenuById(Long id) {
+        if(id == null){
+            LOGGER.error("当前删除菜单id为空!");
+            return  Result.fail("405","请求参数为空!");
+        }
+        List<Menu> list = menuDao.findMenuByPid(id);
+        if(CollectionUtils.isNotEmpty(list)){
+            LOGGER.error("当前id关联子菜单,删除失败id:{},子菜单集合大小:{}",id,list.size());
+            return Result.fail("500","当前菜单关联子菜单,删除失败!");
+        }
+        Integer stasus = menuDao.deleteById(id);
+        if(stasus != 1){
+            LOGGER.error("删除菜单失败,id:{}",id);
+            return Result.fail("500","菜单删除失败");
+        }
+        return Result.ok(stasus);
+    }
+
+    @Override
+    @Transactional
+    public Result<Integer> updateMenuStatus(List<Menu> list) {
+        if(CollectionUtils.isEmpty(list)){
+            LOGGER.error("更新菜单状态为空或者id为空!");
+            return  Result.fail("405","请求参数为空!");
+        }
+        Integer updateStatus = 0;
+        for(Menu menu:list){
+            if(menu == null || menu.getId() == null){
+                LOGGER.error("更新菜单状态为空或者id为空!");
+                return  Result.fail("405","请求参数为空!");
+            }
+             updateStatus = menuDao.update(menu);
+            if(updateStatus != 1){
+                LOGGER.error("更新菜单失败,id:{},数据库事务将会回滚",menu.getId());
+                throw  new ResultException(ResultEnum.UPDATE_MENU_STATUS_ERROR);
+            }
+        }
+        return Result.ok(updateStatus);
+    }
 }
