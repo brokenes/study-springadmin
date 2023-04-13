@@ -24,7 +24,6 @@
     <select id="findAll" resultMap="BaseResultMap">
         select *
         from sys_menu
-        where status != 3
         order by
             type ASC,
             sort ASC
