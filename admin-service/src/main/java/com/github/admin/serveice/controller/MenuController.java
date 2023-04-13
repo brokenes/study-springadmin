@@ -59,4 +59,9 @@ public class MenuController {
     public Result<Integer> updateMenuStatus(@RequestBody List<Menu> list){
         return menuServiceImpl.updateMenuStatus(list);
     }
+
+    @PostMapping("/updateMenu")
+    public Result<Integer> updateMenu(@RequestBody Menu menu){
+        return menuServiceImpl.updateMenu(menu);
+    }
 }

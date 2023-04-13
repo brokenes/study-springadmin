@@ -46,4 +46,7 @@ public interface MenuServiceClient {
 
     @PostMapping("/updateMenuStatus")
     public Result<Integer> updateMenuStatus(@RequestBody List<Menu> list);
+
+    @PostMapping("/updateMenu")
+    public Result<Integer> updateMenu(@RequestBody Menu menu);
 }

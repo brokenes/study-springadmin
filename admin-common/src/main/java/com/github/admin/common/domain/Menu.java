@@ -18,18 +18,17 @@ public class Menu implements Serializable {
     private String url;
     private String perms;
     private String icon;
-    private int type;
+    private Integer type;
     private Integer sort;
     private String remark;
     private Date createDate;
     private Date updateDate;
     private Long createBy;
     private Long updateBy;
-    private int status;
+    private Integer status;
     private User createUser;
     private User updateUser;
 
-//    @JSONField(serialize = false)
     @JsonIgnore
     private Map<Long, Menu> children = new HashMap<>();
 

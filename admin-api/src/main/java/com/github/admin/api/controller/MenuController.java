@@ -5,6 +5,8 @@ import com.github.admin.api.util.HttpServletUtil;
 import com.github.admin.client.MenuServiceClient;
 import com.github.admin.common.domain.Menu;
 import com.github.admin.common.domain.User;
+import com.github.admin.common.group.InsertGroup;
+import com.github.admin.common.group.UpdateGroup;
 import com.github.admin.common.request.MenuRequest;
 import com.github.admin.common.util.Result;
 import com.github.admin.common.util.ResultVoUtil;
@@ -104,10 +106,9 @@ public class MenuController {
 
 
     @PostMapping("/system/menu/save")
-//    @RequiresPermissions({"system:menu:add", "system:menu:edit"})
     @RequiresPermissions({"system:menu:add"})
     @ResponseBody
-    public ResultVo save(@Validated MenuRequest menuRequest){
+    public ResultVo save(@Validated(value = InsertGroup.class) MenuRequest menuRequest){
         LOGGER.info("菜单添加请求参数:{}",menuRequest);
         if(SecurityUtils.getSubject() == null || SecurityUtils.getSubject().getPrincipal() == null){
               throw new UnknownAccountException();
@@ -129,6 +130,29 @@ public class MenuController {
         }
     }
 
+
+    @PostMapping("/system/menu/edit")
+    @RequiresPermissions({"system:menu:edit"})
+    @ResponseBody
+    public ResultVo edit(@Validated(value = UpdateGroup.class) MenuRequest menuRequest){
+        if(SecurityUtils.getSubject() == null || SecurityUtils.getSubject().getPrincipal() == null){
+            throw new UnknownAccountException();
+        }
+        User user = (User) SecurityUtils.getSubject().getPrincipal();
+        Long userId = user.getId();
+        Menu menu = new Menu();
+        BeanUtils.copyProperties(menuRequest,menu);
+        menu.setUpdateBy(userId);
+        LOGGER.info("更新菜单对象属性复制后数据:{}",JSON.toJSONString(menu));
+        Result<Integer> result = menuServiceClient.updateMenu(menu);
+        if(result.isSuccess()){
+            return ResultVoUtil.success("修改成功");
+        }else{
+            String errMsg = result.getMessage();
+            String code = result.getCode();
+            return  ResultVoUtil.error(code,errMsg);
+        }
+    }
 
     @GetMapping({"/system/menu/detail/{id}"})
     @RequiresPermissions("system:menu:detail")

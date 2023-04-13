@@ -87,11 +87,47 @@
     <update id="update" parameterType="Menu">
         update  sys_menu
         <set>
+            <if test="title != null">
+               title = #{title},
+            </if>
+            <if test="pid != null">
+                pid = #{pid},
+            </if>
+            <if test="pids != null">
+               pids = #{pids},
+            </if>
+            <if test="url != null">
+                url = #{url},
+            </if>
+            <if test="perms != null">
+                perms = #{perms},
+            </if>
+            <if test="icon != null">
+                icon = #{icon},
+            </if>
+            <if test="type != null">
+                type = #{type},
+            </if>
             <if test="sort != null">
-                sort = #{sort}
+                sort = #{sort},
+            </if>
+            <if test="remark != null">
+                remark = #{remark},
+            </if>
+            <if test="createDate != null">
+                create_date = #{createDate},
+            </if>
+            <if test="updateDate != null">
+                update_date = #{updateDate},
+            </if>
+            <if test="createBy != null">
+                create_by = #{createBy},
+            </if>
+            <if test="updateBy != null">
+                update_by = #{updateBy},
             </if>
             <if test="status != null">
-                status = #{status}
+                status = #{status},
             </if>
         </set>
         where id = #{id}

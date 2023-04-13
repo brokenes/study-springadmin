@@ -6,7 +6,7 @@
 </head>
 <body>
 <div class="layui-form timo-compile">
-    <form th:action="@{/system/menu/save}">
+    <form th:action="@{/system/menu/edit}">
         <input type="hidden" name="id" th:if="${menu}" th:value="${menu.id}"/>
         <div class="layui-form-item">
             <label class="layui-form-label required">标题</label>
@@ -30,6 +30,13 @@
             </button>
         </div>
         <div class="layui-form-item">
+            <label class="layui-form-label required">启用状态</label>
+            <div class="layui-input-block">
+                <input type="radio" value="1" title="启用" name="status" th:checked="${menu.status == 1}">
+                <input type="radio" value="2" title="停用" name="status" th:checked="${menu.status == 2}">
+            </div>
+        </div>
+        <div class="layui-form-item">
             <label class="layui-form-label">菜单图标</label>
             <div class="layui-input-inline">
                 <input class="layui-input icon-input" type="text" name="icon"  placeholder="请输入菜单图标" th:value="${menu?.icon}">
@@ -39,14 +46,14 @@
         <div class="layui-form-item">
             <label class="layui-form-label required">父级菜单</label>
             <div class="layui-input-inline">
-                <input class="layui-input select-tree" th:attr="data-url=@{/system/menu/list}, data-value=${pMenu?.id}" type="text" name="pid"  placeholder="请输入父级菜单" th:value="${pMenu?.title}">
+                <input class="layui-input select-tree" th:attr="data-url=@{/system/menu/list}, data-value=${pMenu?.id}"  type="text" name="pid"  placeholder="请输入父级菜单" th:value="${pMenu?.title}">
             </div>
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label required">菜单类型</label>
             <div class="layui-input-inline">
 <!--                <select name="type" mo:dict="MENU_TYPE" mo-selected="${menu?.type}" mo-empty="" lay-verify="type"></select>-->
-                <select name="type"  mo-empty="" lay-verify="type">
+                <select name="type">
                     <option value="1"  th:selected="${menu.type == 1}">目录</option>
                     <option value="2"  th:selected="${menu.type == 2}">菜单</option>
                     <option value="3"  th:selected="${menu.type == 3}">按钮</option>

@@ -25,4 +25,6 @@ public interface MenuService {
     Result<Integer> deleteMenuById(Long id);
 
     Result<Integer> updateMenuStatus(List<Menu> list);
+
+    Result<Integer> updateMenu(Menu menu);
 }
