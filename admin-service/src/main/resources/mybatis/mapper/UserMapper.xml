@@ -41,6 +41,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         from sys_user where username = #{userName}
     </select>
 
+    <select id="findUserCountByUserName" parameterType="java.lang.String" resultType="java.lang.Integer">
+        select count(*)
+        from sys_user where username = #{userName}
+    </select>
+
     <select id="findUserById" resultMap="BaseUserResultMap" parameterType="java.lang.Long">
         select *
         from sys_user where id = #{id}
@@ -98,5 +103,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         </set>
         where id = #{id}
     </update>
+
+
+    <insert id="saveUser" parameterType="User">
+        insert into sys_user(username, nickname, password, salt, dept_id, picture, sex, email, phone, remark,
+                             create_date, update_date, status)
+        values (#{userName}, #{nickName}, #{password}, #{salt}, #{deptId}, #{picture}, #{sex}, #{email}, #{phone},
+                #{remark}, #{createDate}, #{updateDate}, #{status})
+    </insert>
 
 </mapper>

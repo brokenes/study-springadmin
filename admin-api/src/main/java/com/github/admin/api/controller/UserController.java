@@ -1,20 +1,25 @@
 package com.github.admin.api.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.github.admin.client.UserServiceCient;
 import com.github.admin.common.constants.AdminConst;
 import com.github.admin.common.domain.User;
 import com.github.admin.common.enums.ResultEnum;
 import com.github.admin.common.exception.ResultException;
+import com.github.admin.common.group.InsertGroup;
 import com.github.admin.common.page.DataPage;
 import com.github.admin.common.request.UserRequest;
 import com.github.admin.common.util.Result;
 import com.github.admin.common.util.ResultVoUtil;
+import com.github.admin.common.util.ShiroUtil;
 import com.github.admin.common.vo.ResultVo;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -124,9 +129,35 @@ public class UserController {
 
     }
 
-    @GetMapping(value = "/findByUserName")
-    public Result<User> findByUserName(@RequestParam("userName")String userName){
-        return userSeviceCient.findByUserName(userName);
+    @RequestMapping("/system/user/add")
+    @RequiresPermissions("system:user:add")
+    public String toAdd(){
+        return "/manager/user/add";
     }
 
+
+    @PostMapping("/system/user/save")
+    @RequiresPermissions("system:user:add")
+    @ResponseBody
+    public ResultVo add(@Validated(value= InsertGroup.class) UserRequest userRequest){
+        LOGGER.info("添加用户请求参数:{}", JSON.toJSONString(userRequest));
+
+        String salt = ShiroUtil.getRandomSalt();
+        String encrypt = ShiroUtil.encrypt(userRequest.getPassword(), salt);
+        String confirm = ShiroUtil.encrypt(userRequest.getPassword(), salt);
+        User user = new User();
+        BeanUtils.copyProperties(userRequest,user);
+        user.setPassword(encrypt);
+        user.setSalt(salt);
+        user.setConfirm(confirm);
+        Result<Integer> result = userSeviceCient.saveUser(user);
+        if(result.isSuccess()){
+            return ResultVoUtil.success("添加成功!");
+        }else{
+            String errMsg = result.getMessage();
+            String code = result.getCode();
+            return  ResultVoUtil.error(code,errMsg);
+        }
+
+    }
 }

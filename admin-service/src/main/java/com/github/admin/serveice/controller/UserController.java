@@ -31,4 +31,8 @@ public class UserController {
     Result<Integer> updateUserStatus(@RequestBody List<User> list){
         return userServiceImpl.updateUserStatus(list);
     }
+    @PostMapping("/saveUser")
+    Result<Integer> saveUser(@RequestBody User user){
+        return userServiceImpl.saveUser(user);
+    }
 }

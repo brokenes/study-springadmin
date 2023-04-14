@@ -24,4 +24,7 @@ public interface UserServiceCient {
 
     @PostMapping("/updateUserStatus")
     Result<Integer> updateUserStatus(@RequestBody  List<User> list);
+
+    @PostMapping("/saveUser")
+    Result<Integer> saveUser(@RequestBody User user);
 }

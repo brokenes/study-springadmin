@@ -19,4 +19,6 @@ public interface UserService {
     Result<DataPage<User>> getPageList(UserRequest userRequest);
 
     Result<Integer> updateUserStatus(List<User> list);
+
+    Result<Integer> saveUser(User user);
 }

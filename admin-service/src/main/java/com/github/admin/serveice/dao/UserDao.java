@@ -25,4 +25,9 @@ public interface UserDao {
     List<User> getPageList(Map<String, Object> map);
 
     Integer updateUser(User user);
+
+    Integer saveUser(User user);
+
+    Integer findUserCountByUserName(String userName);
+
 }

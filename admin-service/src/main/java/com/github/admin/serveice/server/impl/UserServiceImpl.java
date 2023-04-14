@@ -10,12 +10,14 @@ import com.github.admin.common.util.Result;
 import com.github.admin.serveice.dao.UserDao;
 import com.github.admin.serveice.server.UserService;
 import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -76,5 +78,36 @@ public class UserServiceImpl implements UserService {
             }
         }
         return Result.ok(updateStatus);
+    }
+
+    @Override
+    public Result<Integer> saveUser(User user) {
+        String password = user.getPassword();
+        String confirm = user.getConfirm();
+        String userName = user.getUserName();
+        Date date = new Date();
+        if(StringUtils.isBlank(password) || StringUtils.isBlank(confirm)){
+            LOGGER.error("用户密码或者确认密码为空");
+            return Result.fail("405","请求参数为空!");
+        }
+        if(!StringUtils.equals(password,confirm)){
+            LOGGER.error("用户密码和确认密码不一致,password:{},confirm:{}",password,confirm);
+            return Result.fail("405","输入密码和确认密码不一致");
+        }
+        user.setCreateDate(date);
+        user.setUpdateDate(date);
+        int existUserCount = userDao.findUserCountByUserName(userName);
+        if(existUserCount > 0){
+            LOGGER.error("当前用户已经存在,userName:{}",userName);
+            return Result.fail("405","当前用户已经存在!");
+        }
+
+        Integer status = userDao.saveUser(user);
+        if(status != 1){
+            LOGGER.error("添加用户失败,status:{}",status);
+            return Result.fail("405","添加用户失败!");
+        }
+
+        return Result.ok(status);
     }
 }
