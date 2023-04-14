@@ -2,15 +2,14 @@ package com.github.admin.common.request;
 
 import lombok.Data;
 
-import java.io.Serializable;
-
 @Data
-public class UserRequest implements Serializable {
+public class UserRequest extends BaseRequest {
 
-//    private Integer status;
+    private Integer status;
+    private String userName;
+    private String nickName;
 
-    private Integer pageNo = 1;
 
-    private Integer pageSize = 1;
+
 
 }

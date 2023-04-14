@@ -75,9 +75,9 @@
                     <div class="btn-group" shiro:hasPermission="system:user:status">
                         <button class="layui-btn">操作<span class="caret"></span></button>
                         <dl class="layui-nav-child layui-anim layui-anim-upbit">
-                            <dd><a class="ajax-status" th:href="@{/system/user/status/ok}">启用</a></dd>
-                            <dd><a class="ajax-status" th:href="@{/system/user/status/freezed}">冻结</a></dd>
-                            <dd><a class="ajax-status" th:href="@{/system/user/status/delete}">删除</a></dd>
+                            <dd><a class="ajax-status" th:href="@{/system/user/status/start}">启用</a></dd>
+                            <dd><a class="ajax-status" th:href="@{/system/user/status/stop}">停用</a></dd>
+<!--                            <dd><a class="ajax-status" th:href="@{/system/user/status/delete}">删除</a></dd>-->
                         </dl>
                     </div>
                 </div>
@@ -97,7 +97,8 @@
                     <th class="sortable" data-field="sex">性别</th>
                     <th class="sortable" data-field="phone">电话</th>
                     <th class="sortable" data-field="email">邮箱</th>
-                    <th class="sortable" data-field="createDate">创建时间</th>
+                    <th class="sortable" data-field="create_date">创建时间</th>
+                    <th class="sortable" data-field="update_date">更新时间</th>
                     <th>状态</th>
                     <th>操作</th>
                 </tr>
@@ -121,8 +122,8 @@
                         <a class="open-popup" data-title="详细信息" th:attr="data-url=@{'/system/user/detail/'+${item.id}}"
                            shiro:hasPermission="system:user:detail"
                            data-size="800,600" href="#">详细</a>
-                        <a class="ajax-get" th:attr="data-msg='您是否删除'+${item.nickName}"
-                           th:href="@{/system/user/status/delete(ids=${item.id})}"
+                        <a th:if="${item.status != 3}" class="ajax-get" th:attr="data-msg='您是否删除'+${item.nickName}"
+                           th:href="@{'/system/user/delete/' + ${item.id}}"
                            shiro:hasPermission="system:user:status">删除</a>
                     </td>
                 </tr>

@@ -51,8 +51,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         select count(*) from sys_user
         <where>
             <if test="status != null">
-                status = #{status}
+                and status = #{status}
             </if>
+            <if test="status != null">
+                and status = #{status}
+            </if>
+            <if test="userName != null and userName != ''">
+                and username like concat(concat('%',#{userName}),'%')
+            </if>
+            <if test="nickName != null and nickName != ''">
+                and nickname like concat(concat('%',#{nickName}),'%')
+            </if>
+            and status != 3
         </where>
     </select>
 
@@ -60,13 +70,33 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         select  * from  sys_user
         <where>
             <if test="status != null">
-                status = #{status}
+                and status = #{status}
             </if>
+            <if test="userName != null and userName != ''">
+                and username like concat(concat('%',#{userName}),'%')
+            </if>
+            <if test="nickName != null and nickName != ''">
+                and nickname like concat(concat('%',#{nickName}),'%')
+            </if>
+            and status != 3
         </where>
+        <if test="orderByColumn != null and asc != null">
+            order by ${orderByColumn} ${asc}
+        </if>
         <if test="startIndex != null and endIndex != null">
-            limit #{startIndex,jdbcType=INTEGER},#{endIndex,jdbcType=INTEGER}
+            limit #{startIndex},#{endIndex}
         </if>
 
     </select>
+
+    <update id="updateUser" parameterType="User">
+        update sys_user
+        <set>
+            <if test="status != null">
+                status = #{status}
+            </if>
+        </set>
+        where id = #{id}
+    </update>
 
 </mapper>

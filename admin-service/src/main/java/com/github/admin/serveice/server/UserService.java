@@ -5,6 +5,8 @@ import com.github.admin.common.page.DataPage;
 import com.github.admin.common.request.UserRequest;
 import com.github.admin.common.util.Result;
 
+import java.util.List;
+
 public interface UserService {
 
     /**
@@ -16,4 +18,5 @@ public interface UserService {
 
     Result<DataPage<User>> getPageList(UserRequest userRequest);
 
+    Result<Integer> updateUserStatus(List<User> list);
 }

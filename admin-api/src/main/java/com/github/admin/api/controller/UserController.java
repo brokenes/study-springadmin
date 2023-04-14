@@ -1,19 +1,25 @@
 package com.github.admin.api.controller;
 
 import com.github.admin.client.UserServiceCient;
+import com.github.admin.common.constants.AdminConst;
 import com.github.admin.common.domain.User;
+import com.github.admin.common.enums.ResultEnum;
+import com.github.admin.common.exception.ResultException;
 import com.github.admin.common.page.DataPage;
 import com.github.admin.common.request.UserRequest;
 import com.github.admin.common.util.Result;
+import com.github.admin.common.util.ResultVoUtil;
+import com.github.admin.common.vo.ResultVo;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 public class UserController {
@@ -33,17 +39,90 @@ public class UserController {
         Result<DataPage<User>> result = userSeviceCient.getPageList(userRequest);
         if(result.isSuccess()){
             DataPage<User> dataPage = result.getData();
-            LOGGER.info("是否有上一页:{},下一页:{}",dataPage.isHasPrev(),dataPage.isHasNext());
+            boolean isHasPrev = dataPage.isHasPrev();
+            boolean isHasNext = dataPage.isHasNext();
+            Integer pageNo = dataPage.getPageNo();
+            Integer pageSize = dataPage.getPageSize();
+            LOGGER.info("用户分页查询是否有上一页:{},下一页:{},当前第:{}页,每页显示:{}条数据",isHasPrev,isHasNext,pageNo,pageSize);
             model.addAttribute("list", dataPage.getDataList());
             model.addAttribute("page", dataPage);
         }
-        // 封装数据
-
-//        model.addAttribute("dept", user.getDept());
         return "/manager/user/index";
     }
 
 
+    @RequestMapping("/system/user/status/start")
+    @RequiresPermissions("system:user:status")
+    @ResponseBody
+    public ResultVo startStatus(@RequestParam(value = "ids", required = true) List<Long> ids) {
+        // 不能修改超级管理员状态
+        if (ids.contains(AdminConst.ADMIN_ID)) {
+            throw new ResultException(ResultEnum.NO_ADMIN_STATUS);
+        }
+        List<User> list = new ArrayList<User>();
+        for(Long id:ids){
+            User user = new User();
+            user.setId(id);
+            user.setStatus(1);
+            list.add(user);
+        }
+        Result<Integer> result = userSeviceCient.updateUserStatus(list);
+        if(result.isSuccess()){
+            return ResultVoUtil.success("启用成功");
+        }else{
+            String errMsg = result.getMessage();
+            String code = result.getCode();
+            return  ResultVoUtil.error(code,errMsg);
+        }
+    }
+
+    @RequestMapping("/system/user/status/stop")
+    @RequiresPermissions("system:user:status")
+    @ResponseBody
+    public ResultVo stopStatus(@RequestParam(value = "ids", required = true) List<Long> ids) {
+        // 不能修改超级管理员状态
+        if (ids.contains(AdminConst.ADMIN_ID)) {
+            throw new ResultException(ResultEnum.NO_ADMIN_STATUS);
+        }
+        List<User> list = new ArrayList<User>();
+        for(Long id:ids){
+            User user = new User();
+            user.setId(id);
+            user.setStatus(2);
+            list.add(user);
+        }
+        Result<Integer> result = userSeviceCient.updateUserStatus(list);
+        if(result.isSuccess()){
+            return ResultVoUtil.success("停用成功");
+        }else{
+            String errMsg = result.getMessage();
+            String code = result.getCode();
+            return  ResultVoUtil.error(code,errMsg);
+        }
+    }
+
+    @RequestMapping("/system/user/delete/{id}")
+    @RequiresPermissions("system:user:status")
+    @ResponseBody
+    public ResultVo delete(@PathVariable( value = "id",required = true)Long id){
+        if (id == AdminConst.ADMIN_ID) {
+            throw new ResultException(ResultEnum.NO_ADMIN_AUTH);
+        }
+        List<User> list = new ArrayList<User>();
+        User user = new User();
+        user.setId(id);
+        user.setStatus(3);
+        list.add(user);
+        Result<Integer> result = userSeviceCient.updateUserStatus(list);
+        if(result.isSuccess()){
+            return ResultVoUtil.success("删除成功");
+        }else{
+            String errMsg = result.getMessage();
+            String code = result.getCode();
+            return  ResultVoUtil.error(code,errMsg);
+        }
+
+    }
 
     @GetMapping(value = "/findByUserName")
     public Result<User> findByUserName(@RequestParam("userName")String userName){

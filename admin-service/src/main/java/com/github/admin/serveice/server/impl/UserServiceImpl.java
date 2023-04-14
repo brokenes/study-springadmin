@@ -2,14 +2,18 @@ package com.github.admin.serveice.server.impl;
 
 import cn.hutool.core.bean.BeanUtil;
 import com.github.admin.common.domain.User;
+import com.github.admin.common.enums.ResultEnum;
+import com.github.admin.common.exception.ResultException;
 import com.github.admin.common.page.DataPage;
 import com.github.admin.common.request.UserRequest;
 import com.github.admin.common.util.Result;
 import com.github.admin.serveice.dao.UserDao;
 import com.github.admin.serveice.server.UserService;
+import org.apache.commons.collections4.CollectionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -50,5 +54,27 @@ public class UserServiceImpl implements UserService {
         dataPage.setDataList(list);
         return Result.ok(dataPage);
 
+    }
+
+    @Transactional
+    @Override
+    public Result<Integer> updateUserStatus(List<User> list) {
+        if(CollectionUtils.isEmpty(list)){
+            LOGGER.error("修改用户列表状态参数为空！");
+            return Result.fail("405","请求参数为空");
+        }
+        Integer updateStatus = 0;
+        for(User user:list){
+            if(user.getId() == null){
+                LOGGER.error("修改用户启用/停用状态id为空！");
+                throw new ResultException(ResultEnum.UPDATE_ADMIN_STATUS_ERROR);
+            }
+            updateStatus = userDao.updateUser(user);
+            if(updateStatus != 1){
+                LOGGER.error("修改用户启用/停用状态异常,id:{},status:{}",user.getId(),user.getStatus());
+                throw new ResultException(ResultEnum.UPDATE_ADMIN_STATUS_ERROR);
+            }
+        }
+        return Result.ok(updateStatus);
     }
 }

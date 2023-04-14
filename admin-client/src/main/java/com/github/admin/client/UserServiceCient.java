@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.List;
+
 @FeignClient(value="springboot-admin-service")
 public interface UserServiceCient {
 
@@ -19,4 +21,7 @@ public interface UserServiceCient {
 
     @PostMapping("/getPageList")
     Result<DataPage<User>> getPageList(@RequestBody UserRequest userRequest);
+
+    @PostMapping("/updateUserStatus")
+    Result<Integer> updateUserStatus(@RequestBody  List<User> list);
 }

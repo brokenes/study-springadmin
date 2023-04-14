@@ -282,11 +282,11 @@ layui.use(['element', 'form', 'layer', 'upload'], function () {
         // 排序参数
         var asc = $(".sortable.asc").data("field");
         if(asc !== undefined){
-            getSearch += "orderByColumn=" + asc + "&isAsc=asc&";
+            getSearch += "orderByColumn=" + asc + "&asc=asc&";
         }
         var desc = $(".sortable.desc").data("field");
         if(desc !== undefined){
-            getSearch += "orderByColumn=" + desc + "&isAsc=desc&";
+            getSearch += "orderByColumn=" + desc + "&asc=desc&";
         }
 
         if (getSearch !== "") {
@@ -322,7 +322,7 @@ layui.use(['element', 'form', 'layer', 'upload'], function () {
         return null;
     };
     var field = getSearch("orderByColumn");
-    var isAsc = getSearch("isAsc");
+    var isAsc = getSearch("asc");
     if(field != null){
         $("[data-field='"+ field +"']").addClass(isAsc);
     }

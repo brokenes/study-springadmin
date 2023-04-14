@@ -23,4 +23,6 @@ public interface UserDao {
     long getPageCount(Map<String, Object> map);
 
     List<User> getPageList(Map<String, Object> map);
+
+    Integer updateUser(User user);
 }

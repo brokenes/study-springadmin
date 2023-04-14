@@ -8,6 +8,7 @@ import com.github.admin.serveice.server.UserService;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @RestController
 public class UserController {
@@ -26,4 +27,8 @@ public class UserController {
         return userServiceImpl.getPageList(userRequest);
     }
 
+    @PostMapping("/updateUserStatus")
+    Result<Integer> updateUserStatus(@RequestBody List<User> list){
+        return userServiceImpl.updateUserStatus(list);
+    }
 }
