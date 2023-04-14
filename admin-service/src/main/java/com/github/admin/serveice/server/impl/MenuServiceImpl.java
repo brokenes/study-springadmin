@@ -1,5 +1,6 @@
 package com.github.admin.serveice.server.impl;
 
+import cn.hutool.core.bean.BeanUtil;
 import com.alibaba.fastjson.JSON;
 import com.github.admin.common.domain.Menu;
 import com.github.admin.common.domain.User;
@@ -10,7 +11,6 @@ import com.github.admin.common.util.Result;
 import com.github.admin.serveice.dao.MenuDao;
 import com.github.admin.serveice.dao.UserDao;
 import com.github.admin.serveice.server.MenuService;
-import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.collections4.CollectionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -45,22 +45,13 @@ public class MenuServiceImpl implements MenuService {
 
     @Override
     public Result<List<Menu>> findAll(MenuRequest menuRequest){
-        try {
-            Map<String,String> map = BeanUtils.describe(menuRequest);
-//            if(menuRequest.getStatus() == null){
-//                map.put("status","1");
-//            }
-            List<Menu> list = menuDao.findByCondition(map);
-            if(CollectionUtils.isEmpty(list)){
-                LOGGER.error("查询菜单集合数据为空,查询参数为map:{}",map);
-                return Result.fail("404","查询菜单集合数据为空");
-            }
-            return Result.ok(list);
-        }catch(Exception e){
-            LOGGER.error("查询菜单集合异常:",e);
-            return Result.fail("500","查询菜单集合异常");
+        Map<String,Object> map = BeanUtil.beanToMap(menuRequest);
+        List<Menu> list = menuDao.findByCondition(map);
+        if(CollectionUtils.isEmpty(list)){
+            LOGGER.error("查询菜单集合数据为空,查询参数为map:{}",map);
+            return Result.fail("404","查询菜单集合数据为空");
         }
-
+        return Result.ok(list);
     }
 
     @Override
@@ -69,7 +60,7 @@ public class MenuServiceImpl implements MenuService {
         if(pid == null || id == null){
             return Result.fail("405","参数pid或id为空!");
         }
-        List<Menu>  list = menuDao.findListByPidAndId(pid,id);
+        List<Menu>  list = menuDao.findListByPidAndNotId(pid,id);
         if(CollectionUtils.isEmpty(list)){
             LOGGER.error("pid:{},id:{}查询对应的排序数据集合为空",pid,id);
             return Result.fail("404","查询数据为空");
@@ -246,6 +237,7 @@ public class MenuServiceImpl implements MenuService {
             return Result.fail("405","请求参数为空!");
         }
         Long pid = menu.getPid();
+        Long id = menu.getId();
         if(pid == null){
             LOGGER.error("菜单pid参数为空!");
             return Result.fail("405","参数pid为空!");
@@ -275,32 +267,30 @@ public class MenuServiceImpl implements MenuService {
         if(menu.getSort() == null){
             Integer maxSort = menuDao.getSortMax(pid);
             menu.setSort(maxSort != null ? maxSort - 1 : 0);
-        }else{
-            menu.setSort(menu.getSort() + 1);
         }
         menu.setUpdateDate(new Date());
         LOGGER.info("添加菜单参数:{}", JSON.toJSONString(menu));
+
         Integer sort = menu.getSort();
-        List<Menu> menuList = menuDao.findMenuByPid(pid);
-        menuList.stream().filter(s -> s.getSort() >= sort).forEach(m -> {
-            Long id = m.getId();
-            Integer s = m.getSort() + 1;
-            Menu updateMenu = new Menu();
-            updateMenu.setId(id);
-            updateMenu.setSort(s);
-            Integer updateStatus = menuDao.update(updateMenu);
-            LOGGER.info("更新当前菜单排序,id:{},sort:{}",id,s);
+        List<Menu> menuList = menuDao.findListByPidAndNotId(pid,id);
+        menuList.add(sort,menu);
+        LOGGER.info("当前修改菜单集合数据大小:{}",menuList.size());
+        for (int i = 1; i <= menuList.size(); i++) {
+            menuList.get(i - 1).setSort(i);
+        }
+        Integer updateStatus = 0;
+        for (Menu m:menuList){
+            long mId = m.getId();
+            long mPid = m.getPid();
+            Integer mSort = m.getSort();
+            updateStatus = menuDao.update(m);
+            LOGGER.info("更新当前菜单排序,id:{},pid:{},sort:{}",mId,mPid,mSort);
             if(updateStatus != 1){
-                LOGGER.error("更新菜单排序失败,菜单对象updateMenu数据:{},返回结果:{}",updateMenu,updateStatus);
+                LOGGER.error("更新菜单排序失败,id:{},pid:{},返回结果:{}",mId,mPid,updateStatus);
                 throw new ResultException(ResultEnum.UPDATE_MENU_ERROR);
             }
-        });
-        Integer status = menuDao.update(menu);
-        LOGGER.info("编辑菜单返回状态结果:{}",status);
-        if(status != 1){
-            LOGGER.error("编辑菜单失败,菜单对象数据:{},返回结果:{}",menu,status);
-            throw new ResultException(ResultEnum.UPDATE_MENU_ERROR);
         }
-        return Result.ok(status);
+        return Result.ok(updateStatus);
+
     }
 }

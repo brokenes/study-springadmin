@@ -12,9 +12,9 @@ public interface MenuDao {
 
      Menu findById(Long menuId);
 
-     List<Menu> findByCondition(Map<String,String> map);
+     List<Menu> findByCondition(Map<String,Object> map);
 
-     List<Menu> findListByPidAndId(@Param("pid")Long pid,@Param("id")Long id);
+     List<Menu> findListByPidAndNotId(@Param("pid")Long pid,@Param("id")Long id);
 
      Integer getSortMax(Long pid);
 
@@ -25,4 +25,5 @@ public interface MenuDao {
      Integer update(Menu menu);
 
      Integer deleteById(Long id);
+
 }

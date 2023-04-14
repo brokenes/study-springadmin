@@ -1,6 +1,8 @@
 package com.github.admin.serveice.server;
 
 import com.github.admin.common.domain.User;
+import com.github.admin.common.page.DataPage;
+import com.github.admin.common.request.UserRequest;
 import com.github.admin.common.util.Result;
 
 public interface UserService {
@@ -11,4 +13,7 @@ public interface UserService {
      * @return
      */
     Result<User> findByUserName(String userName);
+
+    Result<DataPage<User>> getPageList(UserRequest userRequest);
+
 }

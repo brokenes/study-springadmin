@@ -45,4 +45,28 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         select *
         from sys_user where id = #{id}
     </select>
+
+
+    <select id="getPageCount" parameterType="map" resultType="java.lang.Long">
+        select count(*) from sys_user
+        <where>
+            <if test="status != null">
+                status = #{status}
+            </if>
+        </where>
+    </select>
+
+    <select id="getPageList" parameterType="map" resultMap="BaseUserResultMap">
+        select  * from  sys_user
+        <where>
+            <if test="status != null">
+                status = #{status}
+            </if>
+        </where>
+        <if test="startIndex != null and endIndex != null">
+            limit #{startIndex,jdbcType=INTEGER},#{endIndex,jdbcType=INTEGER}
+        </if>
+
+    </select>
+
 </mapper>

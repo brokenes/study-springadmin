@@ -3,6 +3,9 @@ package com.github.admin.serveice.dao;
 import com.github.admin.common.domain.User;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+import java.util.Map;
+
 //@Mapper
 public interface UserDao {
 
@@ -16,4 +19,8 @@ public interface UserDao {
 
 
     User findUserById(Long id);
+
+    long getPageCount(Map<String, Object> map);
+
+    List<User> getPageList(Map<String, Object> map);
 }

@@ -276,7 +276,7 @@ layui.use(['element', 'form', 'layer', 'upload'], function () {
         // 页数参数
         var pageSize = $(".page-number").val();
         if (pageSize !== undefined && pageSize !== "") {
-            getSearch += "size=" + pageSize + "&";
+            getSearch += "pageSize=" + pageSize + "&";
         }
 
         // 排序参数

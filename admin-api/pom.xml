@@ -105,7 +105,13 @@
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-validation</artifactId>
     </dependency>
-<!--    <dependency>-->
+    <dependency>
+      <groupId>com.github.theborakompanioni</groupId>
+      <artifactId>thymeleaf-extras-shiro</artifactId>
+      <version>2.1.0</version>
+    </dependency>
+
+    <!--    <dependency>-->
 <!--      <groupId>io.springfox</groupId>-->
 <!--      <artifactId>springfox-boot-starter</artifactId>-->
 <!--      <version>3.0.0</version>-->
