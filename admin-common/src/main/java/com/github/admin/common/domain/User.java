@@ -28,7 +28,7 @@ public class User implements Serializable {
     /**图片路径**/
     private String picture;
     /**性别**/
-    private int sex;
+    private Integer sex;
     /**邮箱**/
     private String email;
     /**电话号码**/
@@ -40,7 +40,7 @@ public class User implements Serializable {
     /**更新时间**/
     private Date updateDate;
     /**状态**/
-    private int status;
+    private Integer status;
 
     private Dept dept;
 

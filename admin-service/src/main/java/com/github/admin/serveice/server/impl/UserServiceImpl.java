@@ -124,4 +124,28 @@ public class UserServiceImpl implements UserService {
         }
         return Result.ok(user);
     }
+
+    @Override
+    public Result<Integer> updateUserPwd(User user) {
+        if(user.getId() == null){
+            LOGGER.error("修改用户密码请求参数id为空");
+            return Result.fail("405","请求参数为空!");
+        }
+        String password = user.getPassword();
+        String confirm = user.getConfirm();
+        if(StringUtils.isBlank(password) || StringUtils.isBlank(confirm)){
+            LOGGER.error("用户密码或者确认密码为空");
+            return Result.fail("405","请求参数为空!");
+        }
+        if(!StringUtils.equals(password,confirm)){
+            LOGGER.error("用户密码和确认密码不一致,password:{},confirm:{}",password,confirm);
+            return Result.fail("405","输入密码和确认密码不一致");
+        }
+        Integer status = userDao.updateUser(user);
+        if(status != 1){
+            LOGGER.error("修改用户密码失败,status:{}",status);
+            return Result.fail("405","修改用户密码失败!");
+        }
+        return Result.ok(status);
+    }
 }

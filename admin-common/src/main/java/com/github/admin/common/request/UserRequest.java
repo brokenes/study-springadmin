@@ -1,6 +1,7 @@
 package com.github.admin.common.request;
 
 import com.github.admin.common.group.InsertGroup;
+import com.github.admin.common.group.PasswordGroup;
 import com.github.admin.common.group.UpdateGroup;
 import lombok.Data;
 import org.hibernate.validator.constraints.Length;
@@ -15,6 +16,9 @@ import java.util.Date;
 @Data
 public class UserRequest extends BaseRequest {
 
+    @NotNull(message = "用户id不能为空",groups = {UpdateGroup.class, PasswordGroup.class})
+    private Long id;
+
     @NotNull(message = "启用状态不能为空",groups = {InsertGroup.class, UpdateGroup.class})
     @Range(message = "启用状态范围为 {min} 到 {max} 之间", min = 1,max = 2,groups = {InsertGroup.class, UpdateGroup.class})
     private Integer status;
@@ -27,11 +31,11 @@ public class UserRequest extends BaseRequest {
     @Length(message = "用户昵称范围为 {min} 到 {max} 之间", min = 3,max = 12,groups = {InsertGroup.class, UpdateGroup.class})
     private String nickName;
 
-    @NotBlank(message = "密码不能为空",groups = {InsertGroup.class, UpdateGroup.class})
+    @NotBlank(message = "密码不能为空",groups = {InsertGroup.class, PasswordGroup.class})
     @Length(message = "密码围为 {min} 到 {max} 之间", min = 3,max = 12,groups = {InsertGroup.class, UpdateGroup.class})
     private String password;
 
-    @NotBlank(message = "确认密码不能为空",groups = {InsertGroup.class, UpdateGroup.class})
+    @NotBlank(message = "确认密码不能为空",groups = {InsertGroup.class, PasswordGroup.class})
     @Length(message = "确认密码围为 {min} 到 {max} 之间", min = 3,max = 12,groups = {InsertGroup.class, UpdateGroup.class})
     private String confirm;
 

@@ -27,4 +27,7 @@ public interface UserServiceCient {
 
     @PostMapping("/findUserById/{id}")
     Result<User> findUserById(@PathVariable("id") Long id);
+
+    @PostMapping("/updateUserPwd")
+    Result<Integer> updateUserPwd(@RequestBody User user);
 }

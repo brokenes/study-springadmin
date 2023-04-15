@@ -7,6 +7,7 @@ import com.github.admin.common.domain.User;
 import com.github.admin.common.enums.ResultEnum;
 import com.github.admin.common.exception.ResultException;
 import com.github.admin.common.group.InsertGroup;
+import com.github.admin.common.group.PasswordGroup;
 import com.github.admin.common.page.DataPage;
 import com.github.admin.common.request.UserRequest;
 import com.github.admin.common.util.Result;
@@ -24,6 +25,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -144,7 +146,7 @@ public class UserController {
 
         String salt = ShiroUtil.getRandomSalt();
         String encrypt = ShiroUtil.encrypt(userRequest.getPassword(), salt);
-        String confirm = ShiroUtil.encrypt(userRequest.getPassword(), salt);
+        String confirm = ShiroUtil.encrypt(userRequest.getConfirm(), salt);
         User user = new User();
         BeanUtils.copyProperties(userRequest,user);
         user.setPassword(encrypt);
@@ -173,4 +175,37 @@ public class UserController {
         return "/manager/user/detail";
     }
 
+
+    @GetMapping("/system/user/pwd")
+    @RequiresPermissions("system:user:pwd")
+    public String toEditPassword(@RequestParam(value = "ids", required = true)Long id,Model model) {
+        model.addAttribute("id", id);
+        return "/manager/user/pwd";
+    }
+
+    @PostMapping("/system/user/pwd")
+    @RequiresPermissions("system:user:pwd")
+    @ResponseBody
+    public ResultVo editPassword(@Validated(value = PasswordGroup.class) UserRequest userRequest) {
+        if (userRequest.getId() == AdminConst.ADMIN_ID) {
+            throw new ResultException(ResultEnum.NO_ADMIN_AUTH);
+        }
+        String salt = ShiroUtil.getRandomSalt();
+        String encrypt = ShiroUtil.encrypt(userRequest.getPassword(), salt);
+        String confirm = ShiroUtil.encrypt(userRequest.getConfirm(), salt);
+        User user = new User();
+        BeanUtils.copyProperties(userRequest,user);
+        user.setPassword(encrypt);
+        user.setSalt(salt);
+        user.setConfirm(confirm);
+        user.setUpdateDate(new Date());
+        Result<Integer> result = userSeviceCient.updateUserPwd(user);
+        if(result.isSuccess()){
+            return ResultVoUtil.success("密码修改成功!");
+        }else{
+            String errMsg = result.getMessage();
+            String code = result.getCode();
+            return  ResultVoUtil.error(code,errMsg);
+        }
+    }
 }

@@ -40,4 +40,8 @@ public class UserController {
     Result<User> findUserById(@PathVariable("id") Long id){
         return userServiceImpl.findUserById(id);
     }
+    @PostMapping("/updateUserPwd")
+    Result<Integer> updateUserPwd(@RequestBody User user){
+        return userServiceImpl.updateUserPwd(user);
+    }
 }
