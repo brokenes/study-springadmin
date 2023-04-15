@@ -110,4 +110,18 @@ public class UserServiceImpl implements UserService {
 
         return Result.ok(status);
     }
+
+    @Override
+    public Result<User> findUserById(Long id) {
+        if(id == null){
+            LOGGER.error("请求参数id为空");
+            return Result.fail("405","请求参数为空!");
+        }
+        User user = userDao.findUserById(id);
+        if(user == null){
+            LOGGER.error("查询用户id:{}对应数据为空",id);
+            return Result.fail("405","查询用户数据为空!");
+        }
+        return Result.ok(user);
+    }
 }

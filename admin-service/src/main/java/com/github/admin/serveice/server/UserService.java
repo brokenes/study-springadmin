@@ -21,4 +21,6 @@ public interface UserService {
     Result<Integer> updateUserStatus(List<User> list);
 
     Result<Integer> saveUser(User user);
+
+    Result<User> findUserById(Long id);
 }

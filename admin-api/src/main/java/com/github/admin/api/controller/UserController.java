@@ -160,4 +160,17 @@ public class UserController {
         }
 
     }
+
+
+    @RequestMapping("/system/user/detail/{id}")
+    @RequiresPermissions("system:user:detail")
+    public String detail(@PathVariable(value = "id",required = true)Long id,Model model){
+        Result<User> result = userSeviceCient.findUserById(id);
+        if(result.isSuccess()){
+            User user = result.getData();
+            model.addAttribute("user",user);
+        }
+        return "/manager/user/detail";
+    }
+
 }

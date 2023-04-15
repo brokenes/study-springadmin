@@ -35,4 +35,9 @@ public class UserController {
     Result<Integer> saveUser(@RequestBody User user){
         return userServiceImpl.saveUser(user);
     }
+
+    @PostMapping("/findUserById/{id}")
+    Result<User> findUserById(@PathVariable("id") Long id){
+        return userServiceImpl.findUserById(id);
+    }
 }
