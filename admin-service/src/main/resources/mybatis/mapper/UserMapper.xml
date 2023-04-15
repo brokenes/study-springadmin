@@ -97,6 +97,36 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <update id="updateUser" parameterType="User">
         update sys_user
         <set>
+            <if test="userName != null and userName != ''">
+                username = #{userName},
+            </if>
+            <if test="nickName != null and nickName != ''">
+                nickname = #{nickName},
+            </if>
+            <if test="deptId != null">
+                dept_id = #{deptId},
+            </if>
+            <if test="picture != null and picture != ''">
+                picture = #{picture},
+            </if>
+            <if test="sex != null">
+                sex = #{sex},
+            </if>
+            <if test="email != null and email != ''">
+                email = #{email},
+            </if>
+            <if test="phone != null and phone != ''">
+                phone = #{phone},
+            </if>
+            <if test="remark != null and remark != ''">
+                remark = #{remark},
+            </if>
+            <if test="createDate != null">
+                create_date = #{create_date},
+            </if>
+            <if test="updateDate != null">
+                update_date = #{updateDate},
+            </if>
             <if test="password != null and password != ''">
                 password = #{password},
             </if>
@@ -106,7 +136,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="status != null">
                 status = #{status},
             </if>
-
         </set>
         where id = #{id}
     </update>

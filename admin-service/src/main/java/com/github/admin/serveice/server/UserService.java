@@ -25,4 +25,6 @@ public interface UserService {
     Result<User> findUserById(Long id);
 
     Result<Integer> updateUserPwd(User user);
+
+    Result<Integer> updateUser(User user);
 }

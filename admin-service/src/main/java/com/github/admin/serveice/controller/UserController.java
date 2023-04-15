@@ -44,4 +44,9 @@ public class UserController {
     Result<Integer> updateUserPwd(@RequestBody User user){
         return userServiceImpl.updateUserPwd(user);
     }
+
+    @PostMapping("/updateUser")
+    Result<Integer> updateUser(@RequestBody User user){
+        return userServiceImpl.updateUser(user);
+    }
 }

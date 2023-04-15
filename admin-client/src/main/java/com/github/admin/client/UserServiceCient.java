@@ -30,4 +30,7 @@ public interface UserServiceCient {
 
     @PostMapping("/updateUserPwd")
     Result<Integer> updateUserPwd(@RequestBody User user);
+
+    @PostMapping("/updateUser")
+    Result<Integer> updateUser(@RequestBody User user);
 }

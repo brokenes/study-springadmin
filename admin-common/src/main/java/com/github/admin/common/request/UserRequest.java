@@ -32,11 +32,11 @@ public class UserRequest extends BaseRequest {
     private String nickName;
 
     @NotBlank(message = "密码不能为空",groups = {InsertGroup.class, PasswordGroup.class})
-    @Length(message = "密码围为 {min} 到 {max} 之间", min = 3,max = 12,groups = {InsertGroup.class, UpdateGroup.class})
+    @Length(message = "密码围为 {min} 到 {max} 之间", min = 3,max = 12,groups = {InsertGroup.class, PasswordGroup.class})
     private String password;
 
     @NotBlank(message = "确认密码不能为空",groups = {InsertGroup.class, PasswordGroup.class})
-    @Length(message = "确认密码围为 {min} 到 {max} 之间", min = 3,max = 12,groups = {InsertGroup.class, UpdateGroup.class})
+    @Length(message = "确认密码围为 {min} 到 {max} 之间", min = 3,max = 12,groups = {InsertGroup.class, PasswordGroup.class})
     private String confirm;
 
     @NotBlank(message = "手机号码不能为空",groups = {InsertGroup.class, UpdateGroup.class})

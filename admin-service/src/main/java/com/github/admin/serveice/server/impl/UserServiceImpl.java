@@ -148,4 +148,19 @@ public class UserServiceImpl implements UserService {
         }
         return Result.ok(status);
     }
+
+    @Override
+    public Result<Integer> updateUser(User user) {
+        if(user == null || user.getId() == null){
+            LOGGER.error("修改用户请求参数数据或者id为空");
+            return Result.fail("405","请求参数为空!");
+        }
+        user.setUpdateDate(new Date());
+        Integer status = userDao.updateUser(user);
+        if(status != 1){
+            LOGGER.error("修改用户失败,status:{}",status);
+            return Result.fail("405","修改用户失败!");
+        }
+        return Result.ok(status);
+    }
 }

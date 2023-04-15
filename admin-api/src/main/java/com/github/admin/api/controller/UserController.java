@@ -8,6 +8,7 @@ import com.github.admin.common.enums.ResultEnum;
 import com.github.admin.common.exception.ResultException;
 import com.github.admin.common.group.InsertGroup;
 import com.github.admin.common.group.PasswordGroup;
+import com.github.admin.common.group.UpdateGroup;
 import com.github.admin.common.page.DataPage;
 import com.github.admin.common.request.UserRequest;
 import com.github.admin.common.util.Result;
@@ -208,4 +209,37 @@ public class UserController {
             return  ResultVoUtil.error(code,errMsg);
         }
     }
+
+
+    @GetMapping("/system/user/edit/{id}")
+    @RequiresPermissions("system:user:edit")
+    public String toEdit(@PathVariable(value = "id",required = true)Long id,Model model){
+        Result<User> result = userSeviceCient.findUserById(id);
+        if(result.isSuccess()){
+            User user = result.getData();
+            model.addAttribute("user",user);
+        }
+        return "/manager/user/edit";
+    }
+
+    @PostMapping("/system/user/edit")
+    @RequiresPermissions("system:user:edit")
+    @ResponseBody
+    public ResultVo edit(@Validated(value = UpdateGroup.class) UserRequest userRequest){
+        if (userRequest.getId() == AdminConst.ADMIN_ID) {
+            throw new ResultException(ResultEnum.NO_ADMIN_AUTH);
+        }
+        User user = new User();
+        BeanUtils.copyProperties(userRequest,user);
+        Result<Integer> result = userSeviceCient.updateUser(user);
+        if(result.isSuccess()){
+            return ResultVoUtil.success("用户改成功!");
+        }else{
+            String errMsg = result.getMessage();
+            String code = result.getCode();
+            return  ResultVoUtil.error(code,errMsg);
+        }
+    }
+
+
 }
