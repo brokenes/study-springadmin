@@ -1,8 +1,10 @@
 package com.github.admin.api.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.github.admin.client.RoleServiceClient;
 import com.github.admin.client.UserServiceCient;
 import com.github.admin.common.constants.AdminConst;
+import com.github.admin.common.domain.Role;
 import com.github.admin.common.domain.User;
 import com.github.admin.common.enums.ResultEnum;
 import com.github.admin.common.exception.ResultException;
@@ -15,6 +17,7 @@ import com.github.admin.common.util.Result;
 import com.github.admin.common.util.ResultVoUtil;
 import com.github.admin.common.util.ShiroUtil;
 import com.github.admin.common.vo.ResultVo;
+import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,9 +28,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Controller
 public class UserController {
@@ -36,6 +37,9 @@ public class UserController {
 
     @Resource
     private UserServiceCient userSeviceCient;
+
+    @Resource
+    private RoleServiceClient roleServiceClient;
 
 
 
@@ -241,5 +245,57 @@ public class UserController {
         }
     }
 
+    @GetMapping("/system/user/role")
+    @RequiresPermissions("system:user:role")
+    public String toAuth(@RequestParam(value = "ids",required = true) Long id, Model model) {
+        Result<User> result = userSeviceCient.findUserAndRoleById(id);
+        Result<List<Role>> roleResult = roleServiceClient.findAllRole();
+        if(result.isSuccess() && roleResult.isSuccess()){
+            // 获取指定用户角色列表
+            User user = result.getData();
+            Set<Role> authRoles = user.getRoles();
+            // 获取全部角色列表
+            List<Role> list = roleResult.getData();
+            model.addAttribute("id", user.getId());
+            model.addAttribute("list", list);
+            model.addAttribute("authRoles", authRoles);
+        }
+        return "/manager/user/role";
+    }
+
+    /**
+     * 保存角色分配信息
+     */
+    @PostMapping("/system/user/role")
+    @RequiresPermissions("system:user:role")
+    @ResponseBody
+    public ResultVo auth(
+            @RequestParam(value = "id", required = true) Long id,
+            @RequestParam(value = "roleId", required = true) List<Long> roleIds) {
+        User user = (User) SecurityUtils.getSubject().getPrincipal();
+        // 不允许操作超级管理员数据
+        if (AdminConst.ADMIN_ID == id && user.getId() != AdminConst.ADMIN_ID) {
+            throw new ResultException(ResultEnum.NO_ADMIN_AUTH);
+        }
+        User userAuth = new User();
+        userAuth.setId(id);
+        Set<Role> roles = new HashSet<Role>();
+        for (Long roleId:roleIds){
+            Role role = new Role();
+            role.setId(roleId);
+            roles.add(role);
+        }
+        // 更新用户角色
+        userAuth.setRoles(roles);
+        // 保存数据
+        Result<Integer> result = userSeviceCient.userAuth(userAuth);
+        if(result.isSuccess()){
+            return ResultVoUtil.success("授权成功");
+        }else{
+            String errMsg = result.getMessage();
+            String code = result.getCode();
+            return  ResultVoUtil.error(code,errMsg);
+        }
+    }
 
 }

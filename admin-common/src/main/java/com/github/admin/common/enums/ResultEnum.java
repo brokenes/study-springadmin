@@ -49,6 +49,8 @@ public enum ResultEnum implements ResultInterface {
     UPDATE_MENU_STATUS_ERROR("501", "update.menu.status.error","更新菜单状态失败"),
 
     UPDATE_ADMIN_STATUS_ERROR("501", "update.user.status.error","更新用户状态失败"),
+
+    AUTH_USER_ERROR("501", "auth.user.error","用户授权失败"),
     SYS_ERROR("500","sys.error","系统异常,请稍后再试");
 
     ;

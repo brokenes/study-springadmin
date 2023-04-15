@@ -46,6 +46,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         from sys_user where username = #{userName}
     </select>
 
+    <select id="findUserCountByUserNameAndNotId" parameterType="map" resultType="java.lang.Integer">
+        select count(*)
+        from sys_user where username = #{userName} and id != #{id}
+    </select>
+
+
     <select id="findUserById" resultMap="BaseUserResultMap" parameterType="java.lang.Long">
         select *
         from sys_user where id = #{id}

@@ -33,4 +33,10 @@ public interface UserServiceCient {
 
     @PostMapping("/updateUser")
     Result<Integer> updateUser(@RequestBody User user);
+
+    @PostMapping("/findUserAndRoleById/{id}")
+    Result<User> findUserAndRoleById(@PathVariable("id")Long id);
+
+    @PostMapping("/userAuth")
+    Result<Integer> userAuth(@RequestBody User user);
 }

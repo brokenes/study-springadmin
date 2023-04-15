@@ -49,4 +49,14 @@ public class UserController {
     Result<Integer> updateUser(@RequestBody User user){
         return userServiceImpl.updateUser(user);
     }
+
+    @PostMapping("/findUserAndRoleById/{id}")
+    Result<User> findUserAndRoleById(@PathVariable("id")Long id){
+        return userServiceImpl.findUserAndRoleById(id);
+    }
+
+    @PostMapping("/userAuth")
+    Result<Integer> userAuth(@RequestBody User user){
+        return userServiceImpl.userAuth(user);
+    }
 }

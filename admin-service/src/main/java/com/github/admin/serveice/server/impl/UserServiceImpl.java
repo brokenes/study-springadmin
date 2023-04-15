@@ -1,13 +1,17 @@
 package com.github.admin.serveice.server.impl;
 
 import cn.hutool.core.bean.BeanUtil;
+import com.github.admin.common.domain.Role;
 import com.github.admin.common.domain.User;
+import com.github.admin.common.domain.UserRole;
 import com.github.admin.common.enums.ResultEnum;
 import com.github.admin.common.exception.ResultException;
 import com.github.admin.common.page.DataPage;
 import com.github.admin.common.request.UserRequest;
 import com.github.admin.common.util.Result;
+import com.github.admin.serveice.dao.RoleDao;
 import com.github.admin.serveice.dao.UserDao;
+import com.github.admin.serveice.dao.UserRoleDao;
 import com.github.admin.serveice.server.UserService;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -17,15 +21,19 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
 public class UserServiceImpl implements UserService {
     private static final Logger LOGGER = LoggerFactory.getLogger(UserServiceImpl.class);
     @Resource
     private  UserDao userDao;
+
+    @Resource
+    private UserRoleDao userRoleDao;
+
+    @Resource
+    private RoleDao roleDao;
 
     @Override
     public Result<User> findByUserName(String userName) {
@@ -156,11 +164,71 @@ public class UserServiceImpl implements UserService {
             return Result.fail("405","请求参数为空!");
         }
         user.setUpdateDate(new Date());
+        String userName = user.getUserName();
+        Long id = user.getId();
+        int existUserCount = userDao.findUserCountByUserNameAndNotId(userName,id);
+        if(existUserCount > 0){
+            LOGGER.error("当前用户已经存在,userName:{},id",userName,id);
+            return Result.fail("405","当前用户已经存在!");
+        }
         Integer status = userDao.updateUser(user);
         if(status != 1){
             LOGGER.error("修改用户失败,status:{}",status);
             return Result.fail("405","修改用户失败!");
         }
         return Result.ok(status);
+    }
+
+    @Override
+    public Result<User> findUserAndRoleById(Long id) {
+        if(id == null){
+            LOGGER.error("请求参数id为空");
+            return Result.fail("405","请求参数为空!");
+        }
+        User user = userDao.findUserById(id);
+        if(user == null){
+            LOGGER.error("查询用户id:{}对应数据为空",id);
+            return Result.fail("405","查询用户数据为空!");
+        }
+        Set<Role> set = new HashSet<Role>();
+        List<UserRole> userRoleList = userRoleDao.findByUserId(id);
+        for(UserRole userRole:userRoleList){
+            Long roleId = userRole.getRoleId();
+            Role role = roleDao.findByRoleId(roleId);
+            LOGGER.info("查询用户对应的角色,roleId:{},结果:{}",roleId,role);
+            if(role != null){
+                set.add(role);
+            }
+        }
+        user.setRoles(set);
+        return Result.ok(user);
+    }
+
+    @Transactional
+    @Override
+    public Result<Integer> userAuth(User user) {
+        if(user == null || user.getId() == null || CollectionUtils.isEmpty(user.getRoles())){
+            LOGGER.error("用户授权请求参数为空,user:{}",user);
+            return Result.fail("405","请求参数为空");
+        }
+        Long id = user.getId();
+        Set<Role> set = user.getRoles();
+        Integer userRoleStatus = userRoleDao.deleteByUserId(id);
+//        if(userRoleStatus != 1){
+//            LOGGER.error("用户授权异常,userId:{},status:{}",id,userRoleStatus);
+//            throw new ResultException(ResultEnum.AUTH_USER_ERROR);
+//        }
+        for(Role role:set){
+            UserRole userRole = new UserRole();
+            Long roleId = role.getId();
+            userRole.setUserId(id);
+            userRole.setRoleId(roleId);
+            Integer status = userRoleDao.save(userRole);
+            if(status != 1){
+                LOGGER.error("用户保存用户角色异常,userId:{},roleId:{},status:{}",id,roleId,status);
+                throw new ResultException(ResultEnum.AUTH_USER_ERROR);
+            }
+        }
+        return Result.ok(userRoleStatus);
     }
 }

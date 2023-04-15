@@ -30,4 +30,6 @@ public interface UserDao {
 
     Integer findUserCountByUserName(String userName);
 
+    Integer findUserCountByUserNameAndNotId(@Param("userName")String userName,@Param("id")Long id);
+
 }
