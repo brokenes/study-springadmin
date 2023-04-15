@@ -9,6 +9,7 @@ import com.github.admin.common.exception.ResultException;
 import com.github.admin.common.request.MenuRequest;
 import com.github.admin.common.util.Result;
 import com.github.admin.serveice.dao.MenuDao;
+import com.github.admin.serveice.dao.RoleMenuDao;
 import com.github.admin.serveice.dao.UserDao;
 import com.github.admin.serveice.server.MenuService;
 import org.apache.commons.collections4.CollectionUtils;
@@ -31,6 +32,9 @@ public class MenuServiceImpl implements MenuService {
 
     @Resource
     private UserDao userDao;
+
+    @Resource
+    private RoleMenuDao roleMenuDao;
 
     @Override
     public Result<List<Menu>> findAll() {
@@ -189,6 +193,7 @@ public class MenuServiceImpl implements MenuService {
     }
 
     @Override
+    @Transactional
     public Result<Integer> deleteMenuById(Long id) {
         if(id == null){
             LOGGER.error("当前删除菜单id为空!");
@@ -200,9 +205,11 @@ public class MenuServiceImpl implements MenuService {
             return Result.fail("500","当前菜单关联子菜单,删除失败!");
         }
         Integer stasus = menuDao.deleteById(id);
-        if(stasus != 1){
+        Integer roleMenuStatus = roleMenuDao.deleteByMenuId(id);
+        if(stasus != 1 || roleMenuStatus != 1){
             LOGGER.error("删除菜单失败,id:{}",id);
-            return Result.fail("500","菜单删除失败");
+//            return Result.fail("500","菜单删除失败");
+            throw new ResultException(ResultEnum.DELETE_MENU_ERROR);
         }
         return Result.ok(stasus);
     }

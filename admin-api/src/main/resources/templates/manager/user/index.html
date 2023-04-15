@@ -114,6 +114,7 @@
                     <td th:text="${item.phone}">电话</td>
                     <td th:text="${item.email}">邮箱</td>
                     <td th:text="${#dates.format(item.createDate, 'yyyy-MM-dd HH:mm:ss')}">创建时间</td>
+                    <td th:text="${#dates.format(item.updateDate, 'yyyy-MM-dd HH:mm:ss')}">更新时间</td>
                     <td th:text="${item.status == 1 ? '启用' : '停用'}">状态</td>
                     <td>
                         <a class="open-popup" data-title="编辑用户" th:attr="data-url=@{'/system/user/edit/'+${item.id}}"

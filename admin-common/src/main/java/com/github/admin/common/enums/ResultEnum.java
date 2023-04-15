@@ -44,6 +44,8 @@ public enum ResultEnum implements ResultInterface {
     NO_ADMINROLE_STATUS("501", "admin.user.not.exit","不能修改管理员角色状态"),
     SAVE_MENU_ERROR("501", "save.menu.error","添加菜单失败"),
     UPDATE_MENU_ERROR("501", "update.menu.error","更新菜单失败"),
+
+    DELETE_MENU_ERROR("501", "delete.menu.error","删除菜单失败"),
     UPDATE_MENU_STATUS_ERROR("501", "update.menu.status.error","更新菜单状态失败"),
 
     UPDATE_ADMIN_STATUS_ERROR("501", "update.user.status.error","更新用户状态失败"),
