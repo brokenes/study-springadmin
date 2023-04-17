@@ -153,7 +153,7 @@
         #{parameter,jdbcType=LONGVARCHAR},
       </if>
       <if test="statusCode != null" >
-        #{userAgent,jdbcType=VARCHAR},
+        #{statusCode,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
