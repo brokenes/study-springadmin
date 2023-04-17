@@ -27,6 +27,10 @@
     where id = #{id}
   </select>
 
+  <delete id="clearLogger" parameterType="map">
+    delete from sys_admin_log
+  </delete>
+
   <select id="pageLogListCount" parameterType="map" resultType="java.lang.Long">
     select count(*) from sys_admin_log
     <where>

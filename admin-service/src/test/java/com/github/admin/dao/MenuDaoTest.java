@@ -25,7 +25,7 @@ public class MenuDaoTest {
 
     @Test
     public void _测试菜单排序查询(){
-        List<Menu> list = menuDao.findListByPidAndId(0L,2L);
+        List<Menu> list = menuDao.findListByPidAndNotId(0L,2L);
         LOGGER.info("_测试菜单排序查询:{}",list);
     }
 }

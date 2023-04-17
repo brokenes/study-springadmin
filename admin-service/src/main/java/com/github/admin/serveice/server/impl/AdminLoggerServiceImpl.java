@@ -60,4 +60,41 @@ public class AdminLoggerServiceImpl implements AdminLoggerService {
     }
 
 
+    @Override
+    public Result<Integer> clearLogger() {
+        Integer status = adminLoggerDao.clearLogger();
+        if(status == 0){
+            LOGGER.error("清空日志失败,status:{}",status);
+            return Result.fail("500","清空日志失败!");
+        }
+        return Result.ok(status);
+    }
+
+    @Override
+    public Result<Integer> deleteByPrimaryKey(Long id) {
+        if(id == null){
+            LOGGER.error("请求参数id为空!");
+            return Result.fail("405","请求参数为空!");
+        }
+        Integer status = adminLoggerDao.deleteByPrimaryKey(id);
+        if(status != 1){
+            LOGGER.error("删除日志失败,id:{}",id);
+            return Result.fail("500","删除日志失败!");
+        }
+        return Result.ok(status);
+    }
+
+    @Override
+    public Result<AdminLogger> selectByPrimaryKey(Long id) {
+        if(id == null){
+            LOGGER.error("请求参数id为空!");
+            return Result.fail("405","请求参数为空!");
+        }
+        AdminLogger adminLogger = adminLoggerDao.selectByPrimaryKey(id);
+        if(adminLogger == null){
+            LOGGER.error("查询日志失败,id:{}",id);
+            return Result.fail("500","查询数据不存在!");
+        }
+        return Result.ok(adminLogger);
+    }
 }

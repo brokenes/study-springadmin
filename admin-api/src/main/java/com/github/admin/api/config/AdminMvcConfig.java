@@ -53,7 +53,7 @@ public class AdminMvcConfig implements WebMvcConfigurer {
                 .excludePathPatterns("/images/**")
                 .excludePathPatterns("/lib/**")
                 .excludePathPatterns("/favicon.ico")
-                .excludePathPatterns("/main/system/actionLog/index/**")
+                .excludePathPatterns("/**/system/actionLog/**")
                 .excludePathPatterns("/js/**");
     }
 

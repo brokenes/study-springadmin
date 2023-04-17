@@ -5,6 +5,7 @@ import com.github.admin.common.page.DataPage;
 import com.github.admin.common.request.AdminLoggerRequest;
 import com.github.admin.common.util.Result;
 import com.github.admin.serveice.server.AdminLoggerService;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -26,5 +27,21 @@ public class AdminLoggerController {
     Result<Integer> insertSelective(@RequestBody AdminLogger adminLogger){
         return adminLoggerServiceImpl.insertSelective(adminLogger);
     }
+
+    @PostMapping("/clearLogger")
+    Result<Integer> clearLogger(){
+        return adminLoggerServiceImpl.clearLogger();
+    }
+
+    @PostMapping("/deleteByPrimaryKey/{id}")
+    Result<Integer> deleteByPrimaryKey(@PathVariable("id")Long id){
+        return adminLoggerServiceImpl.deleteByPrimaryKey(id);
+    }
+
+    @PostMapping("/selectByPrimaryKey/{id}")
+    Result<AdminLogger> selectByPrimaryKey(@PathVariable("id")Long id){
+        return adminLoggerServiceImpl.selectByPrimaryKey(id);
+    }
+
 
 }

@@ -11,4 +11,10 @@ public interface AdminLoggerService {
     Result<DataPage<AdminLogger>> page(AdminLoggerRequest request);
 
     Result<Integer> insertSelective(AdminLogger adminLogger);
+
+    Result<Integer> clearLogger();
+
+    Result<Integer> deleteByPrimaryKey(Long id);
+
+    Result<AdminLogger> selectByPrimaryKey(Long id);
 }

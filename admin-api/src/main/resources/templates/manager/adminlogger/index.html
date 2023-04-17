@@ -48,7 +48,7 @@
                 </div>
             </div>
             <div class="pull-right screen-btn-group">
-                <a class="layui-btn ajax-get" data-msg="您是否确认清空日志" th:href="@{/system/actionLog/status/delete}"
+                <a class="layui-btn ajax-get" data-msg="您是否确认清空日志" th:href="@{/system/actionLog/delete}"
                    shiro:hasPermission="system:actionLog:status">
                     <i class="fa fa-trash"></i> 清空日志</a>
             </div>
@@ -94,7 +94,7 @@
                     <td th:text="${item.statusCode}" th:title="${item.statusCode}">状态码</td>
                     <td>
                         <a class="open-popup" data-title="详细信息" th:attr="data-url=@{'/system/actionLog/detail/'+${item.id}}" shiro:hasPermission="system:actionLog:detail" data-size="800,600" href="#">详细</a>
-                        <a class="ajax-get" data-msg="您是否确认删除" th:href="@{/system/actionLog/status/delete(ids=${item.id})}" shiro:hasPermission="system:actionLog:status">删除</a>
+                        <a class="ajax-get" data-msg="您是否确认删除" th:href="@{'/system/actionLog/delete/'+${item.id}}" shiro:hasPermission="system:actionLog:status">删除</a>
                     </td>
                 </tr>
                 </tbody>

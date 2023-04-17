@@ -16,4 +16,11 @@ public interface AdminLoggerDao {
 
      Integer insertSelective(AdminLogger adminLogger);
 
+     Integer clearLogger();
+
+     Integer deleteByPrimaryKey(Long id);
+
+
+     AdminLogger selectByPrimaryKey(Long id);
+
 }
