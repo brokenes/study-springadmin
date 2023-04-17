@@ -48,14 +48,14 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Result<DataPage<User>> getPageList(UserRequest userRequest) {
-        Integer pageNo = userRequest.getPageNo() == null ? 1 : userRequest.getPageNo();
-        Integer pageSize = userRequest.getPageSize() == null ? 1 : userRequest.getPageSize();
+        Integer pageNo =  userRequest.getPageNo();
+        Integer pageSize = userRequest.getPageSize();
         Map<String,Object> map = BeanUtil.beanToMap(userRequest);
         DataPage<User> dataPage = new DataPage<User>(pageNo,pageSize);
         int startIndex = dataPage.getStartIndex();
-        int endIndex = dataPage.getEndIndex();
-        map.put("startIndex",startIndex);
-        map.put("endIndex",endIndex);
+        int endIndex = dataPage.getPageSize();
+        map.put("start",startIndex);
+        map.put("offset",endIndex);
         LOGGER.info("用户分页查询当前第:{}页,每页数据显示:{}条数据,mysql查询startIndex:{},endIndex:{}", pageNo,pageSize,startIndex,endIndex);
         long totalCount = userDao.getPageCount(map);
         List<User> list = userDao.getPageList(map);

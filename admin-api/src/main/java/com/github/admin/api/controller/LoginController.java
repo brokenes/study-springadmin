@@ -46,10 +46,8 @@ public class LoginController {
     @Resource
     private ProjectProperties projectProperties;
 
-//    @ApiOperation(value = "跳转到登录页面")
     @GetMapping(value = {"/login","/"})
     public String login(Model model){
-//        ProjectProperties properties = SpringContextUtil.getBean(ProjectProperties.class);
         boolean isCaptcha = projectProperties.isCaptchaOpen();
         LOGGER.info("当前验证码是否开启isCaptcha:{}",isCaptcha);
         model.addAttribute("isCaptcha", projectProperties.isCaptchaOpen());
@@ -59,7 +57,6 @@ public class LoginController {
     /**
      * 验证码图片
      */
-//    @ApiOperation(value = "获取登录验证码")
     @GetMapping("/captcha")
     public void captcha(HttpServletRequest request, HttpServletResponse response) throws IOException {
         //设置响应头信息，通知浏览器不要缓存
@@ -81,11 +78,6 @@ public class LoginController {
     @PostMapping("/login")
     @ResponseBody
     public ResultVo login(@Validated LoginRequest loginRequest){
-//        ProjectProperties properties = SpringContextUtil.getBean(ProjectProperties.class);
-//        if(StringUtils.isBlank(userName) || StringUtils.isBlank(password)){
-//            LOGGER.error("当前用户或密码为空,用户名称-userName:{},密码-password:{}",password);
-//            throw new ResultException(ResultEnum.USER_NAME_PWD_NULL);
-//        }
         String userName = loginRequest.getUserName();
         String password = loginRequest.getPassword();
         String captcha = loginRequest.getCaptcha();
@@ -119,7 +111,6 @@ public class LoginController {
             User user = (User) SecurityUtils.getSubject().getPrincipal();
             Result<Boolean> result = roleServiceClient.existsUserOk(user.getId());
            if (result.isSuccess() && result.getData()) {
-//            if(false){
                 return ResultVoUtil.success("登录成功!", new URL("/main"));
             } else {
                 SecurityUtils.getSubject().logout();

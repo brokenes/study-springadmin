@@ -1,18 +1,25 @@
 package com.github.admin.api.config;
 
+import com.github.admin.api.handler.AdminLoggerHandler;
 import com.github.admin.api.resolver.MyLocaleResolver;
 import org.hibernate.validator.HibernateValidator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.LocaleResolver;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import javax.annotation.Resource;
 import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
 
 @Configuration
-public class AdminMvcConfig {
+public class AdminMvcConfig implements WebMvcConfigurer {
 
+
+    @Resource
+    private AdminLoggerHandler adminLoggerHandler;
 
     @Bean
     public LocaleResolver localeResolver(){
@@ -36,4 +43,19 @@ public class AdminMvcConfig {
         Validator validator = validatorFactory.getValidator();
         return validator;
     }
+
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(adminLoggerHandler)
+//                .excludePathPatterns("/login")
+                .excludePathPatterns("/captcha")
+                .excludePathPatterns("/css/**")
+                .excludePathPatterns("/images/**")
+                .excludePathPatterns("/lib/**")
+                .excludePathPatterns("/favicon.ico")
+                .excludePathPatterns("/main/system/actionLog/index/**")
+                .excludePathPatterns("/js/**");
+    }
+
+
 }

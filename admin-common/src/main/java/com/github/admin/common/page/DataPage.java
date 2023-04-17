@@ -292,8 +292,12 @@ public class DataPage<T> implements Serializable {
     }
 
     public static void main(String[] args) {
-        DataPage<String> dataPage = new DataPage<String>(1,1);
-        System.out.println(dataPage.getStartIndex());
-        System.out.println(dataPage.getEndIndex());
+        for(int i = 1;i<50;i++){
+            DataPage<String> dataPage = new DataPage<String>(i,10);
+            System.out.println(dataPage.getStartIndex() + "---" + dataPage.getEndIndex());
+            System.out.println(dataPage.pageSize);
+            System.out.println("**************");
+        }
+
     }
 }

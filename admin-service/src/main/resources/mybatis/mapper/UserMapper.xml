@@ -94,8 +94,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <if test="orderByColumn != null and asc != null">
             order by ${orderByColumn} ${asc}
         </if>
-        <if test="startIndex != null and endIndex != null">
-            limit #{startIndex},#{endIndex}
+        <if test="start!=null and offset!=null">
+            limit #{start}, #{offset}
         </if>
 
     </select>

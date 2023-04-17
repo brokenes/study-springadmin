@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
+<head th:replace="/common/template :: header(~{::title},~{::link},~{::style})">
     <title>springboot-admin后台主页</title>
-    <link rel="stylesheet" th:href="@{/css/plugins/font-awesome-4.7.0/css/font-awesome.min.css}"  media="all">
-    <link rel="stylesheet" th:href="@{/lib/layui-v2.3.0/css/layui.css}"  media="all">
-    <link rel="stylesheet" th:href="@{/css/main.css}"  media="all">
+<!--    <link rel="stylesheet" th:href="@{/css/plugins/font-awesome-4.7.0/css/font-awesome.min.css}"  media="all">-->
+<!--    <link rel="stylesheet" th:href="@{/lib/layui-2.8.0-rc.15/dist/css/layui.css}"  media="all">-->
+<!--    <link rel="stylesheet" th:href="@{/css/main.css}"  media="all">-->
 </head>
 <body class="layui-layout-body">
 <div class="layui-layout layui-layout-admin">
@@ -86,9 +86,9 @@
         <div class="layui-tab-content"></div>
     </div>
 </div>
-<!--<script th:replace="/common/template :: script"></script>-->
-<script th:src="@{/lib/layui-v2.3.0/layui.js}" charset="utf-8"></script>
-<script th:src="@{/js/main.js}" charset="utf-8"></script>
+<script th:replace="/common/template :: script"></script>
+<!--<script th:src="@{/lib/layui-2.8.0-rc.15/dist/layui.js}" charset="utf-8"></script>-->
+<!--<script th:src="@{/js/main.js}" charset="utf-8"></script>-->
 <script>
     window.main = 111;
 </script>
