@@ -1,5 +1,8 @@
 package com.github.admin.common.domain;
 
+import com.github.framework.sensitive.annotation.Sensitive;
+import com.github.framework.sensitive.core.api.strategory.StrategyAccountNo;
+import com.github.framework.sensitive.core.api.strategory.StrategyPassword;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -12,6 +15,7 @@ public class AdminLogger implements Serializable {
 
     private String description;
 
+    @Sensitive(strategy = StrategyAccountNo.class)
     private String userName;
 
     private Date createDate;
@@ -30,6 +34,7 @@ public class AdminLogger implements Serializable {
 
     private String ip;
 
+    @Sensitive(strategy = StrategyPassword.class)
     private String parameter;
 
     private String statusCode;

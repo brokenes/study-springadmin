@@ -1,6 +1,7 @@
 package com.github.admin.serveice.server.impl;
 
 import cn.hutool.core.bean.BeanUtil;
+import com.alibaba.fastjson.JSON;
 import com.github.admin.common.domain.Role;
 import com.github.admin.common.domain.User;
 import com.github.admin.common.domain.UserRole;
@@ -13,6 +14,7 @@ import com.github.admin.serveice.dao.RoleDao;
 import com.github.admin.serveice.dao.UserDao;
 import com.github.admin.serveice.dao.UserRoleDao;
 import com.github.admin.serveice.server.UserService;
+import com.github.framework.sensitive.core.api.SensitiveUtils;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -139,6 +141,8 @@ public class UserServiceImpl implements UserService {
             LOGGER.error("修改用户密码请求参数id为空");
             return Result.fail("405","请求参数为空!");
         }
+        LOGGER.info("*********修改用户密码信息:{}", JSON.toJSONString(SensitiveUtils.desCopy(user)));
+
         String password = user.getPassword();
         String confirm = user.getConfirm();
         if(StringUtils.isBlank(password) || StringUtils.isBlank(confirm)){
@@ -163,6 +167,7 @@ public class UserServiceImpl implements UserService {
             LOGGER.error("修改用户请求参数数据或者id为空");
             return Result.fail("405","请求参数为空!");
         }
+        LOGGER.info("*********修改用户详情信息:{}", JSON.toJSONString(SensitiveUtils.desCopy(user)));
         user.setUpdateDate(new Date());
         String userName = user.getUserName();
         Long id = user.getId();
