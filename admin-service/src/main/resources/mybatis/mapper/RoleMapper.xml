@@ -25,5 +25,46 @@
         select * from sys_role where status = 1
     </select>
 
+    <select id="pageListCount" parameterType="map" resultType="java.lang.Long">
+        select count(*) from sys_role
+        <where>
+            <if test="status != null">
+                and status = #{status}
+            </if>
+            <if test="title != null">
+                and title like concat(concat('%',#{title}),'%')
+            </if>
+            <if test="name != null">
+                and name like concat(concat('%',#{name}),'%')
+            </if>
+        </where>
+
+    </select>
+
+    <select id="pageList" parameterType="map" resultMap="BaseResultMap">
+        select * from sys_role
+        <where>
+            <if test="status != null">
+                and status = #{status}
+            </if>
+            <if test="title != null">
+                and title like concat(concat('%',#{title}),'%')
+            </if>
+            <if test="name != null">
+                and name like concat(concat('%',#{name}),'%')
+            </if>
+        </where>
+        <if test="orderByColumn != null and asc != null">
+            order by ${orderByColumn} ${asc}
+        </if>
+        <if test="start!=null and offset!=null">
+            limit #{start}, #{offset}
+        </if>
+
+    </select>
+
+    <delete id="deleteByRoleId" parameterType="java.lang.Long">
+        delete  from sys_role where  id = #{roleId}
+    </delete>
 
 </mapper>

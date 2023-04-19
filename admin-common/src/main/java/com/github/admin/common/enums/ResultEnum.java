@@ -31,7 +31,7 @@ public enum ResultEnum implements ResultInterface {
      * 角色问题
      */
     ROLE_EXIST("401", "admin.user.not.exit","该角色标识已经存在，不允许重复！"),
-
+    DELETE_ROLE_ERROR("402", "delete.role.error","删除角色失败！"),
 
 
     /**

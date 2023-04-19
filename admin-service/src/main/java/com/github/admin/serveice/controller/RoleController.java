@@ -1,12 +1,11 @@
 package com.github.admin.serveice.controller;
 
 import com.github.admin.common.domain.Role;
+import com.github.admin.common.page.DataPage;
+import com.github.admin.common.request.RoleRequest;
 import com.github.admin.common.util.Result;
 import com.github.admin.serveice.server.RoleService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -34,4 +33,22 @@ public class RoleController {
         return  roleServiceImpl.findAllRole();
     }
 
+    @PostMapping("/rolePage")
+    public Result<DataPage<Role>> rolePage(@RequestBody RoleRequest roleRequest){
+        return  roleServiceImpl.rolePage(roleRequest);
+    }
+
+    @PostMapping("/getUserListByRoleId/{id}")
+    Result<Role> getUserListByRoleId(@PathVariable("id") Long id){
+        return  roleServiceImpl.getUserListByRoleId(id);
+    }
+
+    @PostMapping("/findRoleById/{id}")
+    Result<Role> findRoleById(@PathVariable("id")Long id){
+        return  roleServiceImpl.findRoleById(id);
+    }
+    @PostMapping("/deleteRoleById/{id}")
+    Result<Integer> deleteRoleById(@PathVariable("id")Long id){
+        return  roleServiceImpl.deleteRoleById(id);
+    }
 }

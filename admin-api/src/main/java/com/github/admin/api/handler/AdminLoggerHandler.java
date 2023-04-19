@@ -7,16 +7,15 @@ import com.github.admin.api.util.RequestUtil;
 import com.github.admin.client.AdminLoggerServiceClient;
 import com.github.admin.common.domain.AdminLogger;
 import com.github.admin.common.domain.User;
-import com.github.framework.sensitive.core.api.SensitiveUtils;
 import org.apache.shiro.SecurityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.lang.reflect.Method;
@@ -29,7 +28,7 @@ public class AdminLoggerHandler implements HandlerInterceptor {
 
     private Logger LOGGER = LoggerFactory.getLogger(AdminLoggerHandler.class);
 
-    @Autowired
+    @Resource
     private AdminLoggerServiceClient adminLoggerServiceClient;
     private long beginTime = 0L;
     private long endTime = 0L;
@@ -73,7 +72,7 @@ public class AdminLoggerHandler implements HandlerInterceptor {
         adminLogger.setUrl(request.getRequestURL().toString());
         adminLogger.setUserAgent(request.getHeader("User-Agent"));
         adminLogger.setUserName(userName);
-        LOGGER.info("*************结束进入日志拦截器:{}***********", JSON.toJSONString(SensitiveUtils.desCopy(adminLogger)));
+        LOGGER.info("*************结束进入日志拦截器:{}***********", JSON.toJSONString(adminLogger));
         adminLoggerServiceClient.insertSelective(adminLogger);
     }
 

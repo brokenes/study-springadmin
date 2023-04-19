@@ -47,7 +47,7 @@ public class AdminMvcConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(adminLoggerHandler)
-//                .excludePathPatterns("/login")
+                .excludePathPatterns("/login")
                 .excludePathPatterns("/captcha")
                 .excludePathPatterns("/css/**")
                 .excludePathPatterns("/images/**")

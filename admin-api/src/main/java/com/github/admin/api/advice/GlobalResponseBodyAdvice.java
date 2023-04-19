@@ -1,7 +1,6 @@
 package com.github.admin.api.advice;
 
 import com.alibaba.fastjson.JSON;
-import com.github.admin.common.util.ResultVoUtil;
 import com.github.admin.common.vo.ResultVo;
 import com.github.framework.sensitive.annotation.Sensitive;
 import com.github.framework.sensitive.annotation.SensitiveEntry;
@@ -50,7 +49,8 @@ public class GlobalResponseBodyAdvice implements ResponseBodyAdvice {
                 return body;
             }
 //            //处理返回值
-            return ResultVoUtil.success(body);
+//            return ResultVoUtil.success(body);
+            return body;
         } catch (Exception e) {
             log.error("globalResponseBodyAdvice exception:{}", e);
             //防止程序异常

@@ -1,5 +1,6 @@
 package com.github.admin.common.domain;
 
+import com.github.framework.sensitive.annotation.SensitiveEntry;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -19,7 +20,12 @@ public class Role implements Serializable {
     private Long createBy;
     private Long updateBy;
     private int status;
+    private User createUser;
+    private User updateUser;
 
     private Set<Menu> menus = new HashSet<Menu>();
+
+    @SensitiveEntry
+    private Set<User> users = new HashSet<User>();
 
 }

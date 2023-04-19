@@ -1,25 +1,24 @@
 package com.github.admin.serveice.server.impl;
 
-import com.github.admin.common.domain.Menu;
-import com.github.admin.common.domain.Role;
-import com.github.admin.common.domain.RoleMenu;
-import com.github.admin.common.domain.UserRole;
+import cn.hutool.core.bean.BeanUtil;
+import com.github.admin.common.domain.*;
+import com.github.admin.common.enums.ResultEnum;
+import com.github.admin.common.exception.ResultException;
+import com.github.admin.common.page.DataPage;
+import com.github.admin.common.request.RoleRequest;
 import com.github.admin.common.util.Result;
-import com.github.admin.serveice.dao.MenuDao;
-import com.github.admin.serveice.dao.RoleDao;
-import com.github.admin.serveice.dao.RoleMenuDao;
-import com.github.admin.serveice.dao.UserRoleDao;
+import com.github.admin.serveice.dao.*;
 import com.github.admin.serveice.server.RoleService;
+import com.github.framework.sensitive.core.api.SensitiveUtils;
 import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -37,6 +36,9 @@ public class RoleServiceImpl implements RoleService {
 
     @Resource
     private MenuDao menuDao;
+
+    @Resource
+    private UserDao userDao;
 
 
     /***
@@ -133,5 +135,97 @@ public class RoleServiceImpl implements RoleService {
     public Result<List<Role>> findAllRole() {
         List<Role> list = roleDao.findAllRole();
         return Result.ok(list);
+    }
+
+    @Override
+    public Result<DataPage<Role>> rolePage(RoleRequest roleRequest) {
+        Integer pageSize = roleRequest.getPageSize();
+        Integer pageNo = roleRequest.getPageNo();
+        if(StringUtils.isBlank(roleRequest.getAsc()) && StringUtils.isBlank(roleRequest.getOrderByColumn())){
+            roleRequest.setAsc("desc");
+            roleRequest.setOrderByColumn("create_date");
+        }
+        DataPage<Role> dataPage = new DataPage<Role>(pageNo,pageSize);
+        Map<String,Object> map = BeanUtil.beanToMap(roleRequest);
+        map.put("start",dataPage.getStartIndex());
+        map.put("offset",dataPage.getPageSize());
+        LOGGER.info("角色分页查询,当前第:{},每页显示:{}",pageNo,pageSize);
+        Long count = roleDao.pageListCount(map);
+        List<Role> list = roleDao.pageList(map);
+        dataPage.setTotalCount(count);
+        dataPage.setDataList(list);
+        return Result.ok(dataPage);
+    }
+
+    @Override
+    public Result<Role> getUserListByRoleId(Long id) {
+        if(id == null){
+            LOGGER.error("查询角色对应用户列表参数id为空");
+            return Result.fail("405","请求参数为空");
+        }
+        Role role = roleDao.findByRoleId(id);
+        if(role == null){
+            LOGGER.error("查询用户角色不存在,roleId:{}",id);
+            return Result.fail("404","角色不存在!");
+        }
+        List<UserRole> userRole = userRoleDao.findByRoleId(id);
+        Set<User> users = new HashSet<User>();
+        if(CollectionUtils.isEmpty(userRole)){
+            LOGGER.error("查询角色对应的用户集合不存在,roleId:{}",id);
+            return Result.fail("404","用户角色不存在!");
+        }
+        userRole.stream().forEach(u ->{
+            Long userId = u.getUserId();
+            User user = userDao.findUserById(userId);
+            if(user != null){
+                users.add(SensitiveUtils.desCopy(user));
+            }
+        });
+        role.setUsers(users);
+        return Result.ok(role);
+    }
+
+    @Override
+    public Result<Role> findRoleById(Long id) {
+        if(id == null){
+            LOGGER.error("查询角色对应用户列表参数id为空");
+            return Result.fail("405","请求参数为空");
+        }
+        Role role = roleDao.findByRoleId(id);
+        if(role == null){
+            LOGGER.error("查询用户角色不存在,roleId:{}",id);
+            return Result.fail("404","角色不存在!");
+        }
+        Long createUserId = role.getCreateBy();
+        Long updateUserId = role.getUpdateBy();
+        if(createUserId != null){
+            User user = userDao.findUserById(createUserId);
+            role.setCreateUser(user);
+        }
+        if(updateUserId != null){
+            User user = userDao.findUserById(updateUserId);
+            role.setUpdateUser(user);
+        }
+        return Result.ok(role);
+    }
+
+    @Override
+    @Transactional
+    public Result<Integer> deleteRoleById(Long id) {
+        if(id == null){
+            LOGGER.error("查询角色对应用户列表参数id为空");
+            return Result.fail("405","请求参数为空");
+        }
+        Integer userRoleStatus = userRoleDao.deleteByRoleId(id);
+        Integer roleMenuStatus = roleMenuDao.deleteByRoleId(id);
+        LOGGER.info("删除用户角色状态:{},角色菜单状态:{}",userRoleStatus,roleMenuStatus);
+        Integer status = roleDao.deleteByRoleId(id);
+        if(status != 1){
+            LOGGER.error("删除角色失败,roleId:{}",id);
+//            return Result.fail("404","删除角色失败!");
+            throw  new ResultException(ResultEnum.DELETE_ROLE_ERROR);
+        }
+
+        return Result.ok(status);
     }
 }

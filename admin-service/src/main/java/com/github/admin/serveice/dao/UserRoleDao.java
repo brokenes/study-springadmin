@@ -14,4 +14,8 @@ public interface UserRoleDao {
 
 
     Integer save(UserRole userRole);
+
+    List<UserRole> findByRoleId(Long roleId);
+
+    Integer deleteByRoleId(Long id);
 }
