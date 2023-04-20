@@ -1,5 +1,7 @@
 package com.github.admin.common.util;
 
+import com.github.framework.sensitive.annotation.SensitiveEntry;
+
 import java.io.Serializable;
 
 public class Result<T> implements Serializable {
@@ -18,6 +20,7 @@ public class Result<T> implements Serializable {
 
     protected boolean success;
 
+    @SensitiveEntry
     protected  T data;
 
 

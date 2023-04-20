@@ -5,6 +5,7 @@ import com.github.admin.common.page.DataPage;
 import com.github.admin.common.request.UserRequest;
 import com.github.admin.common.util.Result;
 import com.github.admin.serveice.server.UserService;
+import com.github.framework.sensitive.annotation.Desensitization;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -22,6 +23,7 @@ public class UserController {
         return userServiceImpl.findByUserName(userName);
     }
 
+    @Desensitization
     @PostMapping("/getPageList")
     Result<DataPage<User>> getPageList(@RequestBody UserRequest userRequest){
         return userServiceImpl.getPageList(userRequest);

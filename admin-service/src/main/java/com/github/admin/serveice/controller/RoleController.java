@@ -5,6 +5,7 @@ import com.github.admin.common.page.DataPage;
 import com.github.admin.common.request.RoleRequest;
 import com.github.admin.common.util.Result;
 import com.github.admin.serveice.server.RoleService;
+import com.github.framework.sensitive.annotation.Desensitization;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -39,6 +40,7 @@ public class RoleController {
     }
 
     @PostMapping("/getUserListByRoleId/{id}")
+    @Desensitization
     Result<Role> getUserListByRoleId(@PathVariable("id") Long id){
         return  roleServiceImpl.getUserListByRoleId(id);
     }

@@ -9,7 +9,6 @@ import com.github.admin.common.request.RoleRequest;
 import com.github.admin.common.util.Result;
 import com.github.admin.serveice.dao.*;
 import com.github.admin.serveice.server.RoleService;
-import com.github.framework.sensitive.core.api.SensitiveUtils;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -178,7 +177,8 @@ public class RoleServiceImpl implements RoleService {
             Long userId = u.getUserId();
             User user = userDao.findUserById(userId);
             if(user != null){
-                users.add(SensitiveUtils.desCopy(user));
+//                users.add(SensitiveUtils.desCopy(user));
+                users.add(user);
             }
         });
         role.setUsers(users);
