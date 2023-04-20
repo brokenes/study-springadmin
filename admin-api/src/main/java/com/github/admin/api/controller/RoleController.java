@@ -16,6 +16,7 @@ import com.github.admin.common.request.RoleRequest;
 import com.github.admin.common.util.Result;
 import com.github.admin.common.util.ResultVoUtil;
 import com.github.admin.common.vo.ResultVo;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.BeanUtils;
@@ -30,6 +31,7 @@ import java.util.List;
 import java.util.Set;
 
 @Controller
+@Slf4j
 public class RoleController {
 
 
@@ -131,6 +133,7 @@ public class RoleController {
         // 不允许操作管理员角色数据
         User user = (User) SecurityUtils.getSubject().getPrincipal();
         if(user == null || user.getId() != AdminConst.ADMIN_ID){
+            log.error("当前授权用户为空或者不是超级管理员,userId:{}",user.getId());
             throw new ResultException(ResultEnum.NO_ADMINROLE_AUTH);
         }
 
