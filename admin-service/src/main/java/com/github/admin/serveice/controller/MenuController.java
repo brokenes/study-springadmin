@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Set;
 
 
 @RestController
@@ -64,4 +65,15 @@ public class MenuController {
     public Result<Integer> updateMenu(@RequestBody Menu menu){
         return menuServiceImpl.updateMenu(menu);
     }
+
+    @PostMapping("/getMenusByRoleId/{roleId}")
+    Result<Set<Menu>> getMenusByRoleId(@PathVariable("roleId")Long roleId){
+        return menuServiceImpl.getMenusByRoleId(roleId);
+    }
+
+    @PostMapping("/getListBySortOk")
+    Result<List<Menu>> getListBySortOk(){
+        return menuServiceImpl.getListBySortOk();
+    }
+
 }

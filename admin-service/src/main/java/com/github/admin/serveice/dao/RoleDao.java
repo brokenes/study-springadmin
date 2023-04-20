@@ -17,4 +17,8 @@ public interface RoleDao {
     List<Role> pageList(Map<String, Object> map);
 
     Integer deleteByRoleId(Long id);
+
+    Integer insertSelective(Role role);
+
+    Integer updateByPrimaryKeySelective(Role role);
 }

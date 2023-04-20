@@ -1,6 +1,7 @@
 package com.github.admin.serveice.server.impl;
 
 import cn.hutool.core.bean.BeanUtil;
+import com.alibaba.fastjson.JSON;
 import com.github.admin.common.domain.*;
 import com.github.admin.common.enums.ResultEnum;
 import com.github.admin.common.exception.ResultException;
@@ -169,10 +170,10 @@ public class RoleServiceImpl implements RoleService {
         }
         List<UserRole> userRole = userRoleDao.findByRoleId(id);
         Set<User> users = new HashSet<User>();
-        if(CollectionUtils.isEmpty(userRole)){
-            LOGGER.error("查询角色对应的用户集合不存在,roleId:{}",id);
-            return Result.fail("404","用户角色不存在!");
-        }
+//        if(CollectionUtils.isEmpty(userRole)){
+//            LOGGER.error("查询角色对应的用户集合不存在,roleId:{}",id);
+//            return Result.fail("404","用户角色不存在!");
+//        }
         userRole.stream().forEach(u ->{
             Long userId = u.getUserId();
             User user = userDao.findUserById(userId);
@@ -226,6 +227,60 @@ public class RoleServiceImpl implements RoleService {
             throw  new ResultException(ResultEnum.DELETE_ROLE_ERROR);
         }
 
+        return Result.ok(status);
+    }
+
+    @Override
+    @Transactional
+    public Result<Integer> auth(Long roleId, List<Long> authMenuIds) {
+        if(roleId == null){
+            LOGGER.error("角色授权id为空");
+            return Result.fail("405","请求参数为空");
+        }
+        Integer roleMenuStatus = roleMenuDao.deleteByRoleId(roleId);
+//        if(roleMenuStatus <= 0){
+//            throw new ResultException(ResultEnum.AUTH_ROLE_ERROR);
+//        }
+        if(CollectionUtils.isNotEmpty(authMenuIds)){
+            authMenuIds.stream().forEach(menuId->{
+                RoleMenu roleMenu = new RoleMenu();
+                roleMenu.setRoleId(roleId);
+                roleMenu.setMenuId(menuId);
+                Integer status = roleMenuDao.insertSelective(roleMenu);
+                LOGGER.info("角色授权返回状态:{},请求参数:{}",status, JSON.toJSONString(roleMenu));
+                if(status != 1){
+                    throw new ResultException(ResultEnum.AUTH_ROLE_ERROR);
+                }
+            });
+        }
+        return Result.ok(roleMenuStatus);
+    }
+
+    @Override
+    public Result<Integer> insertRole(Role role) {
+        if(role == null){
+            LOGGER.error("添加角色参数为空！");
+            return Result.fail("405","请求参数为空");
+        }
+        Integer status = roleDao.insertSelective(role);
+        LOGGER.info("添加角色参返回状态:{},请求参数:{}",status, JSON.toJSONString(role));
+        if(status != 1){
+            return Result.fail("405","角色添加失败!");
+        }
+        return Result.ok(status);
+    }
+
+    @Override
+    public Result<Integer> editRole(Role role) {
+        if(role == null || role.getId() == null){
+            LOGGER.error("修改角色参数为空！");
+            return Result.fail("405","请求参数为空");
+        }
+        Integer status = roleDao.updateByPrimaryKeySelective(role);
+        LOGGER.info("修改角色参返回状态:{},请求参数:{}",status, JSON.toJSONString(role));
+        if(status != 1){
+            return Result.fail("405","角色修改失败!");
+        }
         return Result.ok(status);
     }
 }

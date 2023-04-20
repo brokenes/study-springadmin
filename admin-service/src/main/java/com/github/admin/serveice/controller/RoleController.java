@@ -53,4 +53,19 @@ public class RoleController {
     Result<Integer> deleteRoleById(@PathVariable("id")Long id){
         return  roleServiceImpl.deleteRoleById(id);
     }
+
+    @PostMapping("/auth")
+    Result<Integer> auth(@RequestParam("roleId")Long roleId,@RequestParam("authMenuIds") List<Long> authMenuIds){
+        return  roleServiceImpl.auth(roleId,authMenuIds);
+    }
+
+    @PostMapping("/insertRole")
+    Result<Integer> insertRole(@RequestBody Role role){
+        return  roleServiceImpl.insertRole(role);
+    }
+
+    @PostMapping("/updatetRole")
+    Result<Integer> updatetRole(@RequestBody Role role){
+        return  roleServiceImpl.editRole(role);
+    }
 }

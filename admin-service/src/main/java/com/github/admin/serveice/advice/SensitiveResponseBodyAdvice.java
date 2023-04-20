@@ -50,7 +50,7 @@ public class SensitiveResponseBodyAdvice implements ResponseBodyAdvice {
                     String msg = result.getMessage();
                     Object data = result.getData();
                     Object desCopy = SensitiveUtils.desCopy(data);
-                    String simpleClassName = desCopy.getClass().getSimpleName();
+//                    String simpleClassName = desCopy.getClass().getSimpleName();
                     result.setData(desCopy);
                     log.info(">>>>>>>>>>>>>>>>脱敏数据data:{}<<<<<<<<<<<<",JSON.toJSONString(desCopy));
                     return result;

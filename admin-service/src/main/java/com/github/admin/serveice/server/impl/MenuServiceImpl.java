@@ -3,6 +3,7 @@ package com.github.admin.serveice.server.impl;
 import cn.hutool.core.bean.BeanUtil;
 import com.alibaba.fastjson.JSON;
 import com.github.admin.common.domain.Menu;
+import com.github.admin.common.domain.RoleMenu;
 import com.github.admin.common.domain.User;
 import com.github.admin.common.enums.ResultEnum;
 import com.github.admin.common.exception.ResultException;
@@ -19,9 +20,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
 public class MenuServiceImpl implements MenuService {
@@ -302,4 +301,26 @@ public class MenuServiceImpl implements MenuService {
     }
 
 
+    @Override
+    public Result<Set<Menu>> getMenusByRoleId(Long roleId) {
+        if(roleId == null){
+            LOGGER.error("查询用户授权菜单roleId为空");
+            return Result.fail("405","请求参数为空!");
+        }
+        List<RoleMenu> roleMenuList = roleMenuDao.findByRoleId(roleId);
+        Set<Menu> sets = new HashSet<Menu>();
+        roleMenuList.stream().forEach(m ->{
+            Long menuId = m.getMenuId();
+            Menu menu = menuDao.findById(menuId);
+            sets.add(menu);
+        });
+
+        return Result.ok(sets);
+    }
+
+    @Override
+    public Result<List<Menu>> getListBySortOk() {
+        List<Menu> list = menuDao.findAll();
+        return Result.ok(list);
+    }
 }

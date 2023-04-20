@@ -4,6 +4,7 @@ import com.github.admin.common.domain.Menu;
 import com.github.admin.common.request.MenuRequest;
 import com.github.admin.common.util.Result;
 import java.util.List;
+import java.util.Set;
 
 
 public interface MenuService {
@@ -27,4 +28,9 @@ public interface MenuService {
     Result<Integer> updateMenuStatus(List<Menu> list);
 
     Result<Integer> updateMenu(Menu menu);
+
+    Result<Set<Menu>> getMenusByRoleId(Long roleId);
+
+
+    Result<List<Menu>> getListBySortOk();
 }

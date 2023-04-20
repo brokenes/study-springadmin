@@ -24,4 +24,12 @@ public interface RoleService {
 
 
     Result<Integer> deleteRoleById(Long id);
+
+    Result<Integer> auth(Long roleId, List<Long> authMenuIds);
+
+
+    Result<Integer> insertRole(Role role);
+
+    Result<Integer> editRole(Role role);
+
 }

@@ -18,4 +18,6 @@ public interface RoleMenuDao {
     Integer deleteByMenuId(Long menuId);
 
     Integer deleteByRoleId(Long id);
+
+    Integer insertSelective(RoleMenu roleMenu);
 }

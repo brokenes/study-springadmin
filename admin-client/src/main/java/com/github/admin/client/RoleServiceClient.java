@@ -36,4 +36,14 @@ public interface RoleServiceClient {
     @PostMapping("/deleteRoleById/{id}")
     Result<Integer> deleteRoleById(@PathVariable("id")Long id);
 
+    @PostMapping("/auth")
+    Result<Integer> auth(@RequestParam("roleId")Long roleId,@RequestParam("authMenuIds") List<Long> authMenuIds);
+
+
+    @PostMapping("/insertRole")
+    Result<Integer> insertRole(@RequestBody Role role);
+
+    @PostMapping("/updatetRole")
+    Result<Integer> updatetRole(@RequestBody Role role);
+
 }

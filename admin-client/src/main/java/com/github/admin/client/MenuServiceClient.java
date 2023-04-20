@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
+import java.util.Set;
 
 @FeignClient(value="springboot-admin-service")
 public interface MenuServiceClient {
@@ -49,4 +50,10 @@ public interface MenuServiceClient {
 
     @PostMapping("/updateMenu")
     public Result<Integer> updateMenu(@RequestBody Menu menu);
+
+    @PostMapping("/getMenusByRoleId/{roleId}")
+    Result<Set<Menu>> getMenusByRoleId(@PathVariable("roleId")Long roleId);
+
+    @PostMapping("/getListBySortOk")
+    Result<List<Menu>> getListBySortOk();
 }

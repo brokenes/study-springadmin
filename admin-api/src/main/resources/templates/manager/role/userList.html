@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="/common/template :: header(~{::title},~{::link},~{::style})">
     <style>
@@ -36,8 +36,8 @@
                 <td th:text="${item.email}">邮箱</td>
                 <td th:text="${#dates.format(item.createDate, 'yyyy-MM-dd HH:mm:ss')}">创建时间</td>
             </tr>
-            <tr th:if="${list.isEmpty()}">
-                <td style="text-align: center" colspan="3">未有分配该角色的用户</td>
+            <tr th:if="${#lists.isEmpty(list)}">
+                <td style="text-align: center" colspan="9">未有分配该角色的用户</td>
             </tr>
             </tbody>
         </table>

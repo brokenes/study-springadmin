@@ -13,16 +13,16 @@
         <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
         <result column="create_by" property="createBy" jdbcType="INTEGER"/>
         <result column="update_by" property="updateBy" jdbcType="INTEGER"/>
-        <result column="status" property="status" jdbcType="TINYINT" />
+        <result column="status" property="status" jdbcType="INTEGER" />
 
     </resultMap>
 
     <select id="findByRoleId" parameterType="java.lang.Long" resultMap="BaseResultMap">
-        select * from sys_role where id = #{roleId} and status = 1
+        select * from sys_role where id = #{roleId}
     </select>
 
     <select id="findAllRole"  resultMap="BaseResultMap">
-        select * from sys_role where status = 1
+        select * from sys_role
     </select>
 
     <select id="pageListCount" parameterType="map" resultType="java.lang.Long">
@@ -66,5 +66,35 @@
     <delete id="deleteByRoleId" parameterType="java.lang.Long">
         delete  from sys_role where  id = #{roleId}
     </delete>
+
+    <insert id="insertSelective" parameterType="Role">
+        insert into sys_role (title,name,remark,create_date,update_date,create_by,update_by,status)
+        values (#{title},#{name},#{remark},#{createDate},#{updateDate},#{createBy},#{updateBy},#{status})
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="Role" >
+        update sys_role
+        <set >
+            <if test="title != null" >
+                title = #{title},
+            </if>
+            <if test="name != null" >
+                name = #{name},
+            </if>
+            <if test="status != null">
+                status = #{status},
+            </if>
+            <if test="remark != null" >
+                remark = #{remark},
+            </if>
+            <if test="updateDate != null" >
+                update_date = #{updateDate},
+            </if>
+            <if test="updateBy != null" >
+                create_by = #{updateBy},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
 
 </mapper>
