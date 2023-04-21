@@ -22,7 +22,7 @@
 <dialect
         xmlns="http://www.thymeleaf.org/extras/dialect"
         prefix="mo"
-        namespace-uri="https://gitee.com/aun/Timo"
+        namespace-uri="https://github.com/"
         class="com.github.admin.api.thymeleaf.TimoDialect">
 
 
