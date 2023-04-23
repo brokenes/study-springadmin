@@ -1,9 +1,9 @@
 package com.github.admin.api.properties;
 
 import lombok.Data;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
-import org.springframework.util.StringUtils;
 
 /**
  * 项目配置项
@@ -45,7 +45,7 @@ public class ProjectProperties {
          * 拼接忽略规则
          */
         public String getExcludes() {
-            if (!StringUtils.isEmpty(excludes.trim())) {
+            if (StringUtils.isNotBlank(excludes.trim())) {
                 return defaultExcludes + "," + excludes;
             }
             return defaultExcludes;
