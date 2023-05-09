@@ -16,34 +16,6 @@
 
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
-
--- ----------------------------
--- Table structure for sys_action_log
--- ----------------------------
-DROP TABLE IF EXISTS `sys_action_log`;
-CREATE TABLE `sys_action_log` (
-  `id` bigint NOT NULL AUTO_INCREMENT,
-  `clazz` varchar(255) DEFAULT NULL,
-  `create_date` datetime DEFAULT NULL,
-  `ipaddr` varchar(255) DEFAULT NULL,
-  `message` text,
-  `method` varchar(255) DEFAULT NULL,
-  `model` varchar(255) DEFAULT NULL,
-  `name` varchar(255) DEFAULT NULL,
-  `oper_name` varchar(255) DEFAULT NULL,
-  `record_id` bigint DEFAULT NULL,
-  `type` tinyint DEFAULT NULL,
-  `oper_by` bigint DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3;
-
--- ----------------------------
--- Records of sys_action_log
--- ----------------------------
-BEGIN;
-INSERT INTO `sys_action_log` VALUES (1, 'com.linln.admin.system.controller.LoginController', '2023-04-20 15:13:10', 'ipv4 unknown', '后台登录成功', 'login', NULL, '用户登录', '超级管理员', NULL, 2, 1);
-COMMIT;
-
 -- ----------------------------
 -- Table structure for sys_admin_log
 -- ----------------------------
@@ -57,14 +29,14 @@ CREATE TABLE `sys_admin_log` (
   `base_path` varchar(500) NOT NULL DEFAULT '' COMMENT '根路径',
   `uri` varchar(500) NOT NULL DEFAULT '' COMMENT 'URI',
   `url` varchar(500) NOT NULL DEFAULT '' COMMENT 'URL',
-  `method` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '请求方法',
-  `parameter` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '请求参数',
+  `method` varchar(10) NOT NULL COMMENT '请求方法',
+  `parameter` mediumtext  NOT NULL COMMENT '请求参数',
   `user_agent` varchar(500) NOT NULL COMMENT '用户标识',
   `ip` varchar(30) NOT NULL COMMENT 'IP地址',
-  `status_code` varchar(12) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '状态码',
+  `status_code` varchar(12) NOT NULL COMMENT '状态码',
   PRIMARY KEY (`id`) USING BTREE,
   KEY `id` (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=2109 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci ROW_FORMAT=DYNAMIC COMMENT='操作日志';
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb3;
 
 -- ----------------------------
 -- Records of sys_admin_log
@@ -88,11 +60,7 @@ CREATE TABLE `sys_dept` (
   `create_by` bigint DEFAULT NULL COMMENT '创建用户',
   `update_by` bigint DEFAULT NULL COMMENT '更新用户',
   `status` tinyint DEFAULT NULL COMMENT '状态（1:正常,2:冻结,3:删除）',
-  PRIMARY KEY (`id`),
-  KEY `FKifwd1h4ciusl3nnxrpfpv316u` (`create_by`),
-  KEY `FK83g45s1cjqqfpifhulqhv807m` (`update_by`),
-  CONSTRAINT `FK83g45s1cjqqfpifhulqhv807m` FOREIGN KEY (`update_by`) REFERENCES `sys_user` (`id`),
-  CONSTRAINT `FKifwd1h4ciusl3nnxrpfpv316u` FOREIGN KEY (`create_by`) REFERENCES `sys_user` (`id`)
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb3;
 
 -- ----------------------------
@@ -122,11 +90,7 @@ CREATE TABLE `sys_dict` (
   `create_by` bigint DEFAULT NULL COMMENT '创建用户',
   `update_by` bigint DEFAULT NULL COMMENT '更新用户',
   `status` tinyint DEFAULT NULL COMMENT '状态（1:正常,2:冻结,3:删除）',
-  PRIMARY KEY (`id`),
-  KEY `FKag4shuprf2tjot9i1mhh37kk6` (`create_by`),
-  KEY `FKoyng5jlifhsme0gc1lwiub0lr` (`update_by`),
-  CONSTRAINT `FKag4shuprf2tjot9i1mhh37kk6` FOREIGN KEY (`create_by`) REFERENCES `sys_user` (`id`),
-  CONSTRAINT `FKoyng5jlifhsme0gc1lwiub0lr` FOREIGN KEY (`update_by`) REFERENCES `sys_user` (`id`)
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb3;
 
 -- ----------------------------
@@ -155,9 +119,7 @@ CREATE TABLE `sys_file` (
   `sha1` varchar(255) DEFAULT NULL COMMENT 'SHA1值',
   `create_by` bigint DEFAULT NULL COMMENT '上传者',
   `create_date` datetime DEFAULT NULL COMMENT '创建时间',
-  PRIMARY KEY (`id`),
-  KEY `FKkkles8yp0a156p4247cc22ovn` (`create_by`),
-  CONSTRAINT `FKkkles8yp0a156p4247cc22ovn` FOREIGN KEY (`create_by`) REFERENCES `sys_user` (`id`)
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb3;
 
 -- ----------------------------
@@ -186,12 +148,7 @@ CREATE TABLE `sys_menu` (
   `create_by` bigint DEFAULT NULL COMMENT '创建用户',
   `update_by` bigint DEFAULT NULL COMMENT '更新用户',
   `status` tinyint DEFAULT NULL COMMENT '状态（1:正常,2:冻结,3:删除）',
-  PRIMARY KEY (`id`),
-  KEY `FKoxg2hi96yr9pf2m0stjomr3we` (`create_by`),
-  KEY `FKsiko0qcr8ddamvrxf1tk4opgc` (`update_by`),
-  KEY `index_perms` (`perms`),
-  CONSTRAINT `FKoxg2hi96yr9pf2m0stjomr3we` FOREIGN KEY (`create_by`) REFERENCES `sys_user` (`id`),
-  CONSTRAINT `FKsiko0qcr8ddamvrxf1tk4opgc` FOREIGN KEY (`update_by`) REFERENCES `sys_user` (`id`)
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=171 DEFAULT CHARSET=utf8mb3;
 
 -- ----------------------------
@@ -256,11 +213,7 @@ CREATE TABLE `sys_role` (
   `create_by` bigint DEFAULT NULL COMMENT '创建用户',
   `update_by` bigint DEFAULT NULL COMMENT '更新用户',
   `status` tinyint DEFAULT NULL COMMENT '状态（1:正常,2:冻结,3:删除）',
-  PRIMARY KEY (`id`),
-  KEY `FKdkwvv0rm6j3d5l6hwsy2dplol` (`create_by`),
-  KEY `FKrouqqi3f2bgc5o83wdstlh6q4` (`update_by`),
-  CONSTRAINT `FKdkwvv0rm6j3d5l6hwsy2dplol` FOREIGN KEY (`create_by`) REFERENCES `sys_user` (`id`),
-  CONSTRAINT `FKrouqqi3f2bgc5o83wdstlh6q4` FOREIGN KEY (`update_by`) REFERENCES `sys_user` (`id`)
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb3;
 
 -- ----------------------------
@@ -280,10 +233,7 @@ DROP TABLE IF EXISTS `sys_role_menu`;
 CREATE TABLE `sys_role_menu` (
   `role_id` bigint NOT NULL,
   `menu_id` bigint NOT NULL,
-  PRIMARY KEY (`role_id`,`menu_id`),
-  KEY `FKf3mud4qoc7ayew8nml4plkevo` (`menu_id`),
-  CONSTRAINT `FKf3mud4qoc7ayew8nml4plkevo` FOREIGN KEY (`menu_id`) REFERENCES `sys_menu` (`id`),
-  CONSTRAINT `FKkeitxsgxwayackgqllio4ohn5` FOREIGN KEY (`role_id`) REFERENCES `sys_role` (`id`)
+  PRIMARY KEY (`role_id`,`menu_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 -- ----------------------------
@@ -394,9 +344,7 @@ CREATE TABLE `sys_user` (
   `create_date` datetime DEFAULT NULL COMMENT '创建时间',
   `update_date` datetime DEFAULT NULL COMMENT '更新时间',
   `status` tinyint DEFAULT NULL COMMENT '状态（1:正常,2:冻结,3:删除）',
-  PRIMARY KEY (`id`),
-  KEY `FKb3pkx0wbo6o8i8lj0gxr37v1n` (`dept_id`),
-  CONSTRAINT `FKb3pkx0wbo6o8i8lj0gxr37v1n` FOREIGN KEY (`dept_id`) REFERENCES `sys_dept` (`id`)
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb3;
 
 -- ----------------------------
@@ -417,10 +365,7 @@ DROP TABLE IF EXISTS `sys_user_role`;
 CREATE TABLE `sys_user_role` (
   `user_id` bigint NOT NULL,
   `role_id` bigint NOT NULL,
-  PRIMARY KEY (`user_id`,`role_id`),
-  KEY `FKhh52n8vd4ny9ff4x9fb8v65qx` (`role_id`),
-  CONSTRAINT `FKb40xxfch70f5qnyfw8yme1n1s` FOREIGN KEY (`user_id`) REFERENCES `sys_user` (`id`),
-  CONSTRAINT `FKhh52n8vd4ny9ff4x9fb8v65qx` FOREIGN KEY (`role_id`) REFERENCES `sys_role` (`id`)
+  PRIMARY KEY (`user_id`,`role_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 -- ----------------------------
